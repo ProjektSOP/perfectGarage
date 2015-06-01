@@ -2,6 +2,9 @@ package frames;
 
 import generators.GenAdminContent;
 import generators.GenFrameContent;
+import generators.GenMeisterContent;
+import generators.GenServiceContent;
+import generators.GenWerkstattContent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +28,11 @@ public class CtrlMain implements ActionListener {
 		
 		GenFrameContent frameContent = new GenFrameContent(this.frame);
 		GenAdminContent adminContent = new GenAdminContent(this.frame);
+		GenServiceContent serviceContent = new GenServiceContent(this.frame);
+		GenMeisterContent meisterContent = new GenMeisterContent(this.frame);
+		GenWerkstattContent werkstattContent = new GenWerkstattContent(this.frame);
 		
+		// Frame
 		if (event.getActionCommand().equals("Beenden")) {
 			System.exit(0);
 		}
@@ -34,14 +41,42 @@ public class CtrlMain implements ActionListener {
 			this.frame.getContentPane().add(frameContent.closeContent());
 			this.frame.pack();
 		}
-		else if (event.getActionCommand().equals("Mitarbeiterverwaltung")) {
-			this.frame.getContentPane().removeAll();
-			this.frame.getContentPane().add(adminContent.generateEmployeeContent());
-			this.frame.pack();
-		}
 		else if (event.getActionCommand().equals("Info")) {
 			DlgInfo dlgInfo = new DlgInfo();
 			dlgInfo.showDialog(true);
+		}
+		
+		// Modul Admin
+		else if (event.getActionCommand().equals("Benutzerverwaltung")) {
+			this.frame.getContentPane().removeAll();
+			this.frame.getContentPane().add(adminContent.showAllUsers());
+			this.frame.pack();
+		}
+		
+		//Modul Service
+		else if (event.getActionCommand().equals("Kundenverwaltung")) {
+			this.frame.getContentPane().removeAll();
+			this.frame.getContentPane().add(serviceContent.showAllCustomers());
+			this.frame.pack();
+		}
+		else if (event.getActionCommand().equals("Fahrzeugverwaltung")) {
+			this.frame.getContentPane().removeAll();
+			this.frame.getContentPane().add(serviceContent.showAllCars());
+			this.frame.pack();
+		}
+		
+		// Modul Meister
+		else if (event.getActionCommand().equals("Auftragsverwaltung")) {
+			this.frame.getContentPane().removeAll();
+			this.frame.getContentPane().add(meisterContent.showAllTasks());
+			this.frame.pack();
+		}
+		
+		// Modul Werkstatt
+		else if (event.getActionCommand().equals("Arbeitsteilaufträge")) {
+			this.frame.getContentPane().removeAll();
+			this.frame.getContentPane().add(werkstattContent.showAllWorkTasks());
+			this.frame.pack();
 		}
 	}
 

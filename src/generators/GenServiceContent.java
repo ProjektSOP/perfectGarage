@@ -10,11 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class GenAdminContent {
-	
+public class GenServiceContent {
+
 	JFrame frame;
 	
-	public GenAdminContent(JFrame frame){
+	public GenServiceContent(JFrame frame){
 		this.frame = frame;
 	}
 	
@@ -27,12 +27,41 @@ public class GenAdminContent {
 		return new Dimension(frameWidth, frameHeight);
 	}
 	
-	public JPanel showAllUsers(){
+	public JPanel showAllCustomers(){
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		
 		JPanel panelTop = new JPanel();
-		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Benutzer)"));
+		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Kunden)"));
+		panelTop.setPreferredSize(new Dimension(400, 100));
+		
+		JTable tableSearch = new JTable(50, 15);
+		JScrollPane scrollTable = new JScrollPane(tableSearch);
+		
+		scrollTable.setPreferredSize(new Dimension(
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 210	));
+		
+		scrollTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		JPanel panelCenter = new JPanel();
+		panelCenter.setBorder(BorderFactory.createTitledBorder("Suchergebnis"));
+		panelCenter.add(scrollTable);
+		
+		panel.setLayout(new BorderLayout());
+		panel.add(panelTop, BorderLayout.NORTH);
+		panel.add(panelCenter, BorderLayout.CENTER);
+		
+		return panel;
+	}
+	
+	public JPanel showAllCars(){
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(this.getContentSize());
+		
+		JPanel panelTop = new JPanel();
+		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Fahrzeuge)"));
 		panelTop.setPreferredSize(new Dimension(400, 100));
 		
 		JTable tableSearch = new JTable(50, 15);

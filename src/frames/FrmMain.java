@@ -1,10 +1,11 @@
 package frames;
 
 import generators.GenAdminContent;
+import generators.GenMeisterContent;
+import generators.GenServiceContent;
+import generators.GenWerkstattContent;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -13,10 +14,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class FrmMain {
-	
-	Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
-	int screenWidth=(int)screenSize.getWidth();
-	int screenHeight=(int)screenSize.getHeight();
 	
 	JFrame frame = new JFrame();
 	JMenuBar menubar = new JMenuBar();
@@ -32,6 +29,9 @@ public class FrmMain {
 		if (this.modul.equals("Admin")){
 			this.frame.setTitle("perfectGarage - Administrator");
 		}
+		else if(this.modul.equals("Service")){
+			this.frame.setTitle("perfectGarage - Service");
+		}
 		
 		this.panel.setLayout(new BorderLayout());
 		
@@ -42,7 +42,7 @@ public class FrmMain {
 		this.frame.add(this.panel);
 				
 		this.frame.pack();
-		this.frame.setSize(new Dimension(screenWidth, screenHeight));
+		this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -79,9 +79,28 @@ public class FrmMain {
 		this.menubar.add(mnuKeyData);
 		
 		if (this.modul.equals("Admin")){
-			JMenuItem mnuItemEmployee = new JMenuItem("Mitarbeiterverwaltung");
-			mnuItemEmployee.addActionListener(new CtrlMain(this.frame));
-			mnuKeyData.add(mnuItemEmployee);
+			JMenuItem mnuItemUsers = new JMenuItem("Mitarbeiterverwaltung");
+			mnuItemUsers.addActionListener(new CtrlMain(this.frame));
+			mnuKeyData.add(mnuItemUsers);
+		}
+		else if(this.modul.equals("Service")){
+			JMenuItem mnuItemCustomer = new JMenuItem("Kundenverwaltung");
+			mnuItemCustomer.addActionListener(new CtrlMain(this.frame));
+			mnuKeyData.add(mnuItemCustomer);
+			
+			JMenuItem mnuItemCars = new JMenuItem("Fahrzeugverwaltung");
+			mnuItemCars.addActionListener(new CtrlMain(this.frame));
+			mnuKeyData.add(mnuItemCars);
+		}
+		else if (this.modul.equals("Meister")){
+			JMenuItem mnuItemTasks = new JMenuItem("Auftragsverwaltung");
+			mnuItemTasks.addActionListener(new CtrlMain(this.frame));
+			mnuKeyData.add(mnuItemTasks);
+		}
+		else if (this.modul.equals("Werkstatt")){
+			JMenuItem mnuItemWorkTasks = new JMenuItem("Arbeitsteilaufträge");
+			mnuItemWorkTasks.addActionListener(new CtrlMain(this.frame));
+			mnuKeyData.add(mnuItemWorkTasks);
 		}
 		
 		//Menü Hilfe
@@ -97,7 +116,19 @@ public class FrmMain {
 		
 		if (this.modul.equals("Admin")){
 			GenAdminContent adminContent = new GenAdminContent(this.frame);
-			this.panel = adminContent.generateEmployeeContent();
+			this.panel = adminContent.showAllUsers();
+		}
+		else if (this.modul.equals("Service")){
+			GenServiceContent serviceContent = new GenServiceContent(this.frame);
+			this.panel = serviceContent.showAllCustomers();
+		}
+		else if (this.modul.equals("Meister")){
+			GenMeisterContent meisterContent = new GenMeisterContent(this.frame);
+			this.panel = meisterContent.showAllTasks();			
+		}
+		else if (this.modul.equals("Werkstatt")){
+			GenWerkstattContent werkstattContent = new GenWerkstattContent(this.frame);
+			this.panel = werkstattContent.showAllWorkTasks();
 		}
 		
 	}

@@ -10,11 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class GenAdminContent {
-	
+public class GenWerkstattContent {
+
 	JFrame frame;
 	
-	public GenAdminContent(JFrame frame){
+	public GenWerkstattContent(JFrame frame){
 		this.frame = frame;
 	}
 	
@@ -27,12 +27,12 @@ public class GenAdminContent {
 		return new Dimension(frameWidth, frameHeight);
 	}
 	
-	public JPanel showAllUsers(){
+	public JPanel showAllWorkTasks(){
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		
 		JPanel panelTop = new JPanel();
-		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Benutzer)"));
+		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Arbeitsteilaufträge)"));
 		panelTop.setPreferredSize(new Dimension(400, 100));
 		
 		JTable tableSearch = new JTable(50, 15);
