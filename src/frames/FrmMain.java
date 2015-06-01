@@ -79,7 +79,7 @@ public class FrmMain {
 		this.menubar.add(mnuKeyData);
 		
 		if (this.modul.equals("Admin")){
-			JMenuItem mnuItemUsers = new JMenuItem("Mitarbeiterverwaltung");
+			JMenuItem mnuItemUsers = new JMenuItem("Benutzerverwaltung");
 			mnuItemUsers.addActionListener(new CtrlMain(this.frame));
 			mnuKeyData.add(mnuItemUsers);
 		}

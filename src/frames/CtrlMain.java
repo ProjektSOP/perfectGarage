@@ -12,8 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import dialogs.DlgInfo;
-
-//import dialogs.DlgInfo;
+import dialogs.DlgNutzer;
 
 public class CtrlMain implements ActionListener {
 	

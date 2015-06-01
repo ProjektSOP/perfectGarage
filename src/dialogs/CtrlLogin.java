@@ -8,16 +8,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import objects.Nutzer;
 import frames.FrmMain;
 
 public class CtrlLogin implements ActionListener {
 	
 	JDialog message;
 	JDialog dialog;
+	
 	JTextField txtUser;
 	JPasswordField txtPassword;
-	String strGroup;
-	Boolean bLogin = false;
+	
+	Boolean login = false;
 	
 	public CtrlLogin(JDialog dialog, JTextField txtUser, JPasswordField txtPassword){
 		this.dialog = dialog;
@@ -27,31 +29,33 @@ public class CtrlLogin implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		
+		Nutzer user = new Nutzer();
+		
 		if (event.getActionCommand().equals("Abbrechen")) {
 			System.exit(0);
 		}
-		
 		else if (event.getActionCommand().equals("Anmelden")) {
 			
 			if(this.txtUser.getText().equals("Admin")){
+				user.createNutzer("Admin", "", "", "", "Admin");
 				this.dialog.setVisible(false);
-				this.strGroup = "Admin";
-				this.bLogin = true;
+				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Service")){
+				user.createNutzer("Service", "", "", "", "Service");
 				this.dialog.setVisible(false);
-				this.strGroup = "Service";
-				this.bLogin = true;
+				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Meister")){
+				user.createNutzer("Meister", "", "", "", "Meister");
 				this.dialog.setVisible(false);
-				this.strGroup = "Meister";
-				this.bLogin = true;
+				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Werkstatt")){
+				user.createNutzer("Werkstatt", "", "", "", "Werkstatt");
 				this.dialog.setVisible(false);
-				this.strGroup = "Werkstatt";
-				this.bLogin = true;
+				this.login = true;
 			}
 			
 			/*
@@ -62,20 +66,20 @@ public class CtrlLogin implements ActionListener {
 			 */
 			
 			// Loginstatus auswerten
-			if(bLogin==true){
-				if(this.strGroup.equals("Admin")){
+			if(login==true){
+				if(user.getGruppe().equals("Admin")){
 					FrmMain frmMain = new FrmMain("Admin");
 					frmMain.showFrame(true);
 				}
-				else if(this.strGroup.equals("Service")){
+				else if(user.getGruppe().equals("Service")){
 					FrmMain frmMain = new FrmMain("Service");
 					frmMain.showFrame(true);
 				}
-				else if(this.strGroup.equals("Meister")){
+				else if(user.getGruppe().equals("Meister")){
 					FrmMain frmMain = new FrmMain("Meister");
 					frmMain.showFrame(true);
 				}
-				else if(this.strGroup.equals("Werkstatt")){
+				else if(user.getGruppe().equals("Werkstatt")){
 					FrmMain frmMain = new FrmMain("Werkstatt");
 					frmMain.showFrame(true);
 				}
