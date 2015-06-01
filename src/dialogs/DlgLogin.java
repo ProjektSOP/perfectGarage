@@ -1,4 +1,4 @@
-package perfectGarage;
+package dialogs;
 
 import interfaces.DlgInterface;
 

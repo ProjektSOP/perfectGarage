@@ -1,4 +1,4 @@
-package perfectGarage;
+package dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import frames.FrmMain;
 
 public class CtrlLogin implements ActionListener {
 	
@@ -29,13 +31,8 @@ public class CtrlLogin implements ActionListener {
 			
 			if(this.txtUser.getText().equals("Admin")){
 				this.dialog.setVisible(false);
-				//FrmAdmin frmAdmin = new FrmAdmin();
-				//frmAdmin.showFrame(true);
-			}
-			else if(this.txtUser.getText().equals("Service")){
-				this.dialog.setVisible(false);				
-				//FrmService frmService = new FrmService();
-				//frmService.showFrame(true);
+				FrmMain frmMain = new FrmMain();
+				frmMain.showFrame(true);
 			}
 			else{
 				System.exit(0);
