@@ -3,8 +3,8 @@ package perfectGarage;
 public class ProgMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		DlgLogin dlgLogin = new DlgLogin();
+		dlgLogin.showDialog(true);
 	}
 
 }
