@@ -3,6 +3,8 @@ package frames;
 import generators.GenAdminContent;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -12,12 +14,25 @@ import javax.swing.JPanel;
 
 public class FrmMain {
 	
+	Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
+	int screenWidth=(int)screenSize.getWidth();
+	int screenHeight=(int)screenSize.getHeight();
+	
 	JFrame frame = new JFrame();
 	JMenuBar menubar = new JMenuBar();
 	JPanel panel = new JPanel();
 	
-	public FrmMain(){
-		this.frame.setTitle("FrmAdmin");
+	String modul = new String();
+	
+	
+	public FrmMain(String modul){
+		
+		this.modul = modul;
+		
+		if (this.modul.equals("Admin")){
+			this.frame.setTitle("perfectGarage - Administrator");
+		}
+		
 		this.panel.setLayout(new BorderLayout());
 		
 		this.createMenubar();
@@ -27,6 +42,7 @@ public class FrmMain {
 		this.frame.add(this.panel);
 				
 		this.frame.pack();
+		this.frame.setSize(new Dimension(screenWidth, screenHeight));
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -62,9 +78,11 @@ public class FrmMain {
 		JMenu mnuKeyData = new JMenu("Stammdaten");
 		this.menubar.add(mnuKeyData);
 		
-		JMenuItem mnuItemEmployee = new JMenuItem("Mitarbeiterverwaltung");
-		mnuItemEmployee.addActionListener(new CtrlMain(this.frame));
-		mnuKeyData.add(mnuItemEmployee);
+		if (this.modul.equals("Admin")){
+			JMenuItem mnuItemEmployee = new JMenuItem("Mitarbeiterverwaltung");
+			mnuItemEmployee.addActionListener(new CtrlMain(this.frame));
+			mnuKeyData.add(mnuItemEmployee);
+		}
 		
 		//Menü Hilfe
 		JMenu mnuHelp = new JMenu("Hilfe");
@@ -76,8 +94,12 @@ public class FrmMain {
 	}
 	
 	private void createPanel(){
-		GenAdminContent adminContent = new GenAdminContent();
-		this.panel = adminContent.resetContent();
+		
+		if (this.modul.equals("Admin")){
+			GenAdminContent adminContent = new GenAdminContent(this.frame);
+			this.panel = adminContent.generateEmployeeContent();
+		}
+		
 	}
 
 	public void showFrame(boolean b) {

@@ -31,7 +31,7 @@ public class CtrlLogin implements ActionListener {
 			
 			if(this.txtUser.getText().equals("Admin")){
 				this.dialog.setVisible(false);
-				FrmMain frmMain = new FrmMain();
+				FrmMain frmMain = new FrmMain("Admin");
 				frmMain.showFrame(true);
 			}
 			else{

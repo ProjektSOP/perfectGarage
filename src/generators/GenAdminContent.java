@@ -4,24 +4,31 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class GenAdminContent {
 	
-	static final Dimension displaysize = new Dimension(1366, 768 );
+	JFrame frame;
 	
-	public JPanel resetContent(){
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(displaysize);
+	public GenAdminContent(JFrame frame){
+		this.frame = frame;
+	}
+	
+	private Dimension getContentSize(){
 		
-		return panel;
+		Dimension frameSize = this.frame.getContentPane().getSize();
+		int frameWidth = (int)frameSize.getWidth();
+		int frameHeight = (int)frameSize.getHeight();
+		
+		return new Dimension(frameWidth, frameHeight);
 	}
 	
 	public JPanel generateEmployeeContent(){
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(displaysize);
+		panel.setPreferredSize(this.getContentSize());
 		
 		JPanel panelTop = new JPanel();
 		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter"));
