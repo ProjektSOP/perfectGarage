@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.DAO_Nutzer;
 import dialogs.DlgNutzer;
 import objects.Nutzer;
 
@@ -42,22 +43,8 @@ public class GenAdminContent {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		
-		final ArrayList<Nutzer> users = new ArrayList<Nutzer>();
-		//
-		Nutzer user1 = new Nutzer("user1", "", "Tester", "Theo", "Admin");
-		
-		users.add(user1);
-		Nutzer user2 = new Nutzer("user2", "", "Tester", "Theoline", "Service");
-		
-		users.add(user2);
-		Nutzer user3 = new Nutzer("user3", "", "Mustermann", "Max", "Meister");
-		
-		users.add(user3);
-		Nutzer user4 = new Nutzer("user4", "", "Mustermann", "Maxeline", "Werkstatt");
-		
-		users.add(user4);
-		//
-		
+		DAO_Nutzer daoNutzer = new DAO_Nutzer();
+		final ArrayList<Nutzer> users = daoNutzer.returnAllNutzer();
 		
 		// DefaultTableModel erzeugen
         final DefaultTableModel modelUsers = new DefaultTableModel();
