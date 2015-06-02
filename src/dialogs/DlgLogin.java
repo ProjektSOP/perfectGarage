@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import mySQLConnector.MySQLConnection;
 
@@ -30,6 +31,7 @@ public class DlgLogin implements DlgInterface {
 		
 		this.dialog.pack();
 		this.dialog.setLocationRelativeTo(null);
+		this.dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.dialog.setModal(true);
 	}
 	
