@@ -76,6 +76,17 @@ public static Connection getInstance() {
 	      new MySQLConnection();
 	    return conn;
 	  }
+
+public void schliesseVerbindung() {
+	
+	try {
+		conn.close();	}
+ 
+	catch (SQLException sqle) {
+ 
+		System.out.println(sqle.toString());
+	}
+}
 	  
 	 
 	  /**
