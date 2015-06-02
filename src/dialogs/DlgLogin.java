@@ -46,17 +46,13 @@ public class DlgLogin implements DlgInterface {
 			txtStatus.setEditable(false);
 			
 			if ( MySQLConnection.connect() == true){
-				
 				txtStatus.setText("Verbindung hergestellt");
 				txtStatus.setBackground(Color.GREEN);
 			}
 			else {
-				
 				txtStatus.setText("Keine Verbindung");
 				txtStatus.setBackground(Color.RED);
 			}
-			
-			
 				
 		JPanel panelStatus = new JPanel();
 			panelStatus.add(lblStatus);
