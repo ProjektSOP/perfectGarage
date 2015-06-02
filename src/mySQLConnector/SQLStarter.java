@@ -1,11 +1,16 @@
 package mySQLConnector;
 
+import DAO.DAO_Nutzer;
+
 public class SQLStarter {
 	
-	public static void main(String[] args)
-	  {
+	public static void main(String[] args)  {
 	    // Abfrage aller vorhandenen Namen
-	    MySQLConnection.printNameList();
+	    
+		new DAO_Nutzer().returnAllNutzer();
+		
+		
+		
 	 
 /**
 	    // Neuen Datensatz hinzufügen
