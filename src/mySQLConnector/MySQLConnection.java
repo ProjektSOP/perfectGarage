@@ -28,7 +28,7 @@ public boolean connect() {
 		if (!isConnected) {
 	    try {
 	    	
-	       // Properties auslesen
+	       // Properties auslesen 
 	       	 InputStream in = this.getClass().getResourceAsStream("/settings.properties");
 	         Properties properties = new Properties();
 	         try {
@@ -39,7 +39,7 @@ public boolean connect() {
 				System.out.println("Fehler beim Einlesen der Properties datei " + e.getMessage() );
 			}
 	       	        
-	      // Properties setzen
+	      // Properties setzen   
 	         String dbHost = properties.getProperty("db.host");
 	         String dbPort = properties.getProperty("db.port");
 	         String dbName = properties.getProperty("db.name");
