@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import mySQLConnector.MySQLConnection;
 import objects.Nutzer;
 
-public class DAO_Nutzer {
+public class DAO_Alle_Nutzer {
 	
 public ArrayList<Nutzer> returnAllNutzer()  {
 	
