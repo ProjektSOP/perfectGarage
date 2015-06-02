@@ -3,10 +3,11 @@ package generators;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Toolkit;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -46,81 +47,169 @@ public class GenServiceContent {
 		// Hinzufügen von Panel zu Registrierkarte.
 		tabbedPane.addTab ("Kundenverwaltung", tabbedPanel);
 
+		// Hinzufügen des Labels.
+		tabbedPanel.add (this.createCustomerPanel());
+
 		// Erstelle Registrierkarte.
 		tabbedPanel = new JPanel ();
 		// Hinzufügen von Panel zu Registrierkarte.
 		tabbedPane.addTab ("Fahrzeugverwaltung", tabbedPanel);
 
+		// Hinzufügen des Labels.
+		tabbedPanel.add (this.createCarPanel());
+		
 		// Erstelle Registrierkarte.
 		tabbedPanel = new JPanel ();
 		// Hinzufügen von Panel zu Registrierkarte.
 		tabbedPane.addTab ("Auftragsverwaltung", tabbedPanel);
 		
+		// Hinzufügen des Labels.
+		tabbedPanel.add (this.createTaskPanel());
+		
 		// Erstelle Registrierkarte.
 		tabbedPanel = new JPanel ();
 		// Hinzufügen von Panel zu Registrierkarte.
 		tabbedPane.addTab ("Rechnungsverwaltung", tabbedPanel);
-	      
+		
+		// Hinzufügen des Labels.
+		tabbedPanel.add (this.createBillingPanel());
+		
 		// Hinzufügen zum Fenster.
 		panel.add(tabbedPane);
 		
 		return panel;
 	}
 	
-	public JPanel showAllCustomers(){
+	private JPanel createCustomerPanel(){
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(this.getContentSize());
+		panel.setLayout (new BorderLayout());
 		
+		// Erstelle JPanel.
 		JPanel panelTop = new JPanel();
-		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Kunden)"));
-		panelTop.setPreferredSize(new Dimension(400, 100));
+		panelTop.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 300));
 		
-		JTable tableSearch = new JTable(50, 15);
+		// Erstelle JLabel.
+		JLabel lblText1 = new JLabel ("Kundeninformationen", JLabel.LEFT);
+		
+		// Setze Format.
+		lblText1.setFont (new Font ("Arial", Font.BOLD, 16));
+
+		//Hinzufügen des Labels.
+		panelTop.add(lblText1);
+		
+		
+		// Erstelle JPanel.
+		JPanel panelCenter = new JPanel();
+		panelCenter.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 300));
+		
+
+		//Hinzufügen des Labels.
+		//panelCenter.add(label);
+		
+		
+		// Erstelle JPanel.
+		JPanel panelBottom = new JPanel();
+		panelBottom.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 300));
+		
+		
+		JTable tableSearch = new JTable(16, 15);
 		JScrollPane scrollTable = new JScrollPane(tableSearch);
 		
 		scrollTable.setPreferredSize(new Dimension(
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 210	));
-		
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20,
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 754	));
 		scrollTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
-		JPanel panelCenter = new JPanel();
-		panelCenter.setBorder(BorderFactory.createTitledBorder("Suchergebnis"));
-		panelCenter.add(scrollTable);
-		
+		//Hinzufügen des Labels.
+		panelBottom.add(scrollTable);
+
+		// Eigenschaften setzen
 		panel.setLayout(new BorderLayout());
 		panel.add(panelTop, BorderLayout.NORTH);
 		panel.add(panelCenter, BorderLayout.CENTER);
+		panel.add(panelBottom, BorderLayout.SOUTH);
+		return panel;
+	}
+	
+	private JPanel createCarPanel(){
+		JPanel panel = new JPanel();
+		panel.setLayout (new BorderLayout());
+		
+		// Erstelle JPanel.
+		JPanel panelTop = new JPanel();
+		panelTop.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 300));
+		
+		// Erstelle JLabel.
+		JLabel lblText1 = new JLabel ("Fahrzeuginformationen", JLabel.LEFT);
+		
+		// Setze Format.
+		lblText1.setFont (new Font ("Arial", Font.BOLD, 16));
+
+		//Hinzufügen des Labels.
+		panelTop.add(lblText1);
+		
+		
+		// Erstelle JPanel.
+		JPanel panelCenter = new JPanel();
+		panelCenter.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 300));
+		
+
+		//Hinzufügen des Labels.
+		//panelCenter.add(label);
+		
+		
+		// Erstelle JPanel.
+		JPanel panelBottom = new JPanel();
+		panelBottom.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 300));
+		
+		
+		JTable tableSearch = new JTable(16, 15);
+		JScrollPane scrollTable = new JScrollPane(tableSearch);
+		
+		scrollTable.setPreferredSize(new Dimension(
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20,
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 754	));
+		scrollTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		//Hinzufügen des Labels.
+		panelBottom.add(scrollTable);
+
+		// Eigenschaften setzen
+		panel.setLayout(new BorderLayout());
+		panel.add(panelTop, BorderLayout.NORTH);
+		panel.add(panelCenter, BorderLayout.CENTER);
+		panel.add(panelBottom, BorderLayout.SOUTH);
+		return panel;
+	}
+	
+	private JPanel createTaskPanel(){
+		JPanel panel = new JPanel();
+		
+		// Erstelle JLabel.
+		JLabel label = new JLabel ("Auftragsinformationen", JLabel.LEFT);
+		
+		// Setze Format.
+		label.setFont (new Font ("Arial", Font.BOLD, 16));
+
+		//Hinzufügen des Labels.
+		panel.add(label);
 		
 		return panel;
 	}
 	
-	public JPanel showAllCars(){
+	private JPanel createBillingPanel(){
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(this.getContentSize());
 		
-		JPanel panelTop = new JPanel();
-		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Fahrzeuge)"));
-		panelTop.setPreferredSize(new Dimension(400, 100));
+		// Erstelle JLabel.
+		JLabel label = new JLabel ("Rechnungsinformationen", JLabel.LEFT);
 		
-		JTable tableSearch = new JTable(50, 15);
-		JScrollPane scrollTable = new JScrollPane(tableSearch);
-		
-		scrollTable.setPreferredSize(new Dimension(
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 210	));
-		
-		scrollTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		JPanel panelCenter = new JPanel();
-		panelCenter.setBorder(BorderFactory.createTitledBorder("Suchergebnis"));
-		panelCenter.add(scrollTable);
-		
-		panel.setLayout(new BorderLayout());
-		panel.add(panelTop, BorderLayout.NORTH);
-		panel.add(panelCenter, BorderLayout.CENTER);
+		// Setze Format.
+		label.setFont (new Font ("Arial", Font.BOLD, 16));
+
+		//Hinzufügen des Labels.
+		panel.add(label);
 		
 		return panel;
 	}
