@@ -111,8 +111,8 @@ public class GenAdminContent {
         JScrollPane scrollTable = new JScrollPane(tableUsers);
 		
 		scrollTable.setPreferredSize(new Dimension(
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 210	));
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 10,
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 170	));
 		
 		scrollTable.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollTable.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -154,7 +154,7 @@ public class GenAdminContent {
 		// Eigenschaften setzen
 		panelTop.setLayout((new BoxLayout (panelTop, BoxLayout.X_AXIS)));
 		panelTop.setBorder(BorderFactory.createTitledBorder("Aktionsmöglichkeiten (Benutzer)"));
-		panelTop.setPreferredSize(new Dimension(400, 100));
+		panelTop.setPreferredSize(new Dimension(400, 60));
 		
 				
 		panel.setLayout(new BorderLayout());

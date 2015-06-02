@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 public class GenServiceContent {
@@ -25,6 +26,41 @@ public class GenServiceContent {
 		int frameHeight = (int)frameSize.getHeight();
 		
 		return new Dimension(frameWidth, frameHeight);
+	}
+	
+	public JPanel showServicePanel(){
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(this.getContentSize());
+		//panel.setLayout (new FlowLayout());
+		
+		// Erstelle Registrierkarten
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setPreferredSize(new Dimension(
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 10,
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 100	));
+		
+		// Erstelle Registrierkarte.
+		JPanel tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Kundenverwaltung", tabbedPanel);
+
+		// Erstelle Registrierkarte.
+		tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Fahrzeugverwaltung", tabbedPanel);
+		
+		// Erstelle Registrierkarte.
+		tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Auftragsverwaltung", tabbedPanel);
+		
+		// Erstelle Registrierkarte.
+		tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Rechnungsverwaltung", tabbedPanel);
+		
+		panel.add(tabbedPane);
+		return panel;
 	}
 	
 	public JPanel showAllCustomers(){

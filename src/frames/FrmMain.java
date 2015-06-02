@@ -52,10 +52,12 @@ public class FrmMain {
 		JMenu mnuFile = new JMenu("Datei");
 		this.menubar.add(mnuFile);
 
+		/*
 		JMenuItem mnuItemClose = new JMenuItem("Schlieﬂen");
 		mnuItemClose.addActionListener(new CtrlMain(this.frame));
 		mnuFile.add(mnuItemClose);
 		mnuFile.addSeparator();
+		*/
 		JMenuItem mnuItemExit = new JMenuItem("Beenden");
 		mnuItemExit.addActionListener(new CtrlMain(this.frame));
 		mnuFile.add(mnuItemExit);
@@ -79,11 +81,14 @@ public class FrmMain {
 		this.menubar.add(mnuKeyData);
 		
 		if (this.modul.equals("Admin")){
+			/*
 			JMenuItem mnuItemUsers = new JMenuItem("Benutzerverwaltung");
 			mnuItemUsers.addActionListener(new CtrlMain(this.frame));
 			mnuKeyData.add(mnuItemUsers);
+			*/
 		}
 		else if(this.modul.equals("Service")){
+			/*
 			JMenuItem mnuItemCustomer = new JMenuItem("Kundenverwaltung");
 			mnuItemCustomer.addActionListener(new CtrlMain(this.frame));
 			mnuKeyData.add(mnuItemCustomer);
@@ -91,6 +96,7 @@ public class FrmMain {
 			JMenuItem mnuItemCars = new JMenuItem("Fahrzeugverwaltung");
 			mnuItemCars.addActionListener(new CtrlMain(this.frame));
 			mnuKeyData.add(mnuItemCars);
+			*/
 		}
 		else if (this.modul.equals("Meister")){
 			JMenuItem mnuItemTasks = new JMenuItem("Auftragsverwaltung");
@@ -120,7 +126,7 @@ public class FrmMain {
 		}
 		else if (this.modul.equals("Service")){
 			GenServiceContent serviceContent = new GenServiceContent(this.frame);
-			this.panel = serviceContent.showAllCustomers();
+			this.panel = serviceContent.showServicePanel();
 		}
 		else if (this.modul.equals("Meister")){
 			GenMeisterContent meisterContent = new GenMeisterContent(this.frame);

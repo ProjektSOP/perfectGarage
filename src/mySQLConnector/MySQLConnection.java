@@ -21,15 +21,15 @@ import java.util.Properties;
 public class MySQLConnection {
 	 
 	  private static Connection conn = null;
-	  private boolean isConnected = false;
+	  private static boolean isConnected = false;
 	 
 	 
-public boolean connect() {
+public static boolean connect() {
 		if (!isConnected) {
 	    try {
 	    	
 	       // Properties auslesen 
-	       	 InputStream in = this.getClass().getResourceAsStream("/settings.properties");
+	       	InputStream in = MySQLConnection.class.getResourceAsStream("settings.properties");
 	         Properties properties = new Properties();
 	         try {
 				properties.load(in);
