@@ -30,7 +30,7 @@ public class CtrlLogin implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
-		Nutzer user = new Nutzer();
+		Nutzer user = new Nutzer("mrothe", "1234", "rothe", "martin", "Admin");
 		
 		if (event.getActionCommand().equals("Abbrechen")) {
 			System.exit(0);

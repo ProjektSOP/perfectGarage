@@ -44,17 +44,17 @@ public class GenAdminContent {
 		
 		final ArrayList<Nutzer> users = new ArrayList<Nutzer>();
 		//
-		Nutzer user1 = new Nutzer();
-		user1.setNutzerInfo("user1", "", "Tester", "Theo", "Admin");
+		Nutzer user1 = new Nutzer("user1", "", "Tester", "Theo", "Admin");
+		
 		users.add(user1);
-		Nutzer user2 = new Nutzer();
-		user2.setNutzerInfo("user2", "", "Tester", "Theoline", "Service");
+		Nutzer user2 = new Nutzer("user2", "", "Tester", "Theoline", "Service");
+		
 		users.add(user2);
-		Nutzer user3 = new Nutzer();
-		user3.setNutzerInfo("user3", "", "Mustermann", "Max", "Meister");
+		Nutzer user3 = new Nutzer("user3", "", "Mustermann", "Max", "Meister");
+		
 		users.add(user3);
-		Nutzer user4 = new Nutzer();
-		user4.setNutzerInfo("user4", "", "Mustermann", "Maxeline", "Werkstatt");
+		Nutzer user4 = new Nutzer("user4", "", "Mustermann", "Maxeline", "Werkstatt");
+		
 		users.add(user4);
 		//
 		
@@ -70,7 +70,7 @@ public class GenAdminContent {
         for(int i=0;i<users.size();i++){
         	
         	// Nutzerinformationen auslesen
-        	Nutzer user = new Nutzer();
+        	Nutzer user = new Nutzer("user5", "", "Mustermann", "Maxeline", "Werkstatt");
         	user = users.get(i);
         	String[] userdata = user.getNutzerInfo();
         	

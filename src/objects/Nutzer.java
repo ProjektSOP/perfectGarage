@@ -8,6 +8,17 @@ public class Nutzer implements Comparable<Nutzer>{
 	private String vorname;
 	private String gruppe;
 	
+		
+	public Nutzer(String username, String password, String nachname,
+			String vorname, String gruppe) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.nachname = nachname;
+		this.vorname = vorname;
+		this.gruppe = gruppe;
+	}
+
 	public void setPassword(String password){
 		this.password = password;
 	}

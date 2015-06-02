@@ -53,20 +53,20 @@ public static boolean connect() {
 	      
 	      // Es wird die JDBC-ODBC-Brücke verwendet.
 	      conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?" + "user=" + dbUser + "&"
-	          + "password=" + dbPassword);
+	          + "password=");
 	    } catch (ClassNotFoundException e) {
 	    	System.out.println("Treiber nicht gefunden");
 	    	
 	    } catch (SQLException e) {
 	    	System.out.println("Connect nicht moeglich");
+	    	System.out.println(e.getMessage());
 	    }
 	    	    
 	  }
 	return isConnected;
 }
 	 
-	  private static Connection getInstance()
-	  {
+public static Connection getInstance() {
 	    if(conn == null)
 	      new MySQLConnection();
 	    return conn;
