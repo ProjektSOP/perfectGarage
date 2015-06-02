@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import DAO.DAO_Alle_Nutzer;
+import DAO.DAO_Kunde;
 import mySQLConnector.MySQLConnection;
 
 public class DlgLogin implements DlgInterface {
@@ -53,7 +54,9 @@ public class DlgLogin implements DlgInterface {
 				txtStatus.setText("Verbindung hergestellt");
 				txtStatus.setBackground(Color.GREEN);
 				
-				new DAO_Alle_Nutzer().returnAllNutzer();
+				// FunktionsTEST
+				String kundenname = "werfel";
+				new DAO_Kunde().returnKundebyKundenNr(2);
 			}
 			else {
 				txtStatus.setText("Keine Verbindung");

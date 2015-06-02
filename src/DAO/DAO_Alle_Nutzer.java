@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import mySQLConnector.MySQLConnection;
+
 import objects.Nutzer;
+
 
 public class DAO_Alle_Nutzer {
 	
@@ -15,7 +17,7 @@ public ArrayList<Nutzer> returnAllNutzer()  {
 	
 		ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
 		Connection conn = null;
-					     
+							     
 		conn = MySQLConnection.getInstance();
 		 
 	    if(conn != null)
@@ -27,7 +29,7 @@ public ArrayList<Nutzer> returnAllNutzer()  {
 	        query = conn.createStatement();
 	 
 	        // Ergebnistabelle erzeugen und abholen.
-	        String sql = "SELECT benutzername, passwort, name, vorname, nutzerrolle FROM t_nutzer";
+	        String sql = "SELECT * FROM t_nutzer";
 	        ResultSet result = query.executeQuery(sql);
 	 
 	        // Ergebnissätze durchfahren.
@@ -46,17 +48,17 @@ public ArrayList<Nutzer> returnAllNutzer()  {
 	          nutzerliste.add(tempnutzer);
 	         	                    
 	        }
-	       	   
+	        
+	        //TEST AUSGABE
+	        /**
+	        for (Nutzer n : nutzerliste)
+	        System.out.println(n.getVorname() + " " + n.getNachname());
+	       	*/
 	        
 	      } catch (SQLException e) {
 	        e.printStackTrace();
 	      }
-	    }
-	    
-	    for(Nutzer n : nutzerliste){
-       	 System.out.println(n.getVorname() + " "+ n.getNachname() +"\n" );
-        }
-	    
+	    }	    
 	    return nutzerliste;
 	  }
 
