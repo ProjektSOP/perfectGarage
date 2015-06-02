@@ -27,6 +27,14 @@ public class GenServiceContent {
 		return new Dimension(frameWidth, frameHeight);
 	}
 	
+	public JPanel showServicePanel(){
+		JPanel panel = new JPanel();
+		
+		
+		
+		return panel;
+	}
+	
 	public JPanel showAllCustomers(){
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());

@@ -5,16 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import mySQLConnector.MySQLConnection;
 import objects.Nutzer;
 
 public class DAO_Nutzer {
 	
-public List<Nutzer> returnAllNutzer()  {
+public ArrayList<Nutzer> returnAllNutzer()  {
 	
-		List<Nutzer> nutzerliste = new ArrayList<Nutzer>();
+		ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
 		Connection conn = null;
 					     
 		conn = MySQLConnection.getInstance();
