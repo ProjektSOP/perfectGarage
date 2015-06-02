@@ -29,8 +29,7 @@ public static boolean connect() {
 	    try {
 	    	
 	       // Properties auslesen 
-	       	 //InputStream in = getClass().getResourceAsStream("/settings.properties");
-	    	InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("/settings.properties");
+	       	InputStream in = MySQLConnection.class.getResourceAsStream("settings.properties");
 	         Properties properties = new Properties();
 	         try {
 				properties.load(in);
