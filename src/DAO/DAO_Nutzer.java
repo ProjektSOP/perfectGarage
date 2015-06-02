@@ -41,19 +41,22 @@ public List<Nutzer> returnAllNutzer()  {
 	          String nachname = result.getString("Name"); // 
 	          String vorname = result.getString("Vorname"); 
 	          String nutzerrolle = result.getString("Nutzerrolle");
-	         
+	          	          	         
 	          Nutzer tempnutzer = new Nutzer(benutzername, passwort, nachname, vorname, nutzerrolle);
 	          
-	         nutzerliste.add(tempnutzer);
-	         
+	          nutzerliste.add(tempnutzer);
+	         	                    
 	        }
-	        
-	        System.out.println(nutzerliste);
+	       	   
 	        
 	      } catch (SQLException e) {
 	        e.printStackTrace();
 	      }
 	    }
+	    
+	    for(Nutzer n : nutzerliste){
+       	 System.out.println(n.getVorname() + " "+ n.getNachname() +"\n" );
+        }
 	    
 	    return nutzerliste;
 	  }
