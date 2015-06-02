@@ -81,36 +81,7 @@ public static Connection getInstance() {
 	  /**
 	   * Schreibt die Namensliste in die Konsole
 	   */
-public static void printNameList()
-	  {
-	    conn = getInstance();
-	 
-	    if(conn != null)
-	    {
-	      // Anfrage-Statement erzeugen.
-	      Statement query;
-	      try {
-	        query = conn.createStatement();
-	 
-	        // Ergebnistabelle erzeugen und abholen.
-	        String sql = "SELECT benutzername, passwort, name, vorname, nutzerrolle FROM t_nutzer";
-	        ResultSet result = query.executeQuery(sql);
-	 
-	        // Ergebnissätze durchfahren.
-	        while (result.next()) {
-	          String benutzername = result.getString("benutzername"); 
-	          String passwort = result.getString("passwort"); 
-	          String name = result.getString("Name"); // 
-	          String vorname = result.getString("Vorname"); 
-	          String nutzerrolle = result.getString("Nutzerrolle");
-	          System.out.println(vorname + ", " + name + ", " + passwort + ", " + benutzername + ", " + nutzerrolle + "\n");
-	        }
-	      } catch (SQLException e) {
-	        e.printStackTrace();
-	      }
-	    }
-	  }
-	 
+
 	  /**
 	   * Fügt einen neuen Datensatz hinzu 
 	   
