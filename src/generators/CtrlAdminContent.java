@@ -7,7 +7,7 @@ import objects.Nutzer;
 import dialogs.DlgNutzer;
 
 public class CtrlAdminContent implements ActionListener {
-
+	
 	Nutzer user;
 	
 	public CtrlAdminContent(Nutzer user){
