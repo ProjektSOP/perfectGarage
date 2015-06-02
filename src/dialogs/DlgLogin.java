@@ -45,7 +45,7 @@ public class DlgLogin implements DlgInterface {
 			txtStatus.setPreferredSize(new Dimension(150, 20));
 			txtStatus.setEditable(false);
 			
-			if ( MySQLConnection.testConnection() == true){
+			if ( MySQLConnection.connect() == true){
 				
 				txtStatus.setText("Verbindung hergestellt");
 				txtStatus.setBackground(Color.GREEN);
