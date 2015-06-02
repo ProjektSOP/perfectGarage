@@ -53,7 +53,10 @@ public static boolean connect() {
 	      
 	      // Es wird die JDBC-ODBC-Brücke verwendet.
 	      conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?" + "user=" + dbUser + "&"
-	          + "password=");
+	          + "password=" + dbPassword );
+	      
+	      isConnected = true;
+	      
 	    } catch (ClassNotFoundException e) {
 	    	System.out.println("Treiber nicht gefunden");
 	    	
@@ -63,6 +66,8 @@ public static boolean connect() {
 	    }
 	    	    
 	  }
+		
+		
 	return isConnected;
 }
 	 
