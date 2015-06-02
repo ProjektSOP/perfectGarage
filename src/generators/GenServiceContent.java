@@ -2,12 +2,14 @@ package generators;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 public class GenServiceContent {
@@ -29,8 +31,38 @@ public class GenServiceContent {
 	
 	public JPanel showServicePanel(){
 		JPanel panel = new JPanel();
+		panel.setPreferredSize(this.getContentSize());
+		panel.setLayout (new FlowLayout());
 		
+		// Erstelle Registrierkarten.
+		JTabbedPane tabbedPane = new JTabbedPane();
+		// Setze bevorzugte Größe.
+		tabbedPane.setPreferredSize(new Dimension(
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 10,
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 100	));
+	      
+		// Erstelle Registrierkarte.
+		JPanel tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Kundenverwaltung", tabbedPanel);
+
+		// Erstelle Registrierkarte.
+		tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Fahrzeugverwaltung", tabbedPanel);
+
+		// Erstelle Registrierkarte.
+		tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Auftragsverwaltung", tabbedPanel);
 		
+		// Erstelle Registrierkarte.
+		tabbedPanel = new JPanel ();
+		// Hinzufügen von Panel zu Registrierkarte.
+		tabbedPane.addTab ("Rechnungsverwaltung", tabbedPanel);
+	      
+		// Hinzufügen zum Fenster.
+		panel.add(tabbedPane);
 		
 		return panel;
 	}

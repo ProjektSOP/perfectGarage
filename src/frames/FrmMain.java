@@ -78,21 +78,7 @@ public class FrmMain {
 		JMenu mnuKeyData = new JMenu("Stammdaten");
 		this.menubar.add(mnuKeyData);
 		
-		if (this.modul.equals("Admin")){
-			JMenuItem mnuItemUsers = new JMenuItem("Benutzerverwaltung");
-			mnuItemUsers.addActionListener(new CtrlMain(this.frame));
-			mnuKeyData.add(mnuItemUsers);
-		}
-		else if(this.modul.equals("Service")){
-			JMenuItem mnuItemCustomer = new JMenuItem("Kundenverwaltung");
-			mnuItemCustomer.addActionListener(new CtrlMain(this.frame));
-			mnuKeyData.add(mnuItemCustomer);
-			
-			JMenuItem mnuItemCars = new JMenuItem("Fahrzeugverwaltung");
-			mnuItemCars.addActionListener(new CtrlMain(this.frame));
-			mnuKeyData.add(mnuItemCars);
-		}
-		else if (this.modul.equals("Meister")){
+		if (this.modul.equals("Meister")){
 			JMenuItem mnuItemTasks = new JMenuItem("Auftragsverwaltung");
 			mnuItemTasks.addActionListener(new CtrlMain(this.frame));
 			mnuKeyData.add(mnuItemTasks);
@@ -116,11 +102,11 @@ public class FrmMain {
 		
 		if (this.modul.equals("Admin")){
 			GenAdminContent adminContent = new GenAdminContent(this.frame);
-			this.panel = adminContent.showAllUsers();
+			this.panel = adminContent.showAdminPanel();
 		}
 		else if (this.modul.equals("Service")){
 			GenServiceContent serviceContent = new GenServiceContent(this.frame);
-			this.panel = serviceContent.showAllCustomers();
+			this.panel = serviceContent.showServicePanel();
 		}
 		else if (this.modul.equals("Meister")){
 			GenMeisterContent meisterContent = new GenMeisterContent(this.frame);

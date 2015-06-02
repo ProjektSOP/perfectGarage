@@ -39,7 +39,7 @@ public class GenAdminContent {
 		return new Dimension(frameWidth, frameHeight);
 	}
 	
-	public JPanel showAllUsers(){
+	public JPanel showAdminPanel(){
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		
