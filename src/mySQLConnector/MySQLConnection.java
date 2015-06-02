@@ -8,44 +8,51 @@ package mySQLConnector;
  *
  */
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 
 public class MySQLConnection {
 	 
 	  private static Connection conn = null;
+	  private boolean isConnected = false;
 	 
-	  // Hostname
-	  private static String dbHost = "localhost";
 	 
-	  // Port -- Standard: 3306
-	  private static String dbPort = "3306";
-	 
-	  // Datenbankname
-	  private static String database = "db_werkstatt";
-	 
-	  // Datenbankuser
-	  private static String dbUser = "root";
-	 
-	  // Datenbankpasswort
-	  private static String dbPassword = "";
-	 
-	  private MySQLConnection() {
+public boolean connect() {
+		if (!isConnected) {
 	    try {
-	 
+	    	
+	       // Properties auslesen
+	       	 InputStream in = this.getClass().getResourceAsStream("/settings.properties");
+	         Properties properties = new Properties();
+	         try {
+				properties.load(in);
+				
+			} catch (IOException e) {
+				// TO-DO Hier sollte noch ein Fehlerlog eingebaut werden
+				System.out.println("Fehler beim Einlesen der Properties datei " + e.getMessage() );
+			}
+	       	        
+	      // Properties setzen
+	         String dbHost = properties.getProperty("db.host");
+	         String dbPort = properties.getProperty("db.port");
+	         String dbName = properties.getProperty("db.name");
+	         String dbUser = properties.getProperty("db.user");
+	         String dbPassword = properties.getProperty("db.password");
+	         
 	      // Datenbanktreiber für ODBC Schnittstellen laden.
 	      
 	      Class.forName("com.mysql.jdbc.Driver");
 	 
-	      // Verbindung zur ODBC-Datenbank 'sakila' herstellen.
+	      
 	      // Es wird die JDBC-ODBC-Brücke verwendet.
-	      conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":"
-	          + dbPort + "/" + database + "?" + "user=" + dbUser + "&"
+	      conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?" + "user=" + dbUser + "&"
 	          + "password=" + dbPassword);
 	    } catch (ClassNotFoundException e) {
 	    	System.out.println("Treiber nicht gefunden");
@@ -53,7 +60,10 @@ public class MySQLConnection {
 	    } catch (SQLException e) {
 	    	System.out.println("Connect nicht moeglich");
 	    }
+	    	    
 	  }
+	return isConnected;
+}
 	 
 	  private static Connection getInstance()
 	  {
@@ -62,25 +72,11 @@ public class MySQLConnection {
 	    return conn;
 	  }
 	  
-	  public static boolean testConnection(){
-		
-		  conn = getInstance();
-			 
-		    if(conn != null)  {
-		  		  
-		    	return true;
-		    }
-		    else {
-		    	
-		    	return false;
-		    }
-	 
-	  }
 	 
 	  /**
 	   * Schreibt die Namensliste in die Konsole
 	   */
-	  public static void printNameList()
+public static void printNameList()
 	  {
 	    conn = getInstance();
 	 
