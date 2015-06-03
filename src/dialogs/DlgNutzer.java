@@ -29,7 +29,24 @@ public class DlgNutzer implements DlgInterface {
 		
 		this.dialog.pack();
 		this.dialog.setLocationRelativeTo(null);
+		this.dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.dialog.setModal(true);
+	}
+	
+	public void newNutzer() {
+		this.dialog.setTitle("Neuen Nutzer anlegen");
+		this.dialog.remove(this.panel);
+		this.createPanel("", "", "", "", "");
+		this.dialog.add(this.panel);
+		this.showDialog(true);
+	}
+	
+	public void editNutzer(Nutzer user) {
+		this.dialog.setTitle("Nutzer bearbeiten");
+		this.dialog.remove(this.panel);
+		this.createPanel(user.getUsername(), "p@ssw0rd", user.getNachname(), user.getVorname(), user.getGruppe());
+		this.dialog.add(this.panel);
+		this.showDialog(true);
 	}
 	
 	private void createPanel(String username, String password, String nachname, String vorname, String rolle){
@@ -101,14 +118,6 @@ public class DlgNutzer implements DlgInterface {
 		}else if(b==false){
 			this.dialog.setVisible(false);
 		}
-	}
-	
-	public void editNutzer(Nutzer user) {
-		this.dialog.setTitle("Nutzer bearbeiten");
-		this.dialog.remove(this.panel);
-		this.createPanel(user.getUsername(), "p@ssw0rd", user.getNachname(), user.getVorname(), user.getGruppe());
-		this.dialog.add(this.panel);
-		this.showDialog(true);
 	}
 	
 }

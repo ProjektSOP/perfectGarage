@@ -31,6 +31,22 @@ public class Kunde {
 		this.handy = handy;
 		this.email = email;
 	}
+	
+	public String[] getKundeInfo(){
+		String[] customerdata = new String[11];
+		customerdata[0] = "" + this.kundennr;
+		customerdata[1] = this.nachname;
+		customerdata[2] = this.vorname;
+		customerdata[3] = this.strasse;
+		customerdata[4] = "" + this.plz;
+		customerdata[5] = this.ort;
+		customerdata[6] = "" + this.kundeseit;
+		customerdata[7] = this.telefon;
+		customerdata[8] = this.telefax;
+		customerdata[9] = this.handy;
+		customerdata[10] = this.email;
+		return customerdata;
+	}
 
 	public int getKundennr() {
 		return kundennr;
@@ -75,8 +91,5 @@ public class Kunde {
 	public String getEmail() {
 		return email;
 	}
-	
-	
-	
 	
 }

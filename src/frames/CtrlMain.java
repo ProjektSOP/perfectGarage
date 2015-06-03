@@ -45,19 +45,6 @@ public class CtrlMain implements ActionListener {
 			dlgInfo.showDialog(true);
 		}
 		
-		// Modul Meister
-		else if (event.getActionCommand().equals("Auftragsverwaltung")) {
-			this.frame.getContentPane().removeAll();
-			this.frame.getContentPane().add(meisterContent.showAllTasks());
-			this.frame.pack();
-		}
-		
-		// Modul Werkstatt
-		else if (event.getActionCommand().equals("Arbeitsteilaufträge")) {
-			this.frame.getContentPane().removeAll();
-			this.frame.getContentPane().add(werkstattContent.showAllWorkTasks());
-			this.frame.pack();
-		}
 	}
 
 }

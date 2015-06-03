@@ -11,7 +11,7 @@ import mySQLConnector.MySQLConnection;
 import objects.Nutzer;
 
 
-public class DAO_Alle_Nutzer {
+public class DAONutzer {
 	
 public ArrayList<Nutzer> returnAllNutzer()  {
 	

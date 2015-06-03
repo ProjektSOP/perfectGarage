@@ -16,8 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import DAO.DAO_Alle_Nutzer;
-import DAO.DAO_Kunde;
+import DAO.DAONutzer;
+import DAO.DAOKunde;
 import mySQLConnector.MySQLConnection;
 
 public class DlgLogin implements DlgInterface {
@@ -35,7 +35,6 @@ public class DlgLogin implements DlgInterface {
 		this.dialog.setLocationRelativeTo(null);
 		this.dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.dialog.setModal(true);
-		this.dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
 	private void createPanel(){
@@ -56,7 +55,7 @@ public class DlgLogin implements DlgInterface {
 				
 				// FunktionsTEST
 				String kundenname = "werfel";
-				new DAO_Kunde().returnKundebyKundenNr(2);
+				new DAOKunde().returnKundebyKundenNr(2);
 			}
 			else {
 				txtStatus.setText("Keine Verbindung");

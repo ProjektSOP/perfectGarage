@@ -32,6 +32,12 @@ public class FrmMain {
 		else if(this.modul.equals("Service")){
 			this.frame.setTitle("perfectGarage - Service");
 		}
+		else if(this.modul.equals("Meister")){
+			this.frame.setTitle("perfectGarage - Meister");
+		}
+		else if(this.modul.equals("Werkstatt")){
+			this.frame.setTitle("perfectGarage - Werkstatt");
+		}
 		
 		this.panel.setLayout(new BorderLayout());
 		
@@ -52,10 +58,6 @@ public class FrmMain {
 		JMenu mnuFile = new JMenu("Datei");
 		this.menubar.add(mnuFile);
 
-		JMenuItem mnuItemClose = new JMenuItem("Schließen");
-		mnuItemClose.addActionListener(new CtrlMain(this.frame));
-		mnuFile.add(mnuItemClose);
-		mnuFile.addSeparator();
 		JMenuItem mnuItemExit = new JMenuItem("Beenden");
 		mnuItemExit.addActionListener(new CtrlMain(this.frame));
 		mnuFile.add(mnuItemExit);
@@ -73,21 +75,6 @@ public class FrmMain {
 		mnuEdit.addSeparator();
 		JMenuItem mnuItemSelectAll = new JMenuItem("Alles markieren");
 		mnuEdit.add(mnuItemSelectAll);
-		
-		//Menü Stammdaten
-		JMenu mnuKeyData = new JMenu("Stammdaten");
-		this.menubar.add(mnuKeyData);
-		
-		if (this.modul.equals("Meister")){
-			JMenuItem mnuItemTasks = new JMenuItem("Auftragsverwaltung");
-			mnuItemTasks.addActionListener(new CtrlMain(this.frame));
-			mnuKeyData.add(mnuItemTasks);
-		}
-		else if (this.modul.equals("Werkstatt")){
-			JMenuItem mnuItemWorkTasks = new JMenuItem("Arbeitsteilaufträge");
-			mnuItemWorkTasks.addActionListener(new CtrlMain(this.frame));
-			mnuKeyData.add(mnuItemWorkTasks);
-		}
 		
 		//Menü Hilfe
 		JMenu mnuHelp = new JMenu("Hilfe");
@@ -110,11 +97,11 @@ public class FrmMain {
 		}
 		else if (this.modul.equals("Meister")){
 			GenMeisterContent meisterContent = new GenMeisterContent(this.frame);
-			this.panel = meisterContent.showAllTasks();			
+			this.panel = meisterContent.showMeisterPanel();			
 		}
 		else if (this.modul.equals("Werkstatt")){
 			GenWerkstattContent werkstattContent = new GenWerkstattContent(this.frame);
-			this.panel = werkstattContent.showAllWorkTasks();
+			this.panel = werkstattContent.showWerkstattPanel();
 		}
 		
 	}

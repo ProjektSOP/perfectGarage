@@ -13,7 +13,6 @@ import frames.FrmMain;
 
 public class CtrlLogin implements ActionListener {
 	
-	JDialog message;
 	JDialog dialog;
 	
 	JTextField txtUser;
@@ -84,7 +83,7 @@ public class CtrlLogin implements ActionListener {
 					frmMain.showFrame(true);
 				}
 			}else{
-				JOptionPane.showMessageDialog(message,
+				JOptionPane.showMessageDialog(null,
 					    "Der Benutzer konnte nicht angemeldet werden",
 					    "Anmeldung fehlgeschlagen",
 					    JOptionPane.ERROR_MESSAGE);

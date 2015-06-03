@@ -2,10 +2,12 @@ package generators;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,13 +29,19 @@ public class GenMeisterContent {
 		return new Dimension(frameWidth, frameHeight);
 	}
 	
-	public JPanel showAllTasks(){
+	public JPanel showMeisterPanel(){
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		
 		JPanel panelTop = new JPanel();
-		panelTop.setBorder(BorderFactory.createTitledBorder("Suchfilter (Aufträge)"));
 		panelTop.setPreferredSize(new Dimension(400, 100));
+		
+		// Erstelle JLabel.
+		JLabel lblText1 = new JLabel ("This site is under construction", JLabel.LEFT);
+		// Setze Format.
+		lblText1.setFont (new Font ("Arial", Font.BOLD, 16));
+		// Hinzufügen von Label zu Panel.
+		panelTop.add(lblText1);
 		
 		JTable tableSearch = new JTable(50, 15);
 		JScrollPane scrollTable = new JScrollPane(tableSearch);
