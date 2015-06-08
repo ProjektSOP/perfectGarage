@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import DAO.DAONutzer;
+
 import objects.Nutzer;
 import frames.FrmMain;
 
@@ -60,7 +61,8 @@ public class CtrlLogin implements ActionListener {
 				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin");
 				this.dialog.setVisible(false);
 				this.login = true;
-			}
+				
+		}
 			else if(this.txtUser.getText().equals("Service")){
 				users.get(0).setNutzerInfo("Service", "", "", "", "Service");
 				this.dialog.setVisible(false);

@@ -21,7 +21,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import DAO.DAOKunde;
 import mySQLConnector.MySQLConnection;
 
 public class DlgLogin implements DlgInterface {
@@ -55,11 +54,7 @@ public class DlgLogin implements DlgInterface {
 			
 			if ( MySQLConnection.connect() ){
 				txtStatus.setText("Verbindung hergestellt");
-				txtStatus.setBackground(Color.GREEN);
-				
-				// FunktionsTEST
-				String kundenname = "werfel";
-				new DAOKunde().returnKundebyKundenNr(2);
+				txtStatus.setBackground(Color.GREEN);				
 			}
 			else {
 				txtStatus.setText("Keine Verbindung");
@@ -95,7 +90,8 @@ public class DlgLogin implements DlgInterface {
 		// Buttons
 		JButton btnLogin = new JButton("Anmelden");
 			btnLogin.addActionListener(new CtrlLogin(this.dialog, txtUser, txtPassword));
-		
+			
+	
 		JButton btnCancel = new JButton("Abbrechen");
 			btnCancel.addActionListener(new CtrlLogin(this.dialog, txtUser, txtPassword));
 		
