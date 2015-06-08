@@ -7,15 +7,20 @@ package dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+
+
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import DAO.DAOKunde;
 import DAO.DAONutzer;
-
+import objects.Kunde;
 import objects.Nutzer;
 import frames.FrmMain;
 
@@ -42,6 +47,8 @@ public class CtrlLogin implements ActionListener {
 
 		// Liste der Benutzer erzeugen
 		ArrayList<Nutzer> users = daoNutzer.returnAllNutzer();
+		System.out.println(users.size());
+		
 		
 		// Login auswerten
 		if (event.getActionCommand().equals("Abbrechen")) {
@@ -56,28 +63,30 @@ public class CtrlLogin implements ActionListener {
 			 * 
 			 * 
 			 */
-						
+			
+			
+			
 			if(this.txtUser.getText().equals("Admin")){
-				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin","");
+				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin", "aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
-				
-		}
+			}
 			else if(this.txtUser.getText().equals("Service")){
-				users.get(0).setNutzerInfo("Service", "", "", "", "Service","");
+				users.get(0).setNutzerInfo("Service", "", "", "", "Service", "aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Meister")){
-				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister","");
+				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister", "aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Werkstatt")){
-				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt","");
+				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt", "aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
+			
 			
 			
 			

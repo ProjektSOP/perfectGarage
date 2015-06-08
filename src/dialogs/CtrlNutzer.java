@@ -9,8 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import DAO.DAONutzer;
 import objects.Nutzer;
 
 public class CtrlNutzer implements ActionListener {
@@ -40,24 +42,31 @@ public class CtrlNutzer implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
+		
+		
 		if (event.getActionCommand().equals("Abbrechen")) {
 			this.dialog.setVisible(false);
 		}
 		
 		else if (event.getActionCommand().equals("Speichern")) {
 			
-			this.dialog.setVisible(false);
+			String oldUsername = this.user.getUsername();
 			this.user.setUsername(this.username.getText());
 			this.user.setNachname(this.nachname.getText());
 			this.user.setVorname(this.vorname.getText());
 			this.user.setGruppe(this.gruppe.getText());
+			this.dialog.setVisible(false);
 			
 			if(this.dialog.getTitle().equals("Neuen Nutzer anlegen")){
 				System.out.println("Neuen Nutzer anlegen:" + this.user.getUsername()+" "+user.getNachname()+" "+user.getVorname()+" "+user.getGruppe());
 			}
 			else if(this.dialog.getTitle().equals("Nutzer bearbeiten")){
-				System.out.println("Vorhandenen Nutzer ändern:" + user.getUsername()+" "+user.getNachname()+" "+user.getVorname()+" "+user.getGruppe());
+				boolean done = new DAONutzer().updateNutzer(user, oldUsername);
+				if(done){
+					
+				}
 			}
+			
 		}
 		
 	}

@@ -14,14 +14,17 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import objects.Nutzer;
 
 public class DlgNutzer implements DlgInterface {
 	
+	JFrame frame;
 	JDialog dialog = new JDialog();
 	JPanel panel;
 	
@@ -40,7 +43,7 @@ public class DlgNutzer implements DlgInterface {
 		
 	}
 	
-	public void newNutzer(Nutzer user) {
+	public void newNutzer(JTable tableUsers, Nutzer user) {
 		
 		this.dialog.setTitle("Neuen Nutzer anlegen");
 		this.dialog.remove(this.panel);
@@ -50,7 +53,7 @@ public class DlgNutzer implements DlgInterface {
 		this.showDialog(true);
 	}
 	
-	public void editNutzer(Nutzer user) {
+	public void editNutzer(JTable tableUsers, Nutzer user) {
 		
 		this.dialog.setTitle("Nutzer bearbeiten");
 		

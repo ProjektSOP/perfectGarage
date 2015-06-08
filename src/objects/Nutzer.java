@@ -21,14 +21,6 @@ public class Nutzer implements Comparable<Nutzer>{
 		this.status = status;
 	}
 	
-	public void setNutzerInfo(String username, String password, String nachname, String vorname, String gruppe, String status){
-		this.username = username;
-		this.password = password;
-		this.nachname = nachname;
-		this.vorname = vorname;
-		this.gruppe = gruppe;
-	}
-	
 	public void setUsername(String username){
 		this.username = username;
 	}
@@ -43,8 +35,22 @@ public class Nutzer implements Comparable<Nutzer>{
 	
 	public void setGruppe(String gruppe){
 		this.gruppe = gruppe;
+		this.status = status;
 	}
 
+	public void setPassword(String password){
+		this.password = password;
+	}
+	
+	public void setNutzerInfo(String username, String password, String nachname, String vorname, String gruppe, String status){
+		this.username = username;
+		this.password = password;
+		this.nachname = nachname;
+		this.vorname = vorname;
+		this.gruppe = gruppe;
+		this.status = status;
+	}
+	
 	public String[] getNutzerInfo(){
 		String[] userdata = new String[5];
 		userdata[0] = this.username;
@@ -73,6 +79,31 @@ public class Nutzer implements Comparable<Nutzer>{
 	
 	public String getGruppe(){
 		return this.gruppe;
+		
+	}
+	
+	/**
+	 * 	 Zum Update der Nutzerdaten
+	 */
+	
+	public void updateUsername(String username) {
+		this.username = username;
+	}
+
+	public void updateNachname(String nachname) {
+		this.nachname = nachname;
+	}
+
+	public void updateVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+	public void updateGruppe(String gruppe) {
+		this.gruppe = gruppe;
+	}
+	
+	public void updateStatus(String status) {
+		this.status = status;
 	}
 	
 	public String getStatus(){

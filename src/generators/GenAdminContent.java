@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.DAOJTable;
 import DAO.DAONutzer;
 import dialogs.DlgNutzer;
 import objects.Nutzer;
@@ -50,31 +51,8 @@ public class GenAdminContent {
 		DAONutzer daoNutzer = new DAONutzer();
 		final ArrayList<Nutzer> users = daoNutzer.returnAllNutzerWithoutAdmin();
 		
-		//users.clear();
-		
-		// DefaultTableModel erzeugen
-        DefaultTableModel modelUsers = new DefaultTableModel();
-        modelUsers.addColumn("Username");
-        modelUsers.addColumn("Name");
-        modelUsers.addColumn("Vorname");
-        modelUsers.addColumn("Nutzerrolle");
-        modelUsers.addColumn("Status");
-		
-		if(users.size() >= 1){
-			modelUsers = createUserTable(users, modelUsers);			
-		}
-		
-        // JTable erzeugen 
-        final JTable tableUsers = new JTable(modelUsers) {
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			public boolean isCellEditable(int x, int y) {
-                return false;
-            }
-        };
+		DAOJTable daoJTable = new DAOJTable();
+		final JTable tableUsers = daoJTable.createTableUsers(users);
         
         // Eigenschaften setzen
         tableUsers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -98,7 +76,7 @@ public class GenAdminContent {
 		// JButton "Neuer Benutzer" erzeugen
 		JButton btnNewNutzer = new JButton();
 		btnNewNutzer.setText("Neuer Benutzer");
-		btnNewNutzer.addActionListener(new CtrlAdminContent(new Nutzer("","","","","","")));
+		btnNewNutzer.addActionListener(new CtrlAdminContent(tableUsers, new Nutzer("","","","","","")));
 		
 		// JButton "Benutzer editieren" erzeugen
 		final JButton btnEditNutzer = new JButton();
@@ -126,16 +104,17 @@ public class GenAdminContent {
 		
         // ActionListener für JTable erzeugen
         tableUsers.addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(final MouseEvent e) {
+
+			public void mouseClicked(final MouseEvent e) {
         		// Einfacher Klick auf einen Tabelleneintrag
         		if (e.getClickCount() == 1) {
         			if(users.size() >= 1){
         				btnEditNutzer.setEnabled(true);
-        				btnEditNutzer.addActionListener(new CtrlAdminContent(users.get(tableUsers.getSelectedRow())));
+        				btnEditNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
         				btnDeleteNutzer.setEnabled(true);
-        				btnDeleteNutzer.addActionListener(new CtrlAdminContent(users.get(tableUsers.getSelectedRow())));
+        				btnDeleteNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
         				btnDeactivateNutzer.setEnabled(true);
-        				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(users.get(tableUsers.getSelectedRow())));
+        				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
         				btnSetPassword.setEnabled(true);
         			}
         		}
@@ -143,7 +122,7 @@ public class GenAdminContent {
         		// Doppelklick auf einen Tabelleneintrag
         		if (e.getClickCount() == 2) {
 	    			DlgNutzer dlgNutzer = new DlgNutzer();
-	    			dlgNutzer.editNutzer(users.get(tableUsers.getSelectedRow()));
+	    			dlgNutzer.editNutzer(tableUsers, users.get(tableUsers.getSelectedRow()));
         		}
         	}
         });
@@ -172,15 +151,6 @@ public class GenAdminContent {
 		
 		
 		return panel;
-	}
-	
-	private DefaultTableModel createUserTable(ArrayList<Nutzer> users, DefaultTableModel modelUsers){
-		
-		for( Nutzer n : users ){
-			modelUsers.addRow(n.getNutzerInfo());
-        }
-		
-		return modelUsers;
 	}
 	
 }

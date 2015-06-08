@@ -9,15 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 import objects.Nutzer;
 import dialogs.DlgNutzer;
 
 public class CtrlAdminContent implements ActionListener {
 	
+	JTable tableUsers;
 	Nutzer user;
 	
-	public CtrlAdminContent(Nutzer user){
+	public CtrlAdminContent(JTable tableUsers, Nutzer user){
+		this.tableUsers = tableUsers;
 		this.user = user;
 	}
 	
@@ -27,10 +30,10 @@ public class CtrlAdminContent implements ActionListener {
 		DlgNutzer dlgNutzer = new DlgNutzer();
 		
 		if (event.getActionCommand().equals("Neuer Benutzer")) {
-			dlgNutzer.newNutzer(user);
+			dlgNutzer.newNutzer(tableUsers, user);
 		}
 		else if (event.getActionCommand().equals("Benutzer editieren")) {
-			dlgNutzer.editNutzer(user);
+			dlgNutzer.editNutzer(tableUsers, user);
 		}
 		else if (event.getActionCommand().equals("Benutzer löschen")) {
 			// Erzeugen eines vorgefertigten Optionsdialoges.
