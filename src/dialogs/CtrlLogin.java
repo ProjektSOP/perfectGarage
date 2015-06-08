@@ -1,13 +1,20 @@
 package dialogs;
 
+/**
+ * @author treichert
+ *
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import DAO.DAONutzer;
 import objects.Nutzer;
 import frames.FrmMain;
 
@@ -29,56 +36,83 @@ public class CtrlLogin implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
-		Nutzer user = new Nutzer("mrothe", "1234", "rothe", "martin", "Admin");
+		// DAO-Objekt erzeugen
+		DAONutzer daoNutzer = new DAONutzer();
+
+		// Liste der Benutzer erzeugen
+		ArrayList<Nutzer> users = daoNutzer.returnAllNutzer();
 		
+		// Login auswerten
 		if (event.getActionCommand().equals("Abbrechen")) {
 			System.exit(0);
 		}
 		else if (event.getActionCommand().equals("Anmelden")) {
 			
+			/*
+			 * 
+			 * ACHTUNG!!!
+			 * Diese Testuser bei Fertigstellung wieder löschen
+			 * 
+			 * 
+			 */
+						
 			if(this.txtUser.getText().equals("Admin")){
-				user.setNutzerInfo("Admin", "", "", "", "Admin");
+				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Service")){
-				user.setNutzerInfo("Service", "", "", "", "Service");
+				users.get(0).setNutzerInfo("Service", "", "", "", "Service");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Meister")){
-				user.setNutzerInfo("Meister", "", "", "", "Meister");
+				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Werkstatt")){
-				user.setNutzerInfo("Werkstatt", "", "", "", "Werkstatt");
+				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			
-			/*
-			 * 
-			 *	Hier überprüfen, ob Benutzername vorhanden und Passwort korrekt
-			 *	Anschließnd Loginstatus setzen
-			 *
-			 */
 			
-			// Loginstatus auswerten
-			if(login==true){
-				if(user.getGruppe().equals("Admin")){
+			
+			@SuppressWarnings("deprecation")
+			String password = this.txtPassword.getText();
+			String username = this.txtUser.getText();
+			
+			int i = 0;
+			int u = -1;
+			
+			// Überprüfen ob Username und Password gültig
+			while (i<=users.size()-1){
+				if(users.get(i).getUsername().equals(username)){
+					if(users.get(i).getPassword().equals(password)){
+						this.dialog.setVisible(false);
+						this.login = true;
+						u=i;
+					}
+				}
+				i++;
+			}
+			
+			// Gruppenzugehörigkeit auswerten
+			if(login==true && u!=-1){
+				if(users.get(u).getGruppe().equals("Admin")){
 					FrmMain frmMain = new FrmMain("Admin");
 					frmMain.showFrame(true);
 				}
-				else if(user.getGruppe().equals("Service")){
+				else if(users.get(u).getGruppe().equals("Service")){
 					FrmMain frmMain = new FrmMain("Service");
 					frmMain.showFrame(true);
 				}
-				else if(user.getGruppe().equals("Meister")){
+				else if(users.get(u).getGruppe().equals("Meister")){
 					FrmMain frmMain = new FrmMain("Meister");
 					frmMain.showFrame(true);
 				}
-				else if(user.getGruppe().equals("Werkstatt")){
+				else if(users.get(u).getGruppe().equals("Werkstatt")){
 					FrmMain frmMain = new FrmMain("Werkstatt");
 					frmMain.showFrame(true);
 				}
@@ -87,9 +121,7 @@ public class CtrlLogin implements ActionListener {
 					    "Der Benutzer konnte nicht angemeldet werden",
 					    "Anmeldung fehlgeschlagen",
 					    JOptionPane.ERROR_MESSAGE);
-			}
-			
+			}		
 		}
 	}
-
 }

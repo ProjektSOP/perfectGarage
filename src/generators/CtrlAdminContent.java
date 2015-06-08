@@ -1,5 +1,10 @@
 package generators;
 
+/**
+ * @author treichert
+ *
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

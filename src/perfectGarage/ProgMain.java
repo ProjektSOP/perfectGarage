@@ -1,5 +1,10 @@
 package perfectGarage;
 
+/**
+ * @author treichert
+ *
+ */
+
 import dialogs.DlgLogin;
 
 public class ProgMain {

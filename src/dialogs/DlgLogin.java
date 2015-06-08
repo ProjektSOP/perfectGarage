@@ -1,5 +1,10 @@
 package dialogs;
 
+/**
+ * @author treichert
+ *
+ */
+
 import interfaces.DlgInterface;
 
 import java.awt.BorderLayout;
@@ -16,7 +21,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import DAO.DAONutzer;
 import DAO.DAOKunde;
 import mySQLConnector.MySQLConnection;
 

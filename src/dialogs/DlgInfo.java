@@ -1,5 +1,10 @@
 package dialogs;
 
+/**
+ * @author treichert
+ *
+ */
+
 import interfaces.DlgInterface;
 
 import java.awt.BorderLayout;
@@ -25,6 +30,7 @@ public class DlgInfo implements DlgInterface {
 		
 		this.dialog.pack();
 		this.dialog.setLocationRelativeTo(null);
+		this.dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.dialog.setModal(true);
 	}
 	

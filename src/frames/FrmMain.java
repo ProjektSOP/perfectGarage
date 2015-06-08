@@ -1,5 +1,10 @@
 package frames;
 
+/**
+ * @author treichert
+ *
+ */
+
 import generators.GenAdminContent;
 import generators.GenMeisterContent;
 import generators.GenServiceContent;

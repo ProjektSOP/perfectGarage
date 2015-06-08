@@ -1,5 +1,10 @@
 package generators;
 
+/**
+ * @author treichert
+ *
+ */
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;

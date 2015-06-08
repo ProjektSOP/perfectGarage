@@ -1,5 +1,10 @@
 package dialogs;
 
+/**
+ * @author treichert
+ *
+ */
+
 import interfaces.DlgInterface;
 
 import java.awt.BorderLayout;
