@@ -1,6 +1,7 @@
 package objects;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 public class Kunde {
 	private int kundennr;
@@ -15,17 +16,15 @@ public class Kunde {
 	private String handy;
 	private String email;
 	
-	public Kunde(int kundennr, String nachname, String vorname, String strasse,
-			int plz, String ort, Date kundeseit, String telefon, String telefax,
+	public Kunde(String nachname, String vorname, String strasse,
+			int plz, String ort, String telefon, String telefax,
 			String handy, String email) {
 		
-		this.kundennr = kundennr;
 		this.nachname = nachname;
 		this.vorname = vorname;
 		this.strasse = strasse;
 		this.plz = plz;
 		this.ort = ort;
-		this.kundeseit = kundeseit;
 		this.telefon = telefon;
 		this.telefax = telefax;
 		this.handy = handy;
@@ -75,7 +74,7 @@ public class Kunde {
 	public Date getKundeseit() {
 		return kundeseit;
 	}
-
+	
 	public String getTelefon() {
 		return telefon;
 	}
@@ -90,6 +89,14 @@ public class Kunde {
 
 	public String getEmail() {
 		return email;
+	}
+	
+	public  void setKundeseit(Date datum ) {
+		kundeseit = datum;
+	}
+	
+	public  void setKundennummer(int kndnr ) {
+		kundennr = kndnr;
 	}
 	
 }

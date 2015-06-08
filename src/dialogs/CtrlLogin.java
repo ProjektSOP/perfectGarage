@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import DAO.DAOKunde;
+import objects.Kunde;
 import objects.Nutzer;
 import frames.FrmMain;
 
@@ -30,7 +32,7 @@ public class CtrlLogin implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		
 		Nutzer user = new Nutzer("mrothe", "1234", "rothe", "martin", "Admin");
-		
+				
 		if (event.getActionCommand().equals("Abbrechen")) {
 			System.exit(0);
 		}
@@ -40,7 +42,8 @@ public class CtrlLogin implements ActionListener {
 				user.setNutzerInfo("Admin", "", "", "", "Admin");
 				this.dialog.setVisible(false);
 				this.login = true;
-			}
+				
+		}
 			else if(this.txtUser.getText().equals("Service")){
 				user.setNutzerInfo("Service", "", "", "", "Service");
 				this.dialog.setVisible(false);

@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import objects.Kunde;
 import DAO.DAONutzer;
 import DAO.DAOKunde;
 import mySQLConnector.MySQLConnection;
@@ -91,7 +92,8 @@ public class DlgLogin implements DlgInterface {
 		// Buttons
 		JButton btnLogin = new JButton("Anmelden");
 			btnLogin.addActionListener(new CtrlLogin(this.dialog, txtUser, txtPassword));
-		
+			
+	
 		JButton btnCancel = new JButton("Abbrechen");
 			btnCancel.addActionListener(new CtrlLogin(this.dialog, txtUser, txtPassword));
 		
