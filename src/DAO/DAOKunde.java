@@ -17,7 +17,8 @@ public class DAOKunde {
 	private String returnKundebyKundenNrString = "SELECT * FROM t_kunde WHERE kundennr LIKE ? ";
 	private String returnKundebyNameString = "SELECT * FROM t_kunde WHERE name LIKE ? ";
 	private String returnAllKundeString = "SELECT * FROM t_kunde ";
-	private String insertnewKundeString = "INSERT INTO t_kunde( name, vorname, strasse, plz, ort, kundeseit, telefon, fax, handy, mail) VALUES (?, ?, ?, ?, ?, curDate(), ?, ?,?,?)";;
+	private String insertnewKundeString = "INSERT INTO t_kunde( name, vorname, strasse, plz, ort, kundeseit, telefon, fax, handy, mail) VALUES (?, ?, ?, ?, ?, curDate(), ?, ?,?,?)";
+	private String updateoldKunde = "UPDATE t_kunde SET name=?, vorname=?, strasse=?, plz=?, ort=?, kundeseit=?, telefon=?, fax=?, handy=?, mail=? WHERE kundennr=? ";
 	
 public ArrayList<Kunde> returnKundebyPLZ(int postleitzahl)  {
 
@@ -43,10 +44,7 @@ public ArrayList<Kunde> returnKundebyPLZ(int postleitzahl)  {
 	        // Erstes Fragezeichen durch "PLZ" Parameter ersetzen
 	        ps.setInt(1, iplz);
 	     
-	        // FUNKTIONSTEST
-	        System.out.println(sql);
-	        	        
-	        // SQL ausführen.
+	       // SQL ausführen.
 	        ResultSet result = ps.executeQuery();
 	      
 	        // Ergebnissätze durchfahren.
@@ -70,18 +68,11 @@ public ArrayList<Kunde> returnKundebyPLZ(int postleitzahl)  {
 	          // Attribute nicht im Konstruktor, damit bei setzen eines neuen Kunden diese beiden Werte automatisch gesetzt werden können
 	            
 	            tempkunde.setKundeseit(kundeseit);
-	            tempkunde.setKundennummer(kundennr);
+	            tempkunde.setKundennr(kundennr);
 	            
 	          kundenliste.add(tempkunde);
 	          }
-	        
-	        // Test Ausgabe
-	      //  /**
-	        for (Kunde k : kundenliste ){
-	        	System.out.println(k.getNachname() + " " + k.getVorname() + k.getPlz() );
-	        }
-	       	//  */
-	    } catch (SQLException e) {
+	      } catch (SQLException e) {
 	        e.printStackTrace();
 	      }
 	    }	    
@@ -139,7 +130,7 @@ public ArrayList<Kunde> returnKundebyKundenNr(int kundennummer)  {
         // Attribute nicht im Konstruktor, damit bei setzen eines neuen Kunden diese beiden Werte automatisch gesetzt werden können
           
           tempkunde.setKundeseit(kundeseit);
-          tempkunde.setKundennummer(kundennr);
+          tempkunde.setKundennr(kundennr);
           
           kundenliste.add(tempkunde);
           }
@@ -208,7 +199,7 @@ public ArrayList<Kunde> returnKundebyName(String kundenname)  {
 	          // Attribute nicht im Konstruktor, damit bei setzen eines neuen Kunden diese beiden Werte automatisch gesetzt werden können
 	            
 	            tempkunde.setKundeseit(kundeseit);
-	            tempkunde.setKundennummer(kundennr);
+	            tempkunde.setKundennr(kundennr);
 	            
 	          kundenliste.add(tempkunde);
 	          }
@@ -274,7 +265,7 @@ public ArrayList<Kunde> returnAllKunde()  {
           // Attribute nicht im Konstruktor, damit bei setzen eines neuen Kunden diese beiden Werte automatisch gesetzt werden können
             
             tempkunde.setKundeseit(kundeseit);
-            tempkunde.setKundennummer(kundennr);
+            tempkunde.setKundennr(kundennr);
             
           kundenliste.add(tempkunde);
           }
@@ -322,7 +313,7 @@ public boolean insertnewKunde(Kunde newkunde)  {
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         
         // Parameter durch übernommene Daten ersetzen
-        preparedStatement.setString(1, tempkunde.getNachname());
+        preparedStatement.setString(1, tempkunde.getNachname() );
         preparedStatement.setString(2, tempkunde.getVorname() );
         preparedStatement.setString(3, tempkunde.getStrasse() );
         preparedStatement.setInt(4, tempkunde.getPlz() );
@@ -331,6 +322,62 @@ public boolean insertnewKunde(Kunde newkunde)  {
         preparedStatement.setString(7, tempkunde.getTelefax() );
         preparedStatement.setString(8, tempkunde.getHandy() );
         preparedStatement.setString(9, tempkunde.getEmail() );
+                
+        // SQL ausführen
+        preparedStatement.executeUpdate();
+        
+        ready = true;
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+        
+        ready = false;
+      }
+    }	    
+    return ready;
+  }
+
+public boolean updateKunde(Kunde oldkunde)  {
+	
+	/**
+	 *	@param Übernimmt ein Kunde - Objekt und updates dieses in der Datenbank
+	 *	@param Gibt true zurück, wenn das Update erfolgreich war
+	 *	
+	*/
+	
+	boolean ready = false;
+	
+	Kunde tempkunde = oldkunde;
+		
+	Connection conn = MySQLConnection.getInstance();
+	 
+    if(conn != null)
+    {
+    	
+      // Anfrage-Statement erzeugen.
+      Statement query;
+      try {
+        query = conn.createStatement();
+ 
+        // Insert-Statement erzeugen (Fragezeichen werden später ersetzt).
+        String sql = updateoldKunde; 
+                	        
+        PreparedStatement ps = conn.prepareStatement(sql);
+     
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        
+        // Parameter durch übernommene Daten ersetzen
+        preparedStatement.setString(1, tempkunde.getNachname());
+        preparedStatement.setString(2, tempkunde.getVorname() );
+        preparedStatement.setString(3, tempkunde.getStrasse() );
+        preparedStatement.setInt(4, tempkunde.getPlz() );
+        preparedStatement.setString(5, tempkunde.getOrt() );
+        preparedStatement.setDate(6, tempkunde.getKundeseit() );
+        preparedStatement.setString(7, tempkunde.getTelefon() );
+        preparedStatement.setString(8, tempkunde.getTelefax() );
+        preparedStatement.setString(9, tempkunde.getHandy() );
+        preparedStatement.setString(10, tempkunde.getEmail() );
+        preparedStatement.setInt(11, tempkunde.getKundennr());
                 
         // SQL ausführen
         preparedStatement.executeUpdate();

@@ -31,6 +31,8 @@ public class Kunde {
 		this.email = email;
 	}
 	
+	
+
 	public String[] getKundeInfo(){
 		String[] customerdata = new String[11];
 		customerdata[0] = "" + this.kundennr;
@@ -91,12 +93,62 @@ public class Kunde {
 		return email;
 	}
 	
-	public  void setKundeseit(Date datum ) {
-		kundeseit = datum;
+	/**
+	 * 
+	 * Extra Methode, um bei Übernahme der Daten aus der Datenbank diese Daten in das Kundenobjekt zu schreiben
+	 * Diese werden nicht im Konstruktor angelegt, um die Eindeutigkeit der Daten zu wahren!
+	 */
+	
+	public void setKundennr(int kundennr) {
+		this.kundennr = kundennr;
 	}
 	
-	public  void setKundennummer(int kndnr ) {
-		kundennr = kndnr;
+	public void setKundeseit(Date kundeseit) {
+		this.kundeseit = kundeseit;
+	}
+	
+	
+	/**
+	 * 
+	 * Updater der Kundendaten für das Verändern der Kundendaten
+	 *
+	 */
+	
+	public void updateNachname(String nachname) {
+		this.nachname = nachname;
+	}
+
+	public void updateVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+	public void updateStrasse(String strasse) {
+		this.strasse = strasse;
+	}
+
+	public void updatePlz(int plz) {
+		this.plz = plz;
+	}
+
+	public void updateOrt(String ort) {
+		this.ort = ort;
+	}
+
+	public void updateTelefon(String telefon) {
+		this.telefon = telefon;
+	}
+
+	public void updateTelefax(String telefax) {
+		this.telefax = telefax;
+	}
+
+	public void updateHandy(String handy) {
+		this.handy = handy;
+	}
+
+	public void updateEmail(String email) {
+		this.email = email;
 	}
 	
 }
+	
