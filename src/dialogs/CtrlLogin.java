@@ -58,23 +58,23 @@ public class CtrlLogin implements ActionListener {
 			 */
 						
 			if(this.txtUser.getText().equals("Admin")){
-				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin");
+				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin","");
 				this.dialog.setVisible(false);
 				this.login = true;
 				
 		}
 			else if(this.txtUser.getText().equals("Service")){
-				users.get(0).setNutzerInfo("Service", "", "", "", "Service");
+				users.get(0).setNutzerInfo("Service", "", "", "", "Service","");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Meister")){
-				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister");
+				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister","");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Werkstatt")){
-				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt");
+				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt","");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}

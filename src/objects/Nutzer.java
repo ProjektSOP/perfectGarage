@@ -7,36 +7,51 @@ public class Nutzer implements Comparable<Nutzer>{
 	private String nachname;
 	private String vorname;
 	private String gruppe;
+	private String status;
 	
 		
 	public Nutzer(String username, String password, String nachname,
-			String vorname, String gruppe) {
-		super();
+			String vorname, String gruppe, String status) {
+		
 		this.username = username;
 		this.password = password;
 		this.nachname = nachname;
 		this.vorname = vorname;
+		this.gruppe = gruppe;
+		this.status = status;
+	}
+	
+	public void setNutzerInfo(String username, String password, String nachname, String vorname, String gruppe, String status){
+		this.username = username;
+		this.password = password;
+		this.nachname = nachname;
+		this.vorname = vorname;
+		this.gruppe = gruppe;
+	}
+	
+	public void setUsername(String username){
+		this.username = username;
+	}
+	
+	public void setNachname(String nachname){
+		this.nachname = nachname;
+	}
+	
+	public void setVorname(String vorname){
+		this.vorname = vorname;
+	}
+	
+	public void setGruppe(String gruppe){
 		this.gruppe = gruppe;
 	}
 
-	public void setPassword(String password){
-		this.password = password;
-	}
-	
-	public void setNutzerInfo(String username, String password, String nachname, String vorname, String gruppe){
-		this.username = username;
-		this.password = password;
-		this.nachname = nachname;
-		this.vorname = vorname;
-		this.gruppe = gruppe;
-	}
-	
 	public String[] getNutzerInfo(){
-		String[] userdata = new String[4];
+		String[] userdata = new String[5];
 		userdata[0] = this.username;
 		userdata[1] = this.nachname;
 		userdata[2] = this.vorname;
 		userdata[3] = this.gruppe;
+		userdata[4] = this.status;
 		return userdata;
 	}
 	
@@ -58,6 +73,10 @@ public class Nutzer implements Comparable<Nutzer>{
 	
 	public String getGruppe(){
 		return this.gruppe;
+	}
+	
+	public String getStatus(){
+		return this.status;
 	}
 
 	@Override

@@ -17,22 +17,19 @@ public class CtrlAdminContent implements ActionListener {
 	
 	Nutzer user;
 	
-	public CtrlAdminContent(){
-		
-	}
-	
 	public CtrlAdminContent(Nutzer user){
 		this.user = user;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		
+		DlgNutzer dlgNutzer = new DlgNutzer();
+		
 		if (event.getActionCommand().equals("Neuer Benutzer")) {
-			DlgNutzer dlgNutzer = new DlgNutzer();
-			dlgNutzer.newNutzer();
+			dlgNutzer.newNutzer(user);
 		}
 		else if (event.getActionCommand().equals("Benutzer editieren")) {
-			DlgNutzer dlgNutzer = new DlgNutzer();
 			dlgNutzer.editNutzer(user);
 		}
 		else if (event.getActionCommand().equals("Benutzer löschen")) {

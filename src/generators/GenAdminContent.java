@@ -48,7 +48,7 @@ public class GenAdminContent {
 		panel.setPreferredSize(this.getContentSize());
 		
 		DAONutzer daoNutzer = new DAONutzer();
-		final ArrayList<Nutzer> users = daoNutzer.returnAllNutzer();
+		final ArrayList<Nutzer> users = daoNutzer.returnAllNutzerWithoutAdmin();
 		
 		//users.clear();
 		
@@ -58,6 +58,7 @@ public class GenAdminContent {
         modelUsers.addColumn("Name");
         modelUsers.addColumn("Vorname");
         modelUsers.addColumn("Nutzerrolle");
+        modelUsers.addColumn("Status");
 		
 		if(users.size() >= 1){
 			modelUsers = createUserTable(users, modelUsers);			
@@ -97,7 +98,7 @@ public class GenAdminContent {
 		// JButton "Neuer Benutzer" erzeugen
 		JButton btnNewNutzer = new JButton();
 		btnNewNutzer.setText("Neuer Benutzer");
-		btnNewNutzer.addActionListener(new CtrlAdminContent());
+		btnNewNutzer.addActionListener(new CtrlAdminContent(new Nutzer("","","","","","")));
 		
 		// JButton "Benutzer editieren" erzeugen
 		final JButton btnEditNutzer = new JButton();
@@ -114,6 +115,15 @@ public class GenAdminContent {
 		btnDeactivateNutzer.setText("Benutzer deaktivieren");
 		btnDeactivateNutzer.setEnabled(false);
 		
+		// JButton "Passwort zurücksetzen"
+		final JButton btnSetPassword = new JButton();
+		btnSetPassword.setText("Passwort zurücksetzen");
+		btnSetPassword.setEnabled(false);
+		
+		// JButton "Passwort des Administrators ändern"
+		final JButton btnSetAdminPassword = new JButton();
+		btnSetAdminPassword.setText("Passwort des Administrators ändern");
+		
         // ActionListener für JTable erzeugen
         tableUsers.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(final MouseEvent e) {
@@ -126,6 +136,7 @@ public class GenAdminContent {
         				btnDeleteNutzer.addActionListener(new CtrlAdminContent(users.get(tableUsers.getSelectedRow())));
         				btnDeactivateNutzer.setEnabled(true);
         				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(users.get(tableUsers.getSelectedRow())));
+        				btnSetPassword.setEnabled(true);
         			}
         		}
         		
@@ -146,6 +157,8 @@ public class GenAdminContent {
 		panelTop.add(btnEditNutzer);
 		panelTop.add(btnDeleteNutzer);
 		panelTop.add(btnDeactivateNutzer);
+		panelTop.add(btnSetPassword);
+		panelTop.add(btnSetAdminPassword);
 		
 		// Eigenschaften setzen
 		panelTop.setLayout (new FlowLayout (FlowLayout.LEFT, 5, 5));
@@ -164,7 +177,7 @@ public class GenAdminContent {
 	private DefaultTableModel createUserTable(ArrayList<Nutzer> users, DefaultTableModel modelUsers){
 		
 		for( Nutzer n : users ){
-            modelUsers.addRow(n.getNutzerInfo());
+			modelUsers.addRow(n.getNutzerInfo());
         }
 		
 		return modelUsers;
