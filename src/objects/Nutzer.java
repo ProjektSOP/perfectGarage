@@ -1,5 +1,7 @@
 package objects;
 
+import java.sql.Date;
+
 public class Nutzer implements Comparable<Nutzer>{
 	
 	private String username;
@@ -8,6 +10,7 @@ public class Nutzer implements Comparable<Nutzer>{
 	private String vorname;
 	private String gruppe;
 	private String status;
+	private Date zeitstempelLoeschung;
 	
 		
 	public Nutzer(String username, String password, String nachname,
@@ -58,6 +61,8 @@ public class Nutzer implements Comparable<Nutzer>{
 		userdata[2] = this.vorname;
 		userdata[3] = this.gruppe;
 		userdata[4] = this.status;
+		userdata[5] = this.zeitstempelLoeschung.toString();
+		
 		return userdata;
 	}
 	
@@ -80,6 +85,11 @@ public class Nutzer implements Comparable<Nutzer>{
 	public String getGruppe(){
 		return this.gruppe;
 		
+	}
+	
+	public Date getzeitstempelLöschung(){
+		
+		return this.zeitstempelLoeschung;
 	}
 	
 	/**
