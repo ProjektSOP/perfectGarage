@@ -50,6 +50,7 @@ public class GenAdminContent {
 		DAONutzer daoNutzer = new DAONutzer();
 		final ArrayList<Nutzer> users = daoNutzer.returnAllNutzerWithoutAdmin();
 		
+		// JTable erzeugen
 		final JTable tableUsers = DAOJTable.createTableUsers(users);
         
         // Eigenschaften setzen

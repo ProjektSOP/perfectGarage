@@ -28,6 +28,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import objects.Kunde;
+import DAO.DAOJTable;
 import DAO.DAOKunde;
 
 public class GenServiceContent {
@@ -135,6 +136,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtKundenNr = new JTextField();
+		txtKundenNr.setEditable(false);
 		txtKundenNr.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -147,6 +149,7 @@ public class GenServiceContent {
 		
 		// JTextField erstllen
 		final JTextField txtKundenSeit = new JTextField();
+		txtKundenSeit.setEditable(false);
 		txtKundenSeit.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -159,6 +162,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtName = new JTextField();
+		txtName.setEditable(false);
 		txtName.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -171,6 +175,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtVorname = new JTextField();
+		txtVorname.setEditable(false);
 		txtVorname.setPreferredSize(new Dimension(190, 20));
 
 		// JLabel und JTextField hinzufügen
@@ -183,6 +188,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtStrasse = new JTextField();
+		txtStrasse.setEditable(false);
 		txtStrasse.setPreferredSize(new Dimension(470, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -195,6 +201,7 @@ public class GenServiceContent {
 		
 		// JTextField erstelllen
 		final JTextField txtPostleitzahl = new JTextField();
+		txtPostleitzahl.setEditable(false);
 		txtPostleitzahl.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -207,6 +214,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtOrt = new JTextField();
+		txtOrt.setEditable(false);
 		txtOrt.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -219,6 +227,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtTelefon = new JTextField();
+		txtTelefon.setEditable(false);
 		txtTelefon.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -231,6 +240,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtTelefax = new JTextField();
+		txtTelefax.setEditable(false);
 		txtTelefax.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -243,6 +253,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtHandy = new JTextField();
+		txtHandy.setEditable(false);
 		txtHandy.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -255,6 +266,7 @@ public class GenServiceContent {
 		
 		// JTextField erstellen
 		final JTextField txtMail = new JTextField();
+		txtMail.setEditable(false);
 		txtMail.setPreferredSize(new Dimension(190, 20));
 		
 		// JLabel und JTextField hinzufügen
@@ -281,13 +293,14 @@ public class GenServiceContent {
 		
 		
 		
-		
+		/*
 		// DefaultTableModel erzeugen
         DefaultTableModel modelCars = new DefaultTableModel();
         modelCars.addColumn("FIN");
         modelCars.addColumn("Hersteller");
         modelCars.addColumn("Modell");
         modelCars.addColumn("Farbe");
+		*/
 		
         /*
 		if(customers.size() >= 1){
@@ -308,7 +321,9 @@ public class GenServiceContent {
 		
 		
 		// Erstelle JTable mit JScrollPane
-		JTable tableSearchCar = new JTable(modelCars);
+		//JTable tableSearchCar = new JTable(modelCars);
+		final JTable tableSearchCar = DAOJTable.createTableCars();
+		
 		JScrollPane scrollTableCar = new JScrollPane(tableSearchCar);
 		scrollTableCar.setPreferredSize(new Dimension(600, 70));
 		scrollTableCar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -395,36 +410,9 @@ public class GenServiceContent {
 		DAOKunde daoKunde = new DAOKunde();
 		final ArrayList<Kunde> customers = daoKunde.returnAllKunde();
 		
-		// DefaultTableModel erzeugen
-        DefaultTableModel modelCustomers = new DefaultTableModel();
-        modelCustomers.addColumn("KundeNr");
-        modelCustomers.addColumn("Name");
-        modelCustomers.addColumn("Vorname");
-        modelCustomers.addColumn("Strasse");
-        modelCustomers.addColumn("PLZ");
-        modelCustomers.addColumn("Ort");
-        modelCustomers.addColumn("Kunde seit");
-        modelCustomers.addColumn("Telefon");
-        modelCustomers.addColumn("Telefax");
-        modelCustomers.addColumn("Handy");
-        modelCustomers.addColumn("E-Mail");
+		// JTable erzeugen
+		final JTable tableSearchCustomer = DAOJTable.createTableCustomers(customers);
 		
-		if(customers.size() >= 1){
-			modelCustomers = fillCustomerTable(customers, modelCustomers);			
-		}
-		
-        // JTable erzeugen 
-        final JTable tableSearchCustomer = new JTable(modelCustomers) {
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			public boolean isCellEditable(int x, int y) {
-                return false;
-            }
-        };
-        
         // Eigenschaften setzen
         tableSearchCustomer.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
