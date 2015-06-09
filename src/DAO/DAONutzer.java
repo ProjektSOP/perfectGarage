@@ -9,15 +9,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import mySQLConnector.MySQLConnection;
+import objects.Kunde;
 import objects.Nutzer;
 
 
 public class DAONutzer {
 	
 	final String returnAllNutzerString = "SELECT * FROM t_nutzer";
-	final String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=MD5(?), Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
 	final String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
-	
+	final String insertnewNutzerString = "INSERT INTO t_nutzer( benutzername, passwort, Name, Vorname, Nutzerrolle, Status) VALUES (?, MD5(?), ?, ?, ?,?)";
+	final String getpasswordString = "SELECT passwort FROM t_nutzer where benutzername=? ";
 	
 public ArrayList<Nutzer> returnAllNutzer()  {
 	
@@ -210,6 +212,46 @@ public boolean deleteNutzer(Nutzer oldNutzer)  {
     }	    
     return ready;
   }
+
+public boolean pruefungPasswort(String benutzername, String passwortabfrage)  {
+	
+	String passwort = null;
+	
+	Connection conn = MySQLConnection.getInstance();
+	 
+    if(conn != null)
+    {
+    	
+      // Anfrage-Statement erzeugen.
+      Statement query;
+      try {
+        query = conn.createStatement();
+ 
+        // Ergebnistabelle erzeugen und abholen.
+        String sql = getpasswordString;
+        	        
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        // Erstes Fragezeichen durch "Name" Parameter ersetzen
+        ps.setString(1, benutzername);
+     
+        // SQL ausführen.
+        ResultSet result = ps.executeQuery();
+      
+        // Passwort auslesen.
+        while (result.next()) {
+            passwort = result.getString("passwort"); 
+        }
+        
+      
+    } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }	    
+    return passwortabfrage.equals(passwort);
+  }
+
+
 
 }
 
