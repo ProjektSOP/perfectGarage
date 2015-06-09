@@ -14,8 +14,8 @@ import objects.Nutzer;
 
 public class DAONutzer {
 	
-	private String returnAllNutzerString = "SELECT * FROM t_nutzer";
-	private String updateoldNutzer = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final String returnAllNutzerString = "SELECT * FROM t_nutzer";
+	final String updateoldNutzer = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
 	
 	
 public ArrayList<Nutzer> returnAllNutzer()  {
