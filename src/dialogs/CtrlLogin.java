@@ -88,9 +88,11 @@ public class CtrlLogin implements ActionListener {
 			
 			int i = 0;
 			int u = -1;
-			
+
+			/*
 			// Überprüfen ob Username und Password gültig
 			while (i<=users.size()-1){
+
 				if(users.get(i).getUsername().equals(username)){
 					if(users.get(i).getPassword().equals(password)){
 						if(users.get(i).getStatus().equals("Aktiviert")){
@@ -100,8 +102,22 @@ public class CtrlLogin implements ActionListener {
 						}
 					}
 				}
+				
+				
 				i++;
 			}
+			*/
+				
+			if(DAONutzer.pruefungPasswort(username, password)){
+				this.dialog.setVisible(false);
+				this.login = true;
+				u=i;
+				System.out.println("richtig!"+ username + "|" + password);
+			}else{
+				
+				System.out.println("falsch!" + username + "|" + password);
+			}
+			
 			
 			// Gruppenzugehörigkeit auswerten
 			if(login==true && u!=-1){

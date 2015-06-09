@@ -14,10 +14,15 @@ import objects.Nutzer;
 
 public class DAONutzer {
 	
-	final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
-	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
-	final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
+	//final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
+	//final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	//final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
 	
+	final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
+	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=MD5(?), Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
+	final String insertnewNutzerString = "INSERT INTO t_nutzer( benutzername, passwort, Name, Vorname, Nutzerrolle, Status) VALUES (?, MD5(?), ?, ?, ?,?)";
+	final static String getpasswordString = "SELECT * FROM t_nutzer where benutzername=? AND passwort=? ";
 	
 public static ArrayList<Nutzer> returnAllNutzer()  {
 	
@@ -206,5 +211,47 @@ public static boolean deleteNutzer(Nutzer oldNutzer)  {
     }	    
     return ready;
   }
+
+public static boolean pruefungPasswort(String benutzername, String passwortabfrage)  {
+	
+	String benutzer = null;
+	
+	Connection conn = MySQLConnection.getInstance();
+	 
+    if(conn != null)
+    {
+    	
+      // Anfrage-Statement erzeugen.
+      Statement query;
+      try {
+        query = conn.createStatement();
+ 
+        // Ergebnistabelle erzeugen und abholen.
+        String sql = getpasswordString;
+        	        
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        // Erstes Fragezeichen durch "Name" Parameter ersetzen
+        ps.setString(1, benutzername);
+        ps.setString(2, passwortabfrage);
+     
+        // SQL ausführen.
+        ResultSet result = ps.executeQuery();
+        
+        // Passwort auslesen
+        while (result.next()) {
+        	benutzer = result.getString("benutzername");
+        }
+        
+      
+    } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    
+    return true;
+  }
+
+
 
 }
