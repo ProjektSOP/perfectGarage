@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,8 @@ import objects.Nutzer;
 public class DAONutzer {
 	
 	final String returnAllNutzerString = "SELECT * FROM t_nutzer";
-	final String updateoldNutzer = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
 	
 	
 public ArrayList<Nutzer> returnAllNutzer()  {
@@ -45,6 +47,7 @@ public ArrayList<Nutzer> returnAllNutzer()  {
 	          String vorname = result.getString("Vorname"); 
 	          String nutzerrolle = result.getString("Nutzerrolle");
 	          String status = result.getString("Status");
+	          Date zeitstempelLöschung = result.getDate("zeitstempelLöschung");
 	          	          	         
 	          Nutzer tempnutzer = new Nutzer(benutzername, passwort, nachname, vorname, nutzerrolle, status);
 	        
@@ -114,7 +117,7 @@ public ArrayList<Nutzer> returnAllNutzerWithoutAdmin()  {
 public boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
 	
 	/**
-	 *	@param Übernimmt einen Nutzer - Objekt und updates dieses in der Datenbank
+	 *	@param Übernimmt einen Nutzer - Objekt und updatet dieses in der Datenbank
 	 *	@param gibt ein boolean zurück, ob das Update erfolgreich war
 	*/
 	
@@ -133,7 +136,7 @@ public boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
         query = conn.createStatement();
  
         // Insert-Statement erzeugen (Fragezeichen werden später ersetzt).
-        String sql = updateoldNutzer; 
+        String sql = updateoldNutzerString; 
                 	        
         PreparedStatement ps = conn.prepareStatement(sql);
      
@@ -162,4 +165,51 @@ public boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
     return ready;
   }
 
+
+public boolean deleteNutzer(Nutzer oldNutzer)  {
+	
+	/**
+	 *	@param Übernimmt einen Nutzer - Objekt und updatet dieses in der Datenbank
+	 *	@param gibt ein boolean zurück, ob das Update erfolgreich war
+	*/
+	
+	boolean ready = false;
+	
+	Nutzer tempnutzer = oldNutzer;
+		
+	Connection conn = MySQLConnection.getInstance();
+	 
+    if(conn != null)
+    {
+    	
+      // Anfrage-Statement erzeugen.
+      Statement query;
+      try {
+        query = conn.createStatement();
+ 
+        // Insert-Statement erzeugen (Fragezeichen werden später ersetzt).
+        String sql = deleteNutzerString; 
+                	        
+        PreparedStatement ps = conn.prepareStatement(sql);
+     
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        
+        // Parameter durch übernommene Daten ersetzen
+        preparedStatement.setString(1, tempnutzer.getUsername());
+                                
+        // SQL ausführen
+        preparedStatement.executeUpdate();
+        
+        ready = true;
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+        
+        ready = false;
+      }
+    }	    
+    return ready;
+  }
+
 }
+
