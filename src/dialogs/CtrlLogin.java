@@ -40,47 +40,12 @@ public class CtrlLogin implements ActionListener {
 		
 		// Liste der Benutzer erzeugen
 		ArrayList<Nutzer> users = DAONutzer.returnAllNutzer();
-		
-		
+				
 		// Login auswerten
 		if (event.getActionCommand().equals("Abbrechen")) {
 			System.exit(0);
 		}
 		else if (event.getActionCommand().equals("Anmelden")) {
-			
-			/*
-			 * 
-			 * ACHTUNG!!!
-			 * Diese Testuser bei Fertigstellung wieder löschen
-			 * 
-			 * 
-			 */
-			
-			
-			
-			if(this.txtUser.getText().equals("Admin")){
-				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin", "Aktiviert");
-				this.dialog.setVisible(false);
-				this.login = true;
-			}
-			else if(this.txtUser.getText().equals("Service")){
-				users.get(0).setNutzerInfo("Service", "", "", "", "Service", "Aktiviert");
-				this.dialog.setVisible(false);
-				this.login = true;
-			}
-			else if(this.txtUser.getText().equals("Meister")){
-				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister", "Aktiviert");
-				this.dialog.setVisible(false);
-				this.login = true;
-			}
-			else if(this.txtUser.getText().equals("Werkstatt")){
-				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt", "Aktiviert");
-				this.dialog.setVisible(false);
-				this.login = true;
-			}
-			
-			
-			
 			
 			@SuppressWarnings("deprecation")
 			String password = this.txtPassword.getText();
@@ -88,36 +53,23 @@ public class CtrlLogin implements ActionListener {
 			
 			int i = 0;
 			int u = -1;
-
+			
 			// Überprüfen ob Username und Password gültig
-			while (i<=users.size()-1){
-
-				if(users.get(i).getUsername().equals(username)){
-					if(users.get(i).getPassword().equals(password)){
+			if(DAONutzer.pruefungPasswort(username, password)){
+				while (i<=users.size()-1){
+					
+					if(users.get(i).getUsername().equals(username)){
 						if(users.get(i).getStatus().equals("Aktiviert")){
 							this.dialog.setVisible(false);
 							this.login = true;
 							u=i;							
 						}
-					}
+					}					
+					
+					i++;					
 				}
-				
-				
-				i++;
 			}
-			
-			/*
-			if(DAONutzer.pruefungPasswort(username, password)){
-				this.dialog.setVisible(false);
-				this.login = true;
-				u=i;
-				System.out.println("richtig!"+ username + "|" + password);
-			}else{
-				
-				System.out.println("falsch!" + username + "|" + password);
-			}
-			*/
-			
+
 			// Gruppenzugehörigkeit auswerten
 			if(login==true && u!=-1){
 				if(users.get(u).getGruppe().equals("Admin")){

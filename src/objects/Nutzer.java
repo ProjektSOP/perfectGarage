@@ -53,6 +53,10 @@ public class Nutzer implements Comparable<Nutzer>{
 		this.password = password;
 	}
 	
+	public void setStatus(String status){
+		this.status = status;
+	}
+	
 	public void setNutzerInfo(String username, String password, String nachname, String vorname, String gruppe, String status){
 		this.username = username;
 		this.password = password;
@@ -95,10 +99,19 @@ public class Nutzer implements Comparable<Nutzer>{
 		
 	}
 	
+	public String getStatus(){
+		return this.status;
+	}
+	
+	public String getDelete(){
+		return this.status;
+	}
+	
+	
 	/**
 	 * 	 Zum Update der Nutzerdaten
 	 */
-	
+	/*
 	public void updateUsername(String username) {
 		this.username = username;
 	}
@@ -119,13 +132,10 @@ public class Nutzer implements Comparable<Nutzer>{
 		this.status = status;
 	}
 	
-	public String getStatus(){
-		return this.status;
-	}
+	*/
 	
 	@Override
 	public int compareTo(Nutzer o) {
 		return 0;
 	}
-
 }

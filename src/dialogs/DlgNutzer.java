@@ -9,6 +9,7 @@ import interfaces.DlgInterface;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import DAO.DAONutzer;
 import objects.Nutzer;
 
 public class DlgNutzer implements DlgInterface {
@@ -26,6 +28,7 @@ public class DlgNutzer implements DlgInterface {
 	private JTable tableUsers;
 	private JDialog dialog = new JDialog();
 	private JPanel panel;
+	private ArrayList<Nutzer> users;
 	
 	public DlgNutzer(){
 		Nutzer user = new Nutzer();
@@ -59,6 +62,19 @@ public class DlgNutzer implements DlgInterface {
 		this.tableUsers = tableUsers;
 		this.dialog.remove(this.panel);
 		this.createPanel(user);
+		this.dialog.add(this.panel);
+		
+		this.showDialog(true);
+	}
+	
+	public void editNutzerInt(JTable tableUsers, int i) {
+		
+		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
+		
+		this.dialog.setTitle("Nutzer bearbeiten");
+		this.tableUsers = tableUsers;
+		this.dialog.remove(this.panel);
+		this.createPanel(this.users.get(i));
 		this.dialog.add(this.panel);
 		
 		this.showDialog(true);

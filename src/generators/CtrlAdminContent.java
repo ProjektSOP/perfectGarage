@@ -20,50 +20,52 @@ import dialogs.DlgNutzer;
 public class CtrlAdminContent implements ActionListener {
 	
 	private JTable tableUsers;
-	private Nutzer user;
 	private ArrayList<Nutzer> users;
+	private int i;
 	
-	public CtrlAdminContent(JTable tableUsers, Nutzer user){
+	
+	public CtrlAdminContent(JTable tableUsers){
 		this.tableUsers = tableUsers;
-		this.user = user;
 	}
 	
-	public CtrlAdminContent(JTable tableUsers, ArrayList<Nutzer> users, Nutzer user){
+	public CtrlAdminContent(JTable tableUsers, int i){
 		this.tableUsers = tableUsers;
-		this.users = users;
-		this.user = user;
+		this.i = i;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
 		DlgNutzer dlgNutzer = new DlgNutzer();
+		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
 		
 		if (event.getActionCommand().equals("Neuer Benutzer")) {
-			dlgNutzer.newNutzer(tableUsers, user);
+			dlgNutzer.newNutzer(tableUsers, new Nutzer());
 		}
 		else if (event.getActionCommand().equals("Benutzer editieren")) {
-			dlgNutzer.editNutzer(tableUsers, user);
+			dlgNutzer.editNutzer(tableUsers, users.get(i));
 		}
 		else if (event.getActionCommand().equals("Benutzer löschen")) {
-			// Erzeugen eines vorgefertigten Optionsdialoges.
 			int eingabe = JOptionPane.showOptionDialog(null, "Sind Sie sich sicher, diesen Benutzer zu löschen?", "Benutzer löschen", 
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			
 			if(eingabe == 0){
-				System.out.println("Löschen");
-				DAONutzer.deleteNutzer(user);
-				this.users = DAONutzer.returnAllNutzerWithoutAdmin();
-				
-				this.tableUsers.setModel( DAOJTable.fillTableUsers(users) );
+				DAONutzer.deleteNutzer(users.get(i));
 			}
 			else if(eingabe == 1){
 				System.out.println("Nicht löschen");
 			}
 		}
 		else if (event.getActionCommand().equals("Benutzerstatus ändern")) {
-			System.out.println("Deaktiviern");
+			if(users.get(i).getStatus().equals("Aktiviert")){
+				DAONutzer.updateStatus(users.get(i), "Deaktiviert");
+			}else{
+				DAONutzer.updateStatus(users.get(i), "Aktiviert");
+			}
 		}
+		
+		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
+		this.tableUsers.setModel( DAOJTable.fillTableUsers(users) );
 		
 	}
 

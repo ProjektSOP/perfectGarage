@@ -25,8 +25,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 
+import objects.Fahrzeug;
 import objects.Kunde;
 import DAO.DAOJTable;
 import DAO.DAOKunde;
@@ -93,6 +93,9 @@ public class GenServiceContent {
 		
 		// DAO-Objekt und ArrayList<Kunde> wird erstellt
 		final ArrayList<Kunde> customers = DAOKunde.returnAllKunde();
+		
+		// DAO-Objekt und ArrayList<Fahrzeug> wird erstellt
+		final ArrayList<Fahrzeug> cars;
 		
 		JPanel panel = new JPanel();
 		panel.setLayout (new BorderLayout());
@@ -314,12 +317,75 @@ public class GenServiceContent {
         				txtTelefax.setText(customers.get(tableSearchCustomer.getSelectedRow()).getTelefax());
         				txtHandy.setText(customers.get(tableSearchCustomer.getSelectedRow()).getHandy());
         				txtMail.setText(customers.get(tableSearchCustomer.getSelectedRow()).getEmail());
-        				DAOJTable.createTableCars(customers.get(tableSearchCustomer.getSelectedRow()));	
+        				//DAOJTable.createTableCars(customers.get(tableSearchCustomer.getSelectedRow()));	
         			}
         		}
         	}
         });
 		
+		
+		
+		
+		
+		
+		// Erstelle JPanel
+		JPanel panelCarDetails = new JPanel();
+		
+		// Eigenschaften setzen
+		panelCarDetails.setBorder(BorderFactory.createTitledBorder("Details zum ausgewählten Fahrzeug"));
+		panelCarDetails.setPreferredSize(new Dimension(100, 430));
+
+		// JLabel erstellen
+		JLabel lblFIN = new JLabel("FIN:");
+		lblFIN.setPreferredSize(new Dimension(80, 20));
+		
+		// JTextField erstellen
+		final JTextField txtFIN = new JTextField();
+		txtFIN.setEditable(false);
+		txtFIN.setPreferredSize(new Dimension(210, 20));
+		
+		// JLabel und JTextField hinzufügen
+		panelCarDetails.add(lblFIN);
+		panelCarDetails.add(txtFIN);
+		
+		// JLabel erstellen
+		JLabel lblFarbe = new JLabel("Farbe:");
+		lblFarbe.setPreferredSize(new Dimension(80, 20));
+		
+		// JTextField erstellen
+		final JTextField txtFarbe = new JTextField();
+		txtFarbe.setEditable(false);
+		txtFarbe.setPreferredSize(new Dimension(210, 20));
+		
+		// JLabel und JTextField hinzufügen
+		panelCarDetails.add(lblFarbe);
+		panelCarDetails.add(txtFarbe);
+		
+		// JLabel erstellen
+		JLabel lblHersteller = new JLabel("Hersteller:");
+		lblHersteller.setPreferredSize(new Dimension(80, 20));
+		
+		// JTextField erstellen
+		final JTextField txtHersteller = new JTextField();
+		txtHersteller.setEditable(false);
+		txtHersteller.setPreferredSize(new Dimension(210, 20));
+		
+		// JLabel und JTextField hinzufügen
+		panelCarDetails.add(lblHersteller);
+		panelCarDetails.add(txtHersteller);
+		
+		// JLabel erstellen
+		JLabel lblModell = new JLabel("Modell:");
+		lblModell.setPreferredSize(new Dimension(80, 20));
+		
+		// JTextField erstellen
+		final JTextField txtModell = new JTextField();
+		txtModell.setEditable(false);
+		txtModell.setPreferredSize(new Dimension(210, 20));
+		
+		// JLabel und JTextField hinzufügen
+		panelCarDetails.add(lblModell);
+		panelCarDetails.add(txtModell);
 		
 		
 		
@@ -337,71 +403,52 @@ public class GenServiceContent {
 		panelCarSelect.setBorder(BorderFactory.createTitledBorder("Vorhandene Fahrzeuge"));
 		panelCarSelect.setPreferredSize(new Dimension(100, 430));
 		
+		
+		
+		
+		
+		
+		
+		// Temporäre Fahrzeuge
+		cars = new ArrayList<Fahrzeug>();
+		
+//		cars.add(new Fahrzeug(1234,"audi","a3","schwarz"));
+//		cars.add(new Fahrzeug(5678,"audi","a4","blau"));
+		
+		
+		
+		
+		
+		
 		// Erstelle JTable mit JScrollPane
-		final JTable tableSearchCar = DAOJTable.createTableCars(new Kunde());
+		final JTable tableSearchCar = DAOJTable.createTableCars(cars);
 		
 		JScrollPane scrollTableCar = new JScrollPane(tableSearchCar);
 		scrollTableCar.setPreferredSize(new Dimension(600, 70));
 		scrollTableCar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
+        // ActionListener für JTable erzeugen
+		tableSearchCar.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(final MouseEvent e) {
+        		// Einfacher Klick auf einen Tabelleneintrag
+        		if (e.getClickCount() == 1) {
+        			if(cars.size() >= 1){
+        				// Kundeninformationen zum ausgewählten Kunden einlesen
+        				txtFIN.setText(""+cars.get(tableSearchCar.getSelectedRow()).getFIN());
+        				txtFarbe.setText(cars.get(tableSearchCar.getSelectedRow()).getFarbe());
+        				txtHersteller.setText(cars.get(tableSearchCar.getSelectedRow()).getHersteller());
+        				txtModell.setText(cars.get(tableSearchCar.getSelectedRow()).getModell());
+        			}
+        		}
+        	}
+        });
+		
 		// JTable mit JScrollPane zum JPanel hinzufügen
 		panelCarSelect.add(scrollTableCar);
 		
-		// Erstelle JPanel
-		JPanel panelCarDetails = new JPanel();
 		
-		// Eigenschaften setzen
-		panelCarDetails.setBorder(BorderFactory.createTitledBorder("Details zum ausgewählten Fahrzeug"));
-		panelCarDetails.setPreferredSize(new Dimension(100, 430));
-
-		// JLabel erstellen
-		JLabel lblFIN = new JLabel("FIN:");
-		lblFIN.setPreferredSize(new Dimension(80, 20));
 		
-		// JTextField erstellen
-		JTextField txtFIN = new JTextField();
-		txtFIN.setPreferredSize(new Dimension(210, 20));
 		
-		// JLabel und JTextField hinzufügen
-		panelCarDetails.add(lblFIN);
-		panelCarDetails.add(txtFIN);
-		
-		// JLabel erstellen
-		JLabel lblFarbe = new JLabel("Farbe:");
-		lblFarbe.setPreferredSize(new Dimension(80, 20));
-		
-		// JTextField erstellen
-		JTextField txtFarbe = new JTextField();
-		txtFarbe.setPreferredSize(new Dimension(210, 20));
-		
-		// JLabel und JTextField hinzufügen
-		panelCarDetails.add(lblFarbe);
-		panelCarDetails.add(txtFarbe);
-		
-		// JLabel erstellen
-		JLabel lblHersteller = new JLabel("Hersteller:");
-		lblHersteller.setPreferredSize(new Dimension(80, 20));
-		
-		// JTextField erstellen
-		JTextField txtHersteller = new JTextField();
-		txtHersteller.setPreferredSize(new Dimension(210, 20));
-		
-		// JLabel und JTextField hinzufügen
-		panelCarDetails.add(lblHersteller);
-		panelCarDetails.add(txtHersteller);
-		
-		// JLabel erstellen
-		JLabel lblModell = new JLabel("Modell:");
-		lblModell.setPreferredSize(new Dimension(80, 20));
-		
-		// JTextField erstellen
-		JTextField txtModell = new JTextField();
-		txtModell.setPreferredSize(new Dimension(210, 20));
-		
-		// JLabel und JTextField hinzufügen
-		panelCarDetails.add(lblModell);
-		panelCarDetails.add(txtModell);
-
 		// Hinzufügen der JPanel's
 		panelCar.add(panelCarSelect);
 		panelCar.add(panelCarDetails);

@@ -1,10 +1,16 @@
 package DAO;
 
+import generators.CtrlAdminContent;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dialogs.DlgNutzer;
+import objects.Fahrzeug;
 import objects.Kunde;
 import objects.Nutzer;
 
@@ -49,7 +55,7 @@ public class DAOJTable {
 		for (Nutzer n : list) {
 			model.addRow(n.getNutzerInfo());
 		}
-
+		
 		return model;
 	}
 
@@ -96,12 +102,12 @@ public class DAOJTable {
 		return model;
 	}
 	
-	public static JTable createTableCars(Kunde customer) {
+	public static JTable createTableCars(ArrayList<Fahrzeug> list) {
 		
 		// DefaultTableModel erzeugen
 		DefaultTableModel model = new DefaultTableModel();
 
-		model = fillTableCars(customer);
+		model = fillTableCars(list);
 
 		// JTable erzeugen
 		JTable table = new JTable(model) {
@@ -115,14 +121,18 @@ public class DAOJTable {
 		return table;
 	}
 	
-	public static DefaultTableModel fillTableCars(Kunde costomer) {
+	public static DefaultTableModel fillTableCars(ArrayList<Fahrzeug> list) {
 		
 		DefaultTableModel model = new DefaultTableModel();
         model.addColumn("FIN");
         model.addColumn("Hersteller");
         model.addColumn("Modell");
         model.addColumn("Farbe");
-
+        
+		for (Fahrzeug n : list) {
+			model.addRow(n.getFahrzeugInfo());
+		}
+        
 		return model;
 	}
 	

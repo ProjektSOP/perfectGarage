@@ -21,6 +21,7 @@ public class CtrlNutzer implements ActionListener {
 
 	private JDialog dialog;
 	private JTable tableUsers;
+	private ArrayList<Nutzer> users;
 	private Nutzer user;
 	
 	private JTextField username;
@@ -46,7 +47,7 @@ public class CtrlNutzer implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
-
+		
 		if (event.getActionCommand().equals("Abbrechen")) {
 			this.dialog.setVisible(false);
 		}
@@ -61,15 +62,17 @@ public class CtrlNutzer implements ActionListener {
 			this.dialog.setVisible(false);
 			
 			if(this.dialog.getTitle().equals("Neuen Nutzer anlegen")){
-				System.out.println("Neuen Nutzer anlegen:" + this.user.getUsername()+" "+user.getNachname()+" "+user.getVorname()+" "+user.getGruppe());
+				this.user.setPassword("p@ssw0rd");
+				this.user.setStatus("Aktiviert");
+				DAONutzer.insertNutzer(user);
 			}
 			else if(this.dialog.getTitle().equals("Nutzer bearbeiten")){
 				DAONutzer.updateNutzer(user, oldUsername);
 			}
 			
-			ArrayList<Nutzer> users = DAONutzer.returnAllNutzerWithoutAdmin();
-			this.tableUsers.setModel( DAOJTable.fillTableUsers( users) );
-			
+			this.users = DAONutzer.returnAllNutzerWithoutAdmin();
+			this.tableUsers.setModel( DAOJTable.fillTableUsers(this.users) );
+						
 		}
 		
 	}

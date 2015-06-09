@@ -75,7 +75,7 @@ public class GenAdminContent {
 		// JButton "Neuer Benutzer" erzeugen
 		JButton btnNewNutzer = new JButton();
 		btnNewNutzer.setText("Neuer Benutzer");
-		btnNewNutzer.addActionListener(new CtrlAdminContent(tableUsers, new Nutzer()));
+		btnNewNutzer.addActionListener(new CtrlAdminContent(tableUsers));
 		
 		// JButton "Benutzer editieren" erzeugen
 		final JButton btnEditNutzer = new JButton();
@@ -109,11 +109,11 @@ public class GenAdminContent {
         		if (e.getClickCount() == 1) {
         			if(users.size() >= 1){
         				btnEditNutzer.setEnabled(true);
-        				btnEditNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
+        				btnEditNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
         				btnDeleteNutzer.setEnabled(true);
-        				btnDeleteNutzer.addActionListener(new CtrlAdminContent(tableUsers, users, users.get(tableUsers.getSelectedRow())));
+        				btnDeleteNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
         				btnDeactivateNutzer.setEnabled(true);
-        				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
+        				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
         				btnSetPassword.setEnabled(true);
         			}
         		}
@@ -121,7 +121,7 @@ public class GenAdminContent {
         		// Doppelklick auf einen Tabelleneintrag
         		if (e.getClickCount() == 2) {
 	    			DlgNutzer dlgNutzer = new DlgNutzer();
-	    			dlgNutzer.editNutzer(tableUsers, users.get(tableUsers.getSelectedRow()));
+	    			dlgNutzer.editNutzerInt(tableUsers, tableUsers.getSelectedRow());
         		}
         	}
         });

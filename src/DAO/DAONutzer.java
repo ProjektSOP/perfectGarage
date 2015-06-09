@@ -13,17 +13,12 @@ import objects.Nutzer;
 
 public class DAONutzer {
 
-	// final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
-	// final static String updateoldNutzerString =
-	// "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
-	// final static String deleteNutzerString =
-	// "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
-
 	final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
-	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=MD5(?), Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
 	final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
 	final static String insertnewNutzerString = "INSERT INTO t_nutzer( benutzername, passwort, Name, Vorname, Nutzerrolle, Status) VALUES (?, MD5(?), ?, ?, ?,?)";
 	final static String getpasswordString = "SELECT * FROM t_nutzer where benutzername=? AND passwort=MD5(?) AND Status='Aktiviert' ";
+	final static String updateStatusString = "UPDATE t_nutzer SET Status=? WHERE benutzername=? ";
 
 	public static ArrayList<Nutzer> returnAllNutzer() {
 
@@ -116,6 +111,7 @@ public class DAONutzer {
 				e.printStackTrace();
 			}
 		}
+		
 		return nutzerliste;
 	}
 
@@ -258,5 +254,107 @@ public class DAONutzer {
 
 		return false;
 	}
+	
+	public static boolean insertNutzer(Nutzer oldNutzer) {
 
+		/**
+		 * @param Übernimmt
+		 *            einen Nutzer - Objekt und updatet dieses in der Datenbank
+		 * @param gibt
+		 *            ein boolean zurück, ob das Update erfolgreich war
+		 */
+
+		boolean ready = false;
+
+		Nutzer tempnutzer = oldNutzer;
+
+		Connection conn = MySQLConnection.getInstance();
+
+		if (conn != null) {
+
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Insert-Statement erzeugen (Fragezeichen werden später
+				// ersetzt).
+				String sql = insertnewNutzerString;
+
+				PreparedStatement ps = conn.prepareStatement(sql);
+
+				PreparedStatement preparedStatement = conn
+						.prepareStatement(sql);
+
+				// Parameter durch übernommene Daten ersetzen
+				preparedStatement.setString(1, tempnutzer.getUsername());
+				preparedStatement.setString(2, tempnutzer.getPassword());
+				preparedStatement.setString(3, tempnutzer.getNachname());
+				preparedStatement.setString(4, tempnutzer.getVorname());
+				preparedStatement.setString(5, tempnutzer.getGruppe());
+				preparedStatement.setString(6, tempnutzer.getStatus());
+
+				// SQL ausführen
+				preparedStatement.executeUpdate();
+
+				ready = true;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+				ready = false;
+			}
+		}
+		return ready;
+	}
+
+	public static boolean updateStatus(Nutzer oldNutzer, String status) {
+
+		/**
+		 * @param Übernimmt
+		 *            einen Nutzer - Objekt und updatet dieses in der Datenbank
+		 * @param gibt
+		 *            ein boolean zurück, ob das Update erfolgreich war
+		 */
+
+		boolean ready = false;
+
+		Nutzer tempnutzer = oldNutzer;
+
+		Connection conn = MySQLConnection.getInstance();
+
+		if (conn != null) {
+
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Insert-Statement erzeugen (Fragezeichen werden später
+				// ersetzt).
+				String sql = updateStatusString;
+
+				PreparedStatement ps = conn.prepareStatement(sql);
+
+				PreparedStatement preparedStatement = conn
+						.prepareStatement(sql);
+
+				// Parameter durch übernommene Daten ersetzen
+				preparedStatement.setString(1, status);
+				preparedStatement.setString(2, oldNutzer.getUsername());
+
+				// SQL ausführen
+				preparedStatement.executeUpdate();
+
+				ready = true;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+				ready = false;
+			}
+		}
+		return ready;
+	}
+	
 }
