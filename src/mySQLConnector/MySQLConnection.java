@@ -17,8 +17,11 @@ import java.util.Properties;
 
 
 public class MySQLConnection {
-	 
-	  private static Connection conn = null;
+		 
+	  public MySQLConnection() {
+	  }
+
+	private static Connection conn = null;
 	  private static boolean isConnected = false;
 	 
 	 
@@ -81,8 +84,7 @@ public void schliesseVerbindung() {
 		conn.close();	}
  
 	catch (SQLException sqle) {
- 
-		System.out.println(sqle.toString());
+ 		System.out.println(sqle.toString());
 	}
 }
 	  

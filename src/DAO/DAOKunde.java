@@ -13,12 +13,12 @@ import objects.Kunde;
 
 public class DAOKunde {
 	
-	private String returnKundebyPLZString = "SELECT * FROM t_kunde WHERE plz LIKE ? ";
-	private String returnKundebyKundenNrString = "SELECT * FROM t_kunde WHERE kundennr LIKE ? ";
-	private String returnKundebyNameString = "SELECT * FROM t_kunde WHERE name LIKE ? ";
-	private String returnAllKundeString = "SELECT * FROM t_kunde ";
-	private String insertnewKundeString = "INSERT INTO t_kunde( name, vorname, strasse, plz, ort, kundeseit, telefon, fax, handy, mail) VALUES (?, ?, ?, ?, ?, curDate(), ?, ?,?,?)";
-	private String updateoldKunde = "UPDATE t_kunde SET name=?, vorname=?, strasse=?, plz=?, ort=?, kundeseit=?, telefon=?, fax=?, handy=?, mail=? WHERE kundennr=? ";
+	final String returnKundebyPLZString = "SELECT * FROM t_kunde WHERE plz LIKE ? ";
+	final String returnKundebyKundenNrString = "SELECT * FROM t_kunde WHERE kundennr LIKE ? ";
+	final String returnKundebyNameString = "SELECT * FROM t_kunde WHERE name LIKE ? ";
+	final String returnAllKundeString = "SELECT * FROM t_kunde ";
+	final String insertnewKundeString = "INSERT INTO t_kunde( name, vorname, strasse, plz, ort, kundeseit, telefon, fax, handy, mail) VALUES (?, ?, ?, ?, ?, curDate(), ?, ?,?,?)";
+	final String updateoldKunde = "UPDATE t_kunde SET name=?, vorname=?, strasse=?, plz=?, ort=?, kundeseit=?, telefon=?, fax=?, handy=?, mail=? WHERE kundennr=? ";
 	
 public ArrayList<Kunde> returnKundebyPLZ(int postleitzahl)  {
 
