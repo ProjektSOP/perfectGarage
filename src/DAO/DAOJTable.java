@@ -96,12 +96,12 @@ public class DAOJTable {
 		return model;
 	}
 	
-	public static JTable createTableCars() {
+	public static JTable createTableCars(Kunde customer) {
 		
 		// DefaultTableModel erzeugen
 		DefaultTableModel model = new DefaultTableModel();
 
-		model = fillTableCars();
+		model = fillTableCars(customer);
 
 		// JTable erzeugen
 		JTable table = new JTable(model) {
@@ -111,11 +111,11 @@ public class DAOJTable {
 				return false;
 			}
 		};
-
+		
 		return table;
 	}
 	
-	public static DefaultTableModel fillTableCars() {
+	public static DefaultTableModel fillTableCars(Kunde costomer) {
 		
 		DefaultTableModel model = new DefaultTableModel();
         model.addColumn("FIN");

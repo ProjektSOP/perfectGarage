@@ -16,6 +16,18 @@ public class Kunde {
 	private String handy;
 	private String email;
 	
+	public Kunde(){
+		this.nachname = "";
+		this.vorname = "";
+		this.strasse = "";
+		this.plz = 00000;
+		this.ort = "";
+		this.telefon = "";
+		this.telefax = "";
+		this.handy = "";
+		this.email = "";
+	}
+	
 	public Kunde(String nachname, String vorname, String strasse,
 			int plz, String ort, String telefon, String telefax,
 			String handy, String email) {
