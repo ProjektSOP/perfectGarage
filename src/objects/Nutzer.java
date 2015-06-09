@@ -1,7 +1,5 @@
 package objects;
 
-import java.sql.Date;
-
 public class Nutzer implements Comparable<Nutzer>{
 	
 	private String username;
@@ -10,11 +8,21 @@ public class Nutzer implements Comparable<Nutzer>{
 	private String vorname;
 	private String gruppe;
 	private String status;
-	private Date zeitstempelLoeschung;
+	private String delete;
 	
-		
+	
+	public Nutzer(){
+		this.username = "";
+		this.password = "";
+		this.nachname = "";
+		this.vorname = "";
+		this.gruppe = "";
+		this.status = "";
+		this.delete = "";
+	}
+	
 	public Nutzer(String username, String password, String nachname,
-			String vorname, String gruppe, String status) {
+			String vorname, String gruppe, String status, String delete) {
 		
 		this.username = username;
 		this.password = password;
@@ -22,6 +30,7 @@ public class Nutzer implements Comparable<Nutzer>{
 		this.vorname = vorname;
 		this.gruppe = gruppe;
 		this.status = status;
+		this.delete = delete;
 	}
 	
 	public void setUsername(String username){
@@ -38,7 +47,6 @@ public class Nutzer implements Comparable<Nutzer>{
 	
 	public void setGruppe(String gruppe){
 		this.gruppe = gruppe;
-		this.status = status;
 	}
 
 	public void setPassword(String password){
@@ -55,13 +63,13 @@ public class Nutzer implements Comparable<Nutzer>{
 	}
 	
 	public String[] getNutzerInfo(){
-		String[] userdata = new String[5];
+		String[] userdata = new String[6];
 		userdata[0] = this.username;
 		userdata[1] = this.nachname;
 		userdata[2] = this.vorname;
 		userdata[3] = this.gruppe;
 		userdata[4] = this.status;
-		userdata[5] = this.zeitstempelLoeschung.toString();
+		userdata[5] = this.delete;
 		
 		return userdata;
 	}
@@ -85,11 +93,6 @@ public class Nutzer implements Comparable<Nutzer>{
 	public String getGruppe(){
 		return this.gruppe;
 		
-	}
-	
-	public Date getzeitstempelLöschung(){
-		
-		return this.zeitstempelLoeschung;
 	}
 	
 	/**
@@ -119,7 +122,7 @@ public class Nutzer implements Comparable<Nutzer>{
 	public String getStatus(){
 		return this.status;
 	}
-
+	
 	@Override
 	public int compareTo(Nutzer o) {
 		return 0;

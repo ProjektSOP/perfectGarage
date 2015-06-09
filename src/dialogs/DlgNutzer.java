@@ -14,7 +14,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -24,13 +23,12 @@ import objects.Nutzer;
 
 public class DlgNutzer implements DlgInterface {
 	
-	JFrame frame;
-	JTable tableUsers;
-	JDialog dialog = new JDialog();
-	JPanel panel;
+	private JTable tableUsers;
+	private JDialog dialog = new JDialog();
+	private JPanel panel;
 	
 	public DlgNutzer(){
-		Nutzer user = new Nutzer("","","","","","");
+		Nutzer user = new Nutzer();
 		
 		this.dialog.setTitle("DlgNutzer");
 		

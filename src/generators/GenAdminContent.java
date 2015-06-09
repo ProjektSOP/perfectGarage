@@ -28,7 +28,7 @@ import objects.Nutzer;
 
 public class GenAdminContent {
 	
-	JFrame frame;
+	private JFrame frame;
 	
 	public GenAdminContent(JFrame frame){
 		this.frame = frame;
@@ -47,8 +47,8 @@ public class GenAdminContent {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		
-		DAONutzer daoNutzer = new DAONutzer();
-		final ArrayList<Nutzer> users = daoNutzer.returnAllNutzerWithoutAdmin();
+		// ArrayList erzeugen
+		final ArrayList<Nutzer> users = DAONutzer.returnAllNutzerWithoutAdmin();
 		
 		// JTable erzeugen
 		final JTable tableUsers = DAOJTable.createTableUsers(users);
@@ -75,7 +75,7 @@ public class GenAdminContent {
 		// JButton "Neuer Benutzer" erzeugen
 		JButton btnNewNutzer = new JButton();
 		btnNewNutzer.setText("Neuer Benutzer");
-		btnNewNutzer.addActionListener(new CtrlAdminContent(tableUsers, new Nutzer("","","","","","")));
+		btnNewNutzer.addActionListener(new CtrlAdminContent(tableUsers, new Nutzer()));
 		
 		// JButton "Benutzer editieren" erzeugen
 		final JButton btnEditNutzer = new JButton();
@@ -111,7 +111,7 @@ public class GenAdminContent {
         				btnEditNutzer.setEnabled(true);
         				btnEditNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
         				btnDeleteNutzer.setEnabled(true);
-        				btnDeleteNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
+        				btnDeleteNutzer.addActionListener(new CtrlAdminContent(tableUsers, users, users.get(tableUsers.getSelectedRow())));
         				btnDeactivateNutzer.setEnabled(true);
         				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(tableUsers, users.get(tableUsers.getSelectedRow())));
         				btnSetPassword.setEnabled(true);

@@ -14,12 +14,12 @@ import objects.Nutzer;
 
 public class DAONutzer {
 	
-	final String returnAllNutzerString = "SELECT * FROM t_nutzer";
-	final String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
-	final String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
+	final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
+	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
 	
 	
-public ArrayList<Nutzer> returnAllNutzer()  {
+public static ArrayList<Nutzer> returnAllNutzer()  {
 	
 		ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
 		Connection conn = null;
@@ -47,9 +47,10 @@ public ArrayList<Nutzer> returnAllNutzer()  {
 	          String vorname = result.getString("Vorname"); 
 	          String nutzerrolle = result.getString("Nutzerrolle");
 	          String status = result.getString("Status");
-	          Date zeitstempelLöschung = result.getDate("zeitstempelLöschung");
+	          Date zeitstempelLoeschung = result.getDate("zeitstempelLoeschung");
+	          String delete = ""+zeitstempelLoeschung;
 	          	          	         
-	          Nutzer tempnutzer = new Nutzer(benutzername, passwort, nachname, vorname, nutzerrolle, status);
+	          Nutzer tempnutzer = new Nutzer(benutzername, passwort, nachname, vorname, nutzerrolle, status, delete);
 	        
 	          nutzerliste.add(tempnutzer);
 	        }
@@ -62,7 +63,7 @@ public ArrayList<Nutzer> returnAllNutzer()  {
 	    return nutzerliste;
 	  }
 
-public ArrayList<Nutzer> returnAllNutzerWithoutAdmin()  {
+public static ArrayList<Nutzer> returnAllNutzerWithoutAdmin()  {
 	
 	ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
 	Connection conn = null;
@@ -92,20 +93,16 @@ public ArrayList<Nutzer> returnAllNutzerWithoutAdmin()  {
 	          String vorname = result.getString("Vorname"); 
 	          String nutzerrolle = result.getString("Nutzerrolle");
 	          String status = result.getString("Status");
+	          Date zeitstempelLoeschung = result.getDate("zeitstempelLoeschung");
+	          String zeitDelete = ""+zeitstempelLoeschung;
 	          	          	         
-	          Nutzer tempnutzer = new Nutzer(benutzername, passwort, nachname, vorname, nutzerrolle, status);
+	          Nutzer tempnutzer = new Nutzer(benutzername, passwort, nachname, vorname, nutzerrolle, status, zeitDelete);
 	          
 	          nutzerliste.add(tempnutzer);
          	                    
         	}
           
         }
-        
-        //TEST AUSGABE
-        /**
-        for (Nutzer n : nutzerliste)
-        System.out.println(n.getVorname() + " " + n.getNachname());
-       	*/
         
       } catch (SQLException e) {
         e.printStackTrace();
@@ -114,7 +111,7 @@ public ArrayList<Nutzer> returnAllNutzerWithoutAdmin()  {
     return nutzerliste;
   }
 
-public boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
+public static boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
 	
 	/**
 	 *	@param Übernimmt einen Nutzer - Objekt und updatet dieses in der Datenbank
@@ -165,8 +162,7 @@ public boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
     return ready;
   }
 
-
-public boolean deleteNutzer(Nutzer oldNutzer)  {
+public static boolean deleteNutzer(Nutzer oldNutzer)  {
 	
 	/**
 	 *	@param Übernimmt einen Nutzer - Objekt und updatet dieses in der Datenbank
@@ -212,4 +208,3 @@ public boolean deleteNutzer(Nutzer oldNutzer)  {
   }
 
 }
-

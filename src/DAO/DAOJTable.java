@@ -44,6 +44,7 @@ public class DAOJTable {
 		model.addColumn("Vorname");
 		model.addColumn("Nutzerrolle");
 		model.addColumn("Status");
+		model.addColumn("Geloescht am");
 		
 		for (Nutzer n : list) {
 			model.addRow(n.getNutzerInfo());

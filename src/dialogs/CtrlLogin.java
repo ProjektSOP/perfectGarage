@@ -23,12 +23,11 @@ import frames.FrmMain;
 
 public class CtrlLogin implements ActionListener {
 	
-	JDialog dialog;
+	private JDialog dialog;
+	private JTextField txtUser;
+	private JPasswordField txtPassword;
+	private Boolean login = false;
 	
-	JTextField txtUser;
-	JPasswordField txtPassword;
-	
-	Boolean login = false;
 	
 	public CtrlLogin(JDialog dialog, JTextField txtUser, JPasswordField txtPassword){
 		this.dialog = dialog;
@@ -39,11 +38,8 @@ public class CtrlLogin implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
-		// DAO-Objekt erzeugen
-		DAONutzer daoNutzer = new DAONutzer();
-
 		// Liste der Benutzer erzeugen
-		ArrayList<Nutzer> users = daoNutzer.returnAllNutzer();
+		ArrayList<Nutzer> users = DAONutzer.returnAllNutzer();
 		
 		
 		// Login auswerten

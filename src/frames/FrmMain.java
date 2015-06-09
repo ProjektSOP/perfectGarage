@@ -20,11 +20,10 @@ import javax.swing.JPanel;
 
 public class FrmMain {
 	
-	JFrame frame = new JFrame();
-	JMenuBar menubar = new JMenuBar();
-	JPanel panel = new JPanel();
-	
-	String modul = new String();
+	private JFrame frame = new JFrame();
+	private JMenuBar menubar = new JMenuBar();
+	private JPanel panel = new JPanel();
+	private String modul = new String();
 	
 	
 	public FrmMain(String modul){

@@ -19,8 +19,8 @@ import javax.swing.JTextArea;
 
 public class DlgInfo implements DlgInterface {
 	
-	JDialog dialog = new JDialog();
-	JPanel panel = new JPanel();
+	private JDialog dialog = new JDialog();
+	private JPanel panel = new JPanel();
 	
 	public DlgInfo(){
 		this.dialog.setTitle("Info");

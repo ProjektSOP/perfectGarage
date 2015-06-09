@@ -16,7 +16,7 @@ public class DAOKunde {
 	final String returnKundebyPLZString = "SELECT * FROM t_kunde WHERE plz LIKE ? ";
 	final String returnKundebyKundenNrString = "SELECT * FROM t_kunde WHERE kundennr LIKE ? ";
 	final String returnKundebyNameString = "SELECT * FROM t_kunde WHERE name LIKE ? ";
-	final String returnAllKundeString = "SELECT * FROM t_kunde ";
+	final static String returnAllKundeString = "SELECT * FROM t_kunde ";
 	final String insertnewKundeString = "INSERT INTO t_kunde( name, vorname, strasse, plz, ort, kundeseit, telefon, fax, handy, mail) VALUES (?, ?, ?, ?, ?, curDate(), ?, ?,?,?)";
 	final String updateoldKunde = "UPDATE t_kunde SET name=?, vorname=?, strasse=?, plz=?, ort=?, kundeseit=?, telefon=?, fax=?, handy=?, mail=? WHERE kundennr=? ";
 	
@@ -102,9 +102,6 @@ public ArrayList<Kunde> returnKundebyKundenNr(int kundennummer)  {
         
         // Erstes Fragezeichen durch "Kundennummer" Parameter ersetzen
         ps.setInt(1, ikundennr);
-     
-        // FUNKTIONSTEST
-        System.out.println(sql);
         	        
         // SQL ausführen.
         ResultSet result = ps.executeQuery();
@@ -135,12 +132,7 @@ public ArrayList<Kunde> returnKundebyKundenNr(int kundennummer)  {
           kundenliste.add(tempkunde);
           }
         
-        // Test Ausgabe
-      //  /**
-        for (Kunde k : kundenliste ){
-        	System.out.println(k.getNachname() + " " + k.getVorname() );
-        }
-       	//  */
+
     } catch (SQLException e) {
         e.printStackTrace();
       }
@@ -171,9 +163,6 @@ public ArrayList<Kunde> returnKundebyName(String kundenname)  {
 	        
 	        // Erstes Fragezeichen durch "Name" Parameter ersetzen
 	        ps.setString(1, name);
-	     
-	        // FUNKTIONSTEST
-	        System.out.println(sql);
 	        	        
 	        // SQL ausführen.
 	        ResultSet result = ps.executeQuery();
@@ -203,13 +192,7 @@ public ArrayList<Kunde> returnKundebyName(String kundenname)  {
 	            
 	          kundenliste.add(tempkunde);
 	          }
-	        
-	        // Test Ausgabe
-	        /**
-	        for (Kunde k : kundenliste ){
-	        	System.out.println(k.getNachname() + " " + k.getVorname() );
-	        }
-	       	  */
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	      }
@@ -217,7 +200,7 @@ public ArrayList<Kunde> returnKundebyName(String kundenname)  {
 	    return kundenliste;
 	  }
 
-public ArrayList<Kunde> returnAllKunde()  {
+public static ArrayList<Kunde> returnAllKunde()  {
 	
 	ArrayList<Kunde> kundenliste = new ArrayList<Kunde>();
 	Connection conn = null;
@@ -236,9 +219,6 @@ public ArrayList<Kunde> returnAllKunde()  {
         String sql = returnAllKundeString;
         	        
         PreparedStatement ps = conn.prepareStatement(sql);
-     
-        // FUNKTIONSTEST
-        System.out.println(sql);
         	        
         // SQL ausführen.
         ResultSet result = ps.executeQuery();
@@ -270,12 +250,6 @@ public ArrayList<Kunde> returnAllKunde()  {
           kundenliste.add(tempkunde);
           }
         
-        // Test Ausgabe
-        /**
-        for (Kunde k : kundenliste ){
-        	System.out.println(k.getNachname() + " " + k.getVorname() );
-        }
-       	  */
     } catch (SQLException e) {
         e.printStackTrace();
       }

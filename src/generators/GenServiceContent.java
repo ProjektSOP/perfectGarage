@@ -33,7 +33,7 @@ import DAO.DAOKunde;
 
 public class GenServiceContent {
 
-	JFrame frame;
+	private JFrame frame;
 	
 	public GenServiceContent(JFrame frame){
 		this.frame = frame;
@@ -407,8 +407,7 @@ public class GenServiceContent {
 		panelBottom.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 650));
 		
 		// DAO-Objekt und ArrayList<Kunde> wird erstellt
-		DAOKunde daoKunde = new DAOKunde();
-		final ArrayList<Kunde> customers = daoKunde.returnAllKunde();
+		final ArrayList<Kunde> customers = DAOKunde.returnAllKunde();
 		
 		// JTable erzeugen
 		final JTable tableSearchCustomer = DAOJTable.createTableCustomers(customers);

@@ -19,7 +19,7 @@ import javax.swing.JTable;
 
 public class GenWerkstattContent {
 
-	JFrame frame;
+	private JFrame frame;
 	
 	public GenWerkstattContent(JFrame frame){
 		this.frame = frame;

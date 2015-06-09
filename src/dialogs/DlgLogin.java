@@ -25,8 +25,8 @@ import mySQLConnector.MySQLConnection;
 
 public class DlgLogin implements DlgInterface {
 	
-	JDialog dialog = new JDialog();
-	JPanel panel = new JPanel();
+	private JDialog dialog = new JDialog();
+	private JPanel panel = new JPanel();
 	
 	public DlgLogin(){
 		this.dialog.setTitle("Anmeldung");

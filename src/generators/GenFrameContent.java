@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class GenFrameContent {
 	
-	JFrame frame;
+	private JFrame frame;
 	
 	public GenFrameContent(JFrame frame){
 		this.frame = frame;

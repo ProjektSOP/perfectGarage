@@ -19,23 +19,23 @@ import objects.Nutzer;
 
 public class CtrlNutzer implements ActionListener {
 
-	JTable tableUsers;
-	JDialog dialog;
-	Nutzer user;
+	private JDialog dialog;
+	private JTable tableUsers;
+	private Nutzer user;
 	
-	JTextField username;
-	JTextField nachname;
-	JTextField vorname;
-	JTextField gruppe;
+	private JTextField username;
+	private JTextField nachname;
+	private JTextField vorname;
+	private JTextField gruppe;
 	
 	public CtrlNutzer(JTable tableUsers, JDialog dialog) {
-		this.tableUsers = tableUsers;
 		this.dialog = dialog;
+		this.tableUsers = tableUsers;
 	}
 	
 	public CtrlNutzer(JTable tableUsers, JDialog dialog, Nutzer user, JTextField username, JTextField nachname, JTextField vorname, JTextField gruppe){
-		this.tableUsers = tableUsers;
 		this.dialog = dialog;
+		this.tableUsers = tableUsers;
 		this.user = user;
 				
 		this.username = username;
@@ -46,9 +46,7 @@ public class CtrlNutzer implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		
-		
-		
+
 		if (event.getActionCommand().equals("Abbrechen")) {
 			this.dialog.setVisible(false);
 		}
@@ -66,16 +64,10 @@ public class CtrlNutzer implements ActionListener {
 				System.out.println("Neuen Nutzer anlegen:" + this.user.getUsername()+" "+user.getNachname()+" "+user.getVorname()+" "+user.getGruppe());
 			}
 			else if(this.dialog.getTitle().equals("Nutzer bearbeiten")){
-				boolean done = new DAONutzer().updateNutzer(user, oldUsername);
-				if(done){
-					
-				}
+				DAONutzer.updateNutzer(user, oldUsername);
 			}
 			
-			DAONutzer daoNutzer = new DAONutzer();
-			ArrayList<Nutzer> users = daoNutzer.returnAllNutzerWithoutAdmin();
-			
-			
+			ArrayList<Nutzer> users = DAONutzer.returnAllNutzerWithoutAdmin();
 			this.tableUsers.setModel( DAOJTable.fillTableUsers( users) );
 			
 		}

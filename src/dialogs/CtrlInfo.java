@@ -7,7 +7,7 @@ import javax.swing.JDialog;
 
 public class CtrlInfo implements ActionListener {
 	
-	JDialog dialog;
+	private JDialog dialog;
 	
 	public CtrlInfo(JDialog dialog){
 		this.dialog = dialog;

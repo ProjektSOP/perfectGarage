@@ -19,7 +19,7 @@ import javax.swing.JTable;
 
 public class GenMeisterContent {
 
-	JFrame frame;
+	private JFrame frame;
 	
 	public GenMeisterContent(JFrame frame){
 		this.frame = frame;
