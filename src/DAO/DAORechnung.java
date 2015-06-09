@@ -43,8 +43,8 @@ public class DAORechnung {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = returnAllRechnungenString;
-				ResultSet result = query.executeQuery(sql);
+				
+				ResultSet result = query.executeQuery(returnAllRechnungenString);
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
