@@ -1,15 +1,10 @@
 package DAO;
 
-import generators.CtrlAdminContent;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import dialogs.DlgNutzer;
 import objects.Fahrzeug;
 import objects.Kunde;
 import objects.Nutzer;

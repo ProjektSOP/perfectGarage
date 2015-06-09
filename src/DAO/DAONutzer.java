@@ -14,6 +14,7 @@ import objects.Nutzer;
 public class DAONutzer {
 
 	final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
+	final static String returnAllNutzerWithoutAdminString = "SELECT * FROM t_nutzer WHERE benutzername != 'Administrator' ";
 	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
 	final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
 	final static String insertnewNutzerString = "INSERT INTO t_nutzer( benutzername, passwort, Name, Vorname, Nutzerrolle, Status) VALUES (?, MD5(?), ?, ?, ?,?)";
@@ -35,8 +36,7 @@ public class DAONutzer {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = returnAllNutzerString;
-				ResultSet result = query.executeQuery(sql);
+				ResultSet result = query.executeQuery(returnAllNutzerString);
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -67,66 +67,6 @@ public class DAONutzer {
 	public static ArrayList<Nutzer> returnAllNutzerWithoutAdmin() {
 
 		ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
-		Connection conn = null;
-
-		conn = MySQLConnection.getInstance();
-
-		if (conn != null) {
-
-			// Anfrage-Statement erzeugen.
-			Statement query;
-			try {
-				query = conn.createStatement();
-
-				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM t_nutzer";
-				ResultSet result = query.executeQuery(sql);
-
-				while (result.next()) {
-
-					if (!(result.getString("benutzername")
-							.equals("Administrator"))) {
-
-						String benutzername = result.getString("benutzername");
-						String passwort = result.getString("passwort");
-						String nachname = result.getString("Name"); //
-						String vorname = result.getString("Vorname");
-						String nutzerrolle = result.getString("Nutzerrolle");
-						String status = result.getString("Status");
-						Date zeitstempelLoeschung = result
-								.getDate("zeitstempelLoeschung");
-						String zeitDelete = "" + zeitstempelLoeschung;
-
-						Nutzer tempnutzer = new Nutzer(benutzername, passwort,
-								nachname, vorname, nutzerrolle, status,
-								zeitDelete);
-
-						nutzerliste.add(tempnutzer);
-
-					}
-
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return nutzerliste;
-	}
-
-	public static boolean updateNutzer(Nutzer oldNutzer, String oldname) {
-
-		/**
-		 * @param Übernimmt
-		 *            einen Nutzer - Objekt und updatet dieses in der Datenbank
-		 * @param gibt
-		 *            ein boolean zurück, ob das Update erfolgreich war
-		 */
-
-		boolean ready = false;
-
-		Nutzer tempnutzer = oldNutzer;
 
 		Connection conn = MySQLConnection.getInstance();
 
@@ -137,11 +77,56 @@ public class DAONutzer {
 			try {
 				query = conn.createStatement();
 
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = returnAllNutzerWithoutAdminString;
+				ResultSet result = query.executeQuery(sql);
+
+				while (result.next()) {
+
+					String benutzername = result.getString("benutzername");
+					String passwort = result.getString("passwort");
+					String nachname = result.getString("Name"); //
+					String vorname = result.getString("Vorname");
+					String nutzerrolle = result.getString("Nutzerrolle");
+					String status = result.getString("Status");
+					Date zeitstempelLoeschung = result
+							.getDate("zeitstempelLoeschung");
+					String zeitDelete = "" + zeitstempelLoeschung;
+
+					Nutzer tempnutzer = new Nutzer(benutzername, passwort,
+							nachname, vorname, nutzerrolle, status, zeitDelete);
+
+					nutzerliste.add(tempnutzer);
+
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return nutzerliste;
+	}
+
+	public static boolean updateNutzer(Nutzer tempnutzer, String oldname) {
+
+		/**
+		 * @param Übernimmt
+		 *            einen Nutzer - Objekt und updatet dieses in der Datenbank
+		 * @param gibt
+		 *            ein boolean zurück, ob das Update erfolgreich war
+		 */
+
+		boolean ready = false;
+
+		Connection conn = MySQLConnection.getInstance();
+
+		if (conn != null) {
+
+			try {
 				// Insert-Statement erzeugen (Fragezeichen werden später
 				// ersetzt).
 				String sql = updateoldNutzerString;
-
-				PreparedStatement ps = conn.prepareStatement(sql);
 
 				PreparedStatement preparedStatement = conn
 						.prepareStatement(sql);
@@ -163,7 +148,6 @@ public class DAONutzer {
 			} catch (SQLException e) {
 				e.printStackTrace();
 
-				ready = false;
 			}
 		}
 		return ready;
@@ -186,19 +170,11 @@ public class DAONutzer {
 
 		if (conn != null) {
 
-			// Anfrage-Statement erzeugen.
-			Statement query;
 			try {
-				query = conn.createStatement();
-
 				// Insert-Statement erzeugen (Fragezeichen werden später
 				// ersetzt).
-				String sql = deleteNutzerString;
-
-				PreparedStatement ps = conn.prepareStatement(sql);
-
 				PreparedStatement preparedStatement = conn
-						.prepareStatement(sql);
+						.prepareStatement(deleteNutzerString);
 
 				// Parameter durch übernommene Daten ersetzen
 				preparedStatement.setString(1, tempnutzer.getUsername());
@@ -211,7 +187,6 @@ public class DAONutzer {
 			} catch (SQLException e) {
 				e.printStackTrace();
 
-				ready = false;
 			}
 		}
 		return ready;
@@ -228,9 +203,7 @@ public class DAONutzer {
 
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = getpasswordString;
-
-				PreparedStatement ps = conn.prepareStatement(sql);
+				PreparedStatement ps = conn.prepareStatement(getpasswordString);
 
 				// Erstes Fragezeichen durch "Name" Parameter ersetzen
 				ps.setString(1, benutzername);
@@ -243,8 +216,8 @@ public class DAONutzer {
 				while (result.next()) {
 					counter++;
 				}
-				
-				return counter==1;
+
+				return counter == 1;
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -254,8 +227,8 @@ public class DAONutzer {
 
 		return false;
 	}
-	
-	public static boolean insertNutzer(Nutzer oldNutzer) {
+
+	public static boolean insertNutzer(Nutzer tempnutzer) {
 
 		/**
 		 * @param Übernimmt
@@ -266,25 +239,15 @@ public class DAONutzer {
 
 		boolean ready = false;
 
-		Nutzer tempnutzer = oldNutzer;
-
 		Connection conn = MySQLConnection.getInstance();
 
 		if (conn != null) {
 
-			// Anfrage-Statement erzeugen.
-			Statement query;
 			try {
-				query = conn.createStatement();
-
 				// Insert-Statement erzeugen (Fragezeichen werden später
 				// ersetzt).
-				String sql = insertnewNutzerString;
-
-				PreparedStatement ps = conn.prepareStatement(sql);
-
 				PreparedStatement preparedStatement = conn
-						.prepareStatement(sql);
+						.prepareStatement(insertnewNutzerString);
 
 				// Parameter durch übernommene Daten ersetzen
 				preparedStatement.setString(1, tempnutzer.getUsername());
@@ -302,7 +265,6 @@ public class DAONutzer {
 			} catch (SQLException e) {
 				e.printStackTrace();
 
-				ready = false;
 			}
 		}
 		return ready;
@@ -319,25 +281,15 @@ public class DAONutzer {
 
 		boolean ready = false;
 
-		Nutzer tempnutzer = oldNutzer;
-
 		Connection conn = MySQLConnection.getInstance();
 
 		if (conn != null) {
 
-			// Anfrage-Statement erzeugen.
-			Statement query;
 			try {
-				query = conn.createStatement();
-
 				// Insert-Statement erzeugen (Fragezeichen werden später
 				// ersetzt).
-				String sql = updateStatusString;
-
-				PreparedStatement ps = conn.prepareStatement(sql);
-
 				PreparedStatement preparedStatement = conn
-						.prepareStatement(sql);
+						.prepareStatement(updateStatusString);
 
 				// Parameter durch übernommene Daten ersetzen
 				preparedStatement.setString(1, status);
@@ -351,10 +303,9 @@ public class DAONutzer {
 			} catch (SQLException e) {
 				e.printStackTrace();
 
-				ready = false;
 			}
 		}
 		return ready;
 	}
-	
+
 }
