@@ -7,44 +7,48 @@ import javax.swing.table.DefaultTableModel;
 
 import objects.Nutzer;
 
+/**
+ * @author treichert
+ *
+ */
+
 public class DAOJTable {
-	
-	public JTable createTableUsers(ArrayList<Nutzer> users){
+
+	public static JTable createTableUsers(ArrayList<Nutzer> users) {
 		
 		// DefaultTableModel erzeugen
-        DefaultTableModel modelUsers = new DefaultTableModel();
-        modelUsers.addColumn("Username");
-        modelUsers.addColumn("Name");
-        modelUsers.addColumn("Vorname");
-        modelUsers.addColumn("Nutzerrolle");
-        modelUsers.addColumn("Status");
-		
-		if(users.size() >= 1){
-			modelUsers = createUserTable(users, modelUsers);			
+		DefaultTableModel modelUsers = new DefaultTableModel();
+
+		if (users.size() >= 1) {
+			modelUsers = fillTableUsers(users );
 		}
-        
-		// JTable erzeugen 
+
+		// JTable erzeugen
 		JTable tableUsers = new JTable(modelUsers) {
-            /**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int x, int y) {
-                return false;
-            }
-        };
-        
-        return tableUsers;
+				return false;
+			}
+		};
+
+		return tableUsers;
 	}
-	
-	private DefaultTableModel createUserTable(ArrayList<Nutzer> users, DefaultTableModel modelUsers){
+
+	public static DefaultTableModel fillTableUsers(ArrayList<Nutzer> users) {
 		
-		for( Nutzer n : users ){
-			modelUsers.addRow(n.getNutzerInfo());
-        }
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("Username");
+		model.addColumn("Name");
+		model.addColumn("Vorname");
+		model.addColumn("Nutzerrolle");
+		model.addColumn("Status");
 		
-		return modelUsers;
+		for (Nutzer n : users) {
+			model.addRow(n.getNutzerInfo());
+		}
+
+		return model;
 	}
-	
+
 }

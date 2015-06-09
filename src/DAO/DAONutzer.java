@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import mySQLConnector.MySQLConnection;
-import objects.Kunde;
 import objects.Nutzer;
 
 
@@ -78,9 +77,6 @@ public ArrayList<Nutzer> returnAllNutzerWithoutAdmin()  {
         // Ergebnistabelle erzeugen und abholen.
         String sql = "SELECT * FROM t_nutzer";
         ResultSet result = query.executeQuery(sql);
- 
-        // Ergebnissätze durchfahren.
-        int i = 0;
         
         while (result.next()) {
         	
@@ -114,8 +110,6 @@ public ArrayList<Nutzer> returnAllNutzerWithoutAdmin()  {
     }	    
     return nutzerliste;
   }
-
-
 
 public boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
 	
@@ -167,6 +161,5 @@ public boolean updateNutzer(Nutzer oldNutzer, String oldname)  {
     }	    
     return ready;
   }
-
 
 }

@@ -25,6 +25,7 @@ import objects.Nutzer;
 public class DlgNutzer implements DlgInterface {
 	
 	JFrame frame;
+	JTable tableUsers;
 	JDialog dialog = new JDialog();
 	JPanel panel;
 	
@@ -46,6 +47,7 @@ public class DlgNutzer implements DlgInterface {
 	public void newNutzer(JTable tableUsers, Nutzer user) {
 		
 		this.dialog.setTitle("Neuen Nutzer anlegen");
+		this.tableUsers = tableUsers;
 		this.dialog.remove(this.panel);
 		this.createPanel(user);
 		this.dialog.add(this.panel);
@@ -56,7 +58,7 @@ public class DlgNutzer implements DlgInterface {
 	public void editNutzer(JTable tableUsers, Nutzer user) {
 		
 		this.dialog.setTitle("Nutzer bearbeiten");
-		
+		this.tableUsers = tableUsers;
 		this.dialog.remove(this.panel);
 		this.createPanel(user);
 		this.dialog.add(this.panel);
@@ -103,11 +105,11 @@ public class DlgNutzer implements DlgInterface {
 		panelCenter.add(txtGruppe);
 		
 		JButton btnSave = new JButton("Speichern");
-		btnSave.addActionListener(new CtrlNutzer(this.dialog, user, txtUsername, txtNachname, txtVorname, txtGruppe));
+		btnSave.addActionListener(new CtrlNutzer(this.tableUsers, this.dialog, user, txtUsername, txtNachname, txtVorname, txtGruppe));
 		this.showDialog(false);
 		
 		JButton btnAbort = new JButton("Abbrechen");
-		btnAbort.addActionListener(new CtrlNutzer(this.dialog));
+		btnAbort.addActionListener(new CtrlNutzer(this.tableUsers, this.dialog));
 		this.showDialog(false);
 		
 		JPanel panelBottom = new JPanel();

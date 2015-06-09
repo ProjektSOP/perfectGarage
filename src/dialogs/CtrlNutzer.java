@@ -7,16 +7,19 @@ package dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import DAO.DAOJTable;
 import DAO.DAONutzer;
 import objects.Nutzer;
 
 public class CtrlNutzer implements ActionListener {
 
+	JTable tableUsers;
 	JDialog dialog;
 	Nutzer user;
 	
@@ -25,11 +28,13 @@ public class CtrlNutzer implements ActionListener {
 	JTextField vorname;
 	JTextField gruppe;
 	
-	public CtrlNutzer(JDialog dialog) {
+	public CtrlNutzer(JTable tableUsers, JDialog dialog) {
+		this.tableUsers = tableUsers;
 		this.dialog = dialog;
 	}
 	
-	public CtrlNutzer(JDialog dialog, Nutzer user, JTextField username, JTextField nachname, JTextField vorname, JTextField gruppe){
+	public CtrlNutzer(JTable tableUsers, JDialog dialog, Nutzer user, JTextField username, JTextField nachname, JTextField vorname, JTextField gruppe){
+		this.tableUsers = tableUsers;
 		this.dialog = dialog;
 		this.user = user;
 				
@@ -66,6 +71,12 @@ public class CtrlNutzer implements ActionListener {
 					
 				}
 			}
+			
+			DAONutzer daoNutzer = new DAONutzer();
+			ArrayList<Nutzer> users = daoNutzer.returnAllNutzerWithoutAdmin();
+			
+			
+			this.tableUsers.setModel( DAOJTable.fillTableUsers( users) );
 			
 		}
 		

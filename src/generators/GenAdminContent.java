@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 
 import DAO.DAOJTable;
 import DAO.DAONutzer;
@@ -51,8 +50,7 @@ public class GenAdminContent {
 		DAONutzer daoNutzer = new DAONutzer();
 		final ArrayList<Nutzer> users = daoNutzer.returnAllNutzerWithoutAdmin();
 		
-		DAOJTable daoJTable = new DAOJTable();
-		final JTable tableUsers = daoJTable.createTableUsers(users);
+		final JTable tableUsers = DAOJTable.createTableUsers(users);
         
         // Eigenschaften setzen
         tableUsers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -90,7 +88,7 @@ public class GenAdminContent {
 		
 		// JButton "Benutzer deaktivieren" erzeugen
 		final JButton btnDeactivateNutzer = new JButton();
-		btnDeactivateNutzer.setText("Benutzer deaktivieren");
+		btnDeactivateNutzer.setText("Benutzerstatus ändern");
 		btnDeactivateNutzer.setEnabled(false);
 		
 		// JButton "Passwort zurücksetzen"

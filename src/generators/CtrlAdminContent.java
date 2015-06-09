@@ -47,7 +47,7 @@ public class CtrlAdminContent implements ActionListener {
 				System.out.println("Nicht löschen");
 			}
 		}
-		else if (event.getActionCommand().equals("Benutzer deaktivieren")) {
+		else if (event.getActionCommand().equals("Benutzerstatus ändern")) {
 			System.out.println("Deaktiviern");
 		}
 	}

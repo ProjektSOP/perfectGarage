@@ -7,7 +7,6 @@ package dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -18,9 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import DAO.DAOKunde;
 import DAO.DAONutzer;
-import objects.Kunde;
 import objects.Nutzer;
 import frames.FrmMain;
 
@@ -47,7 +44,6 @@ public class CtrlLogin implements ActionListener {
 
 		// Liste der Benutzer erzeugen
 		ArrayList<Nutzer> users = daoNutzer.returnAllNutzer();
-		System.out.println(users.size());
 		
 		
 		// Login auswerten
@@ -67,22 +63,22 @@ public class CtrlLogin implements ActionListener {
 			
 			
 			if(this.txtUser.getText().equals("Admin")){
-				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin", "aktiviert");
+				users.get(0).setNutzerInfo("Admin", "", "", "", "Admin", "Aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Service")){
-				users.get(0).setNutzerInfo("Service", "", "", "", "Service", "aktiviert");
+				users.get(0).setNutzerInfo("Service", "", "", "", "Service", "Aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Meister")){
-				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister", "aktiviert");
+				users.get(0).setNutzerInfo("Meister", "", "", "", "Meister", "Aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
 			else if(this.txtUser.getText().equals("Werkstatt")){
-				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt", "aktiviert");
+				users.get(0).setNutzerInfo("Werkstatt", "", "", "", "Werkstatt", "Aktiviert");
 				this.dialog.setVisible(false);
 				this.login = true;
 			}
@@ -101,9 +97,11 @@ public class CtrlLogin implements ActionListener {
 			while (i<=users.size()-1){
 				if(users.get(i).getUsername().equals(username)){
 					if(users.get(i).getPassword().equals(password)){
-						this.dialog.setVisible(false);
-						this.login = true;
-						u=i;
+						if(users.get(i).getStatus().equals("Aktiviert")){
+							this.dialog.setVisible(false);
+							this.login = true;
+							u=i;							
+						}
 					}
 				}
 				i++;
