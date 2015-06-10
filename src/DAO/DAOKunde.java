@@ -27,6 +27,13 @@ public class DAOKunde {
 
 	public static ArrayList<Kunde> returnKundebyPLZ(int postleitzahl) {
 
+		/**
+		 * @param übernimmt
+		 *            einen Int Wert als Postleitzahl
+		 * @return Gibt alle Rechnungen in einer ArrayList<Rechnung> zurück,
+		 *         welche sich in der Datenbank befinden
+		 */
+
 		ArrayList<Kunde> kundenliste = new ArrayList<Kunde>();
 
 		Connection conn = MySQLConnection.getInstance();
@@ -82,6 +89,13 @@ public class DAOKunde {
 	}
 
 	public static ArrayList<Kunde> returnKundebyKundenNr(int kundennummer) {
+
+		/**
+		 * @param übernimmt
+		 *            einen Int Wert als kundennummer
+		 * @return Gibt alle Rechnungen in einer ArrayList<Rechnung> zurück,
+		 *         welche sich in der Datenbank befinden
+		 */
 
 		ArrayList<Kunde> kundenliste = new ArrayList<Kunde>();
 
@@ -139,6 +153,12 @@ public class DAOKunde {
 	}
 
 	public static ArrayList<Kunde> returnKundebyName(String kundenname) {
+		
+		/**
+		 * @param	übernimmt einen String Wert als Kundenname
+		 * @return Gibt alle Kunden in einer ArrayList<Kunde> zurück,
+		 *         welche sich in der Datenbank befinden
+		 */
 
 		ArrayList<Kunde> kundenliste = new ArrayList<Kunde>();
 
@@ -196,6 +216,12 @@ public class DAOKunde {
 	}
 
 	public static ArrayList<Kunde> returnAllKunde() {
+		
+		/**
+		 * 
+		 * @return Gibt alle Kunden in einer ArrayList<Kunde> zurück,
+		 *         welche sich in der Datenbank befinden
+		 */
 
 		ArrayList<Kunde> kundenliste = new ArrayList<Kunde>();
 
@@ -257,6 +283,7 @@ public class DAOKunde {
 		 *            ein Kunde - Objekt und fügt dieses in die Datenbank ein
 		 *            bei Kundeseit wird aktuelles Datum verwendet Kundennummer
 		 *            wird durch Datenbank incrementell erstellt
+		 * @return	gibt einen boolean zurück, ob das Hinzufügen des Kunden geklappt hat
 		 */
 
 		boolean ready = false;
@@ -268,7 +295,7 @@ public class DAOKunde {
 			try {
 				// Insert-Statement erzeugen (Fragezeichen werden später
 				// ersetzt).
-				
+
 				PreparedStatement preparedStatement = conn
 						.prepareStatement(insertnewKundeString);
 
@@ -315,7 +342,7 @@ public class DAOKunde {
 			try {
 				// Insert-Statement erzeugen (Fragezeichen werden später
 				// ersetzt).
-				
+
 				PreparedStatement preparedStatement = conn
 						.prepareStatement(updateoldKunde);
 

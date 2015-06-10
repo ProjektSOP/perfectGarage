@@ -19,6 +19,10 @@ public class DAOStatistik {
 
 
 	public static int returnanzahlKunden() {
+		
+		/**
+		 * @return gibt zur Auswertung die Anzahl aller Kunden zurück 
+		 */
 
 		int anzahlkunden = 0;
 
@@ -46,6 +50,10 @@ public class DAOStatistik {
 	}
 	
 	public static int returndurschnittKosten() {
+		
+		/**
+		 * @return gibt zur Durchschnittlichen Kosten aller Aufträge zurück 
+		 */
 
 		int durschnittKosten = 0;
 
