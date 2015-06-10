@@ -464,16 +464,10 @@ public class GenServiceContent {
         	}
         });
 		
-		// Erstelle JPanel
-		JPanel panelBlank = new JPanel();
-		
-		// Eigenschaften setzen
-		panelBlank.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 850 - 20, 200));
 		
 		// Hinzufügen der JPanel's
 		panelCenter.add(panelCustomer);
-		panelCenter.add(panelCar);
-		panelCenter.add(panelBlank);		
+		panelCenter.add(panelCar);		
 		
 		// Erstelle JPanel.
 		JPanel panelBottom = new JPanel();
