@@ -23,6 +23,7 @@ public class DAONutzer {
 	final static String updateNutzerRolleString = "UPDATE t_nutzer SET Nutzerrolle=? WHERE benutzername=? ";
 	final static String updateNutzerPwString = "UPDATE t_nutzer SET passwort=MD5(?) WHERE benutzername=? ";
 
+	// 
 	public static ArrayList<Nutzer> returnAllNutzer() {
 
 		ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
