@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -27,14 +28,14 @@ public class CtrlNutzer implements ActionListener {
 	private JTextField username;
 	private JTextField nachname;
 	private JTextField vorname;
-	private JTextField gruppe;
+	private JComboBox<String> gruppe;
 	
 	public CtrlNutzer(JTable tableUsers, JDialog dialog) {
 		this.dialog = dialog;
 		this.tableUsers = tableUsers;
 	}
 	
-	public CtrlNutzer(JTable tableUsers, JDialog dialog, Nutzer user, JTextField username, JTextField nachname, JTextField vorname, JTextField gruppe){
+	public CtrlNutzer(JTable tableUsers, JDialog dialog, Nutzer user, JTextField username, JTextField nachname, JTextField vorname, JComboBox<String> gruppe){
 		this.dialog = dialog;
 		this.tableUsers = tableUsers;
 		this.user = user;
@@ -58,7 +59,7 @@ public class CtrlNutzer implements ActionListener {
 			this.user.setUsername(this.username.getText());
 			this.user.setNachname(this.nachname.getText());
 			this.user.setVorname(this.vorname.getText());
-			this.user.setGruppe(this.gruppe.getText());
+			this.user.setGruppe(gruppe.getSelectedItem().toString());
 			this.dialog.setVisible(false);
 			
 			if(this.dialog.getTitle().equals("Neuen Nutzer anlegen")){

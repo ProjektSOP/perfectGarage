@@ -67,7 +67,7 @@ public class FrmMain {
 		this.menubar.add(mnuFile);
 
 		JMenuItem mnuItemExit = new JMenuItem("Beenden");
-		mnuItemExit.addActionListener(new CtrlMain(this.frame));
+		mnuItemExit.addActionListener(new CtrlMain());
 		mnuFile.add(mnuItemExit);
 		
 		// Menü Bearbeiten
@@ -97,7 +97,7 @@ public class FrmMain {
 		this.menubar.add(mnuHelp);
 		
 		JMenuItem mnuItemInfo = new JMenuItem("Info");
-		mnuItemInfo.addActionListener(new CtrlMain(this.frame));
+		mnuItemInfo.addActionListener(new CtrlMain());
 		mnuHelp.add(mnuItemInfo);
 	}
 	

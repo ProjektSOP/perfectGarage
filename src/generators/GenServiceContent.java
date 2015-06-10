@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -114,19 +115,32 @@ public class GenServiceContent {
 		panelTop.setBorder(BorderFactory.createTitledBorder("Aktionsmöglichkeiten"));
 		panelTop.setPreferredSize(new Dimension((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 20, 60));
 		
-		// JButton "Suchen" erzeugen
-		JButton btnSearchCustomer = new JButton();
-		btnSearchCustomer.setText("Suchen");
-		//btnNewCustomer.addActionListener(new CtrlAdminContent());
-		
 		// JButton "Neuer Kunde" erzeugen
 		JButton btnNewCustomer = new JButton();
 		btnNewCustomer.setText("Neuer Kunde");
-		//btnNewCustomer.addActionListener(new CtrlAdminContent());
+		final ActionListener serviceContent = new CtrlServiceContent();
+		btnNewCustomer.addActionListener(serviceContent);
+		
+		// JButton "Kunde editieren" erzeugen
+		JButton btnChangeCustomer = new JButton();
+		btnChangeCustomer.setText("Kunde editieren");
+		btnChangeCustomer.addActionListener(serviceContent);
+
+		// JButton "Kunde löschen" erzeugen
+		JButton btnDeleteCustomer = new JButton();
+		btnDeleteCustomer.setText("Kunde löschen");
+		btnDeleteCustomer.addActionListener(serviceContent);
+		
+		// JButton "Kunde suchen" erzeugen
+		JButton btnSearchCustomer = new JButton();
+		btnSearchCustomer.setText("Kunde suchen");
+		btnSearchCustomer.addActionListener(serviceContent);
 		
 		// JButton`s dem PanelTop hinzufügen
-		panelTop.add(btnSearchCustomer);
 		panelTop.add(btnNewCustomer);
+		panelTop.add(btnChangeCustomer);
+		panelTop.add(btnDeleteCustomer);
+		panelTop.add(btnSearchCustomer);
 		
 		// Erstelle JPanel
 		JPanel panelCenter = new JPanel();

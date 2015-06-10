@@ -82,21 +82,25 @@ public class GenAdminContent {
 		// JButton "Benutzer editieren" erzeugen
 		final JButton btnEditNutzer = new JButton();
 		btnEditNutzer.setText("Benutzer editieren");
+		btnEditNutzer.addActionListener(adminContent);
 		btnEditNutzer.setEnabled(false);
 		
 		// JButton "Benutzer löschen" erzeugen
 		final JButton btnDeleteNutzer = new JButton();
 		btnDeleteNutzer.setText("Benutzer löschen");
+		btnDeleteNutzer.addActionListener(adminContent);
 		btnDeleteNutzer.setEnabled(false);
 		
 		// JButton "Benutzer deaktivieren" erzeugen
 		final JButton btnDeactivateNutzer = new JButton();
 		btnDeactivateNutzer.setText("Benutzerstatus ändern");
+		btnDeactivateNutzer.addActionListener(adminContent);
 		btnDeactivateNutzer.setEnabled(false);
 		
 		// JButton "Benutzerpasswort zurücksetzen" erzeugen
 		final JButton btnChangePassword = new JButton();
 		btnChangePassword.setText("Benutzerpasswort zurücksetzen");
+		btnChangePassword.addActionListener(adminContent);
 		btnChangePassword.setEnabled(false);		
 		
         // ActionListener für JTable erzeugen
@@ -107,13 +111,9 @@ public class GenAdminContent {
         		if (e.getClickCount() == 1) {
         			if(users.size() >= 1){
         				btnEditNutzer.setEnabled(true);
-        				btnEditNutzer.addActionListener(adminContent);
         				btnDeleteNutzer.setEnabled(true);
-        				btnDeleteNutzer.addActionListener(adminContent);
         				btnDeactivateNutzer.setEnabled(true);
-        				btnDeactivateNutzer.addActionListener(adminContent);
         				btnChangePassword.setEnabled(true);
-        				btnChangePassword.addActionListener(adminContent);
         			}
         		}
         		

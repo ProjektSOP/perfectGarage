@@ -32,6 +32,7 @@ public class CtrlPassword implements ActionListener {
 		this.txtNewPassword2 = txtNewPassword2;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		// Login auswerten

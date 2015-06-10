@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -58,27 +59,30 @@ public class DlgNutzer implements DlgInterface {
 	}
 	
 	public void editNutzer(JTable tableUsers, Nutzer user) {
-		
-		this.dialog.setTitle("Nutzer bearbeiten");
-		this.tableUsers = tableUsers;
-		this.dialog.remove(this.panel);
-		this.createPanel(user);
-		this.dialog.add(this.panel);
-		
-		this.showDialog(true);
+		if(user.getStatus().equals("Aktiviert") || user.getStatus().equals("Deaktiviert")){
+			this.dialog.setTitle("Nutzer bearbeiten");
+			this.tableUsers = tableUsers;
+			this.dialog.remove(this.panel);
+			this.createPanel(user);
+			this.dialog.add(this.panel);
+			
+			this.showDialog(true);
+		}
 	}
 	
 	public void editNutzerInt(JTable tableUsers, int i) {
 		
 		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
 		
-		this.dialog.setTitle("Nutzer bearbeiten");
-		this.tableUsers = tableUsers;
-		this.dialog.remove(this.panel);
-		this.createPanel(this.users.get(i));
-		this.dialog.add(this.panel);
-		
-		this.showDialog(true);
+		if(users.get(i).getStatus().equals("Aktiviert") || users.get(i).getStatus().equals("Deaktiviert")){
+			this.dialog.setTitle("Nutzer bearbeiten");
+			this.tableUsers = tableUsers;
+			this.dialog.remove(this.panel);
+			this.createPanel(this.users.get(i));
+			this.dialog.add(this.panel);
+			
+			this.showDialog(true);
+		}
 	}
 	
 	private void createPanel(Nutzer user){
@@ -113,14 +117,14 @@ public class DlgNutzer implements DlgInterface {
 		
 		JLabel lblGruppe = new JLabel("Nutzerrolle");
 		lblGruppe.setPreferredSize(new Dimension(80, 20));
-		JTextField txtGruppe = new JTextField();
-		txtGruppe.setPreferredSize(new Dimension(150, 20));
-		txtGruppe.setText(user.getGruppe());
+		String strModuls[] = { "Admin", "Service", "Meister", "Werkstatt" };
+		final JComboBox<String> cbGruppe = new JComboBox<String> (strModuls);
+		cbGruppe.setPreferredSize(new Dimension(150, 20));
 		panelCenter.add(lblGruppe);
-		panelCenter.add(txtGruppe);
+		panelCenter.add(cbGruppe);
 		
 		JButton btnSave = new JButton("Speichern");
-		btnSave.addActionListener(new CtrlNutzer(this.tableUsers, this.dialog, user, txtUsername, txtNachname, txtVorname, txtGruppe));
+		btnSave.addActionListener(new CtrlNutzer(this.tableUsers, this.dialog, user, txtUsername, txtNachname, txtVorname, cbGruppe));
 		this.showDialog(false);
 		
 		JButton btnAbort = new JButton("Abbrechen");

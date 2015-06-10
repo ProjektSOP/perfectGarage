@@ -27,7 +27,6 @@ public class CtrlAdminContent implements ActionListener {
 	public CtrlAdminContent(JTable tableUsers){
 		this.tableUsers = tableUsers;
 		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
-		
 	}
 	
 	
@@ -74,6 +73,10 @@ public class CtrlAdminContent implements ActionListener {
 		else if (event.getActionCommand().equals("Benutzerpasswort zurücksetzen")) {
 			users.get(i).setPassword("p@ssw0rd");
 			DAONutzer.updateNutzer(users.get(i), users.get(i).getUsername());
+			JOptionPane.showMessageDialog(null,
+				    "Das Passwort wurde auf   p@ssw0rd   zurückgesetzt!",
+				    "Meldung",
+				    JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
