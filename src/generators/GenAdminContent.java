@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -21,10 +22,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
+import objects.Nutzer;
 import DAO.DAOJTable;
 import DAO.DAONutzer;
 import dialogs.DlgNutzer;
-import objects.Nutzer;
 
 public class GenAdminContent {
 	
@@ -75,7 +76,8 @@ public class GenAdminContent {
 		// JButton "Neuer Benutzer" erzeugen
 		JButton btnNewNutzer = new JButton();
 		btnNewNutzer.setText("Neuer Benutzer");
-		btnNewNutzer.addActionListener(new CtrlAdminContent(tableUsers));
+		final ActionListener adminContent = new CtrlAdminContent(tableUsers);
+		btnNewNutzer.addActionListener(adminContent);
 		
 		// JButton "Benutzer editieren" erzeugen
 		final JButton btnEditNutzer = new JButton();
@@ -92,6 +94,11 @@ public class GenAdminContent {
 		btnDeactivateNutzer.setText("Benutzerstatus ändern");
 		btnDeactivateNutzer.setEnabled(false);
 		
+		// JButton "Benutzerpasswort zurücksetzen" erzeugen
+		final JButton btnChangePassword = new JButton();
+		btnChangePassword.setText("Benutzerpasswort zurücksetzen");
+		btnChangePassword.setEnabled(false);		
+		
         // ActionListener für JTable erzeugen
         tableUsers.addMouseListener(new MouseAdapter() {
 
@@ -100,11 +107,13 @@ public class GenAdminContent {
         		if (e.getClickCount() == 1) {
         			if(users.size() >= 1){
         				btnEditNutzer.setEnabled(true);
-        				btnEditNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
+        				btnEditNutzer.addActionListener(adminContent);
         				btnDeleteNutzer.setEnabled(true);
-        				btnDeleteNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
+        				btnDeleteNutzer.addActionListener(adminContent);
         				btnDeactivateNutzer.setEnabled(true);
-        				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
+        				btnDeactivateNutzer.addActionListener(adminContent);
+        				btnChangePassword.setEnabled(true);
+        				btnChangePassword.addActionListener(adminContent);
         			}
         		}
         		
@@ -125,6 +134,7 @@ public class GenAdminContent {
 		panelTop.add(btnEditNutzer);
 		panelTop.add(btnDeleteNutzer);
 		panelTop.add(btnDeactivateNutzer);
+		panelTop.add(btnChangePassword);
 		
 		// Eigenschaften setzen
 		panelTop.setLayout (new FlowLayout (FlowLayout.LEFT, 5, 5));
