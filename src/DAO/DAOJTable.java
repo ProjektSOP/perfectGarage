@@ -18,6 +18,11 @@ public class DAOJTable {
 
 	public static JTable createTableUsers(ArrayList<Nutzer> list) {
 		
+		/**
+		 * @return Gibt die Tabelle mit allen Nutzern und den
+		 * 			dazugehörigen TableModel zurück
+		 */
+		
 		// DefaultTableModel erzeugen
 		DefaultTableModel model = new DefaultTableModel();
 
@@ -39,6 +44,10 @@ public class DAOJTable {
 
 	public static DefaultTableModel fillTableUsers(ArrayList<Nutzer> list) {
 		
+		/**
+		 * @return Gibt das Modell mit allen Nutzern zurück
+		 */
+		
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Username");
 		model.addColumn("Name");
@@ -55,6 +64,11 @@ public class DAOJTable {
 	}
 
 	public static JTable createTableCustomers(ArrayList<Kunde> list) {
+		
+		/**
+		 * @return Gibt die Tabelle mit allen Kunden und den
+		 * 			dazugehörigen TableModel zurück
+		 */
 		
 		// DefaultTableModel erzeugen
 		DefaultTableModel model = new DefaultTableModel();
@@ -76,6 +90,10 @@ public class DAOJTable {
 	}
 	
 	public static DefaultTableModel fillTableCustomers(ArrayList<Kunde> list) {
+		
+		/**
+		 * @return Gibt das Modell mit allen Kunden zurück
+		 */
 		
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("KundeNr");
@@ -99,6 +117,11 @@ public class DAOJTable {
 	
 	public static JTable createTableCars(ArrayList<Fahrzeug> list) {
 		
+		/**
+		 * @return Gibt die Tabelle mit Fahrzuegen und den
+		 * 			dazugehörigen TableModel zurück
+		 */
+		
 		// DefaultTableModel erzeugen
 		DefaultTableModel model = new DefaultTableModel();
 
@@ -117,6 +140,10 @@ public class DAOJTable {
 	}
 	
 	public static DefaultTableModel fillTableCars(ArrayList<Fahrzeug> list) {
+		
+		/**
+		 * @return Gibt das Modell mit Fahrzeugen zurück
+		 */
 		
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("FIN");

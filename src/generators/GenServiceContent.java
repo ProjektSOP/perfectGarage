@@ -47,6 +47,11 @@ public class GenServiceContent {
 	
 	private Dimension getContentSize(){
 		
+		/**
+		 * @return	Dimension(frameWidth, frameHeight) 
+		 * 			Gibt Höhe und Breite des Frames zurück
+		 */
+		
 		Dimension frameSize = this.frame.getContentPane().getSize();
 		int frameWidth = (int)frameSize.getWidth();
 		int frameHeight = (int)frameSize.getHeight();
@@ -55,6 +60,12 @@ public class GenServiceContent {
 	}
 	
 	public JPanel showServicePanel(){
+		
+		/**
+		 * @return	JPanel panel 
+		 * 			Gibt das panel mit Meister-Content zurück
+		 */
+		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		panel.setLayout (new FlowLayout());
@@ -96,6 +107,11 @@ public class GenServiceContent {
 	}
 	
 	private JPanel createCustomerCarsPanel(){
+		
+		/**
+		 * @return	JPanel panel 
+		 * 			Gibt das panel mit Kunden- und Fahrzeuginformationen zurück
+		 */
 		
 		// DAO-Objekt und ArrayList<Kunde> wird erstellt
 		//final ArrayList<Kunde> customers = DAOKunde.returnAllKunde();
@@ -479,6 +495,12 @@ public class GenServiceContent {
 	
 	
 	private JPanel createTaskPanel(){
+		
+		/**
+		 * @return	JPanel panel 
+		 * 			Gibt das panel mit Auftragsinformationen zurück
+		 */
+		
 		JPanel panel = new JPanel();
 		
 		// Erstelle JLabel.
@@ -494,6 +516,12 @@ public class GenServiceContent {
 	}
 	
 	private JPanel createBillingPanel(){
+		
+		/**
+		 * @return	JPanel panel 
+		 * 			Gibt das panel mit Rechnungsinformationen zurück
+		 */
+		
 		JPanel panel = new JPanel();
 		
 		// Erstelle JLabel.

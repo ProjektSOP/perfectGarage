@@ -37,6 +37,11 @@ public class GenAdminContent {
 	
 	private Dimension getContentSize(){
 		
+		/**
+		 * @return	Dimension(frameWidth, frameHeight) 
+		 * 			Gibt Höhe und Breite des Frames zurück
+		 */
+		
 		Dimension frameSize = this.frame.getContentPane().getSize();
 		int frameWidth = (int)frameSize.getWidth();
 		int frameHeight = (int)frameSize.getHeight();
@@ -45,6 +50,13 @@ public class GenAdminContent {
 	}
 	
 	public JPanel showAdminPanel(){
+		
+		/**
+		 * @return	JPanel panel 
+		 * 			Gibt das panel mit Admin-Content zurück
+		 */
+		
+		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		

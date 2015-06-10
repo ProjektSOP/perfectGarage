@@ -27,6 +27,11 @@ public class GenWerkstattContent {
 	
 	private Dimension getContentSize(){
 		
+		/**
+		 * @return	Dimension(frameWidth, frameHeight) 
+		 * 			Gibt Höhe und Breite des Frames zurück
+		 */
+		
 		Dimension frameSize = this.frame.getContentPane().getSize();
 		int frameWidth = (int)frameSize.getWidth();
 		int frameHeight = (int)frameSize.getHeight();
@@ -35,6 +40,12 @@ public class GenWerkstattContent {
 	}
 	
 	public JPanel showWerkstattPanel(){
+		
+		/**
+		 * @return	JPanel panel 
+		 * 			Gibt das panel mit Werkstatt-Content zurück
+		 */
+		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(this.getContentSize());
 		
