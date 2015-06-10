@@ -1,11 +1,12 @@
 package DAO;
 
 /**
- * 
  * @author mrothe
  */
 
 import java.sql.Connection;
+
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +31,11 @@ public class DAONutzer {
 
 	// 
 	public static ArrayList<Nutzer> returnAllNutzer() {
+		
+		/**
+		 * @return gibt eine ArrayListe aus allen Nutzern in der Datenbank zurück
+		 *
+		 */
 
 		ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
 		Connection conn = null;
@@ -73,6 +79,11 @@ public class DAONutzer {
 	}
 
 	public static ArrayList<Nutzer> returnAllNutzerWithoutAdmin() {
+		
+		/**
+		 * @return gibt eine ArrayListe aus allen Nutzern OHNE den Admin in der Datenbank zurück
+		 *
+		 */
 
 		ArrayList<Nutzer> nutzerliste = new ArrayList<Nutzer>();
 
@@ -278,6 +289,13 @@ public class DAONutzer {
 
 	public static boolean pruefungPasswort(String benutzername,
 			String passwortabfrage) {
+		
+		/**
+		 * @param Übernimmt
+		 *            einen Nutzernamen und ein Passwort als String
+		 * @param gibt
+		 *            ein boolean zurück, ob das Passwort übereinstimmt
+		 */
 
 		int counter = 0;
 
@@ -353,32 +371,4 @@ public class DAONutzer {
 		}
 		return ready;
 	}
-
-	public static int returnanzahlKunden() {
-		
-		int anzahlkunden = 0;
-
-		Connection conn = MySQLConnection.getInstance();
-
-		if (conn != null) {
-
-			Statement query;
-			try {
-				query = conn.createStatement();
-
-				ResultSet result = query.executeQuery(anzahlKundenString);
-
-				while (result.next()) {
-
-					anzahlkunden = result.getInt("Anzahl Kunden");
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return anzahlkunden;
-	}
-
 }
