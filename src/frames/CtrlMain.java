@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import mySQLConnector.MySQLConnection;
 import objects.Nutzer;
 import dialogs.DlgInfo;
 import dialogs.DlgPassword;
@@ -30,7 +31,10 @@ public class CtrlMain implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		
 		if (event.getActionCommand().equals("Beenden")) {
+			MySQLConnection.schliesseVerbindung();
+			
 			System.exit(0);
+			
 		}
 		else if (event.getActionCommand().equals("Passwort ändern")) {
 			DlgPassword dlgPwd = new DlgPassword(user);

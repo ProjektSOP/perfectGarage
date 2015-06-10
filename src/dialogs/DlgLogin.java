@@ -113,6 +113,8 @@ public class DlgLogin implements DlgInterface {
 		this.panel.setLayout(new BorderLayout());
 		this.panel.add(panelContent, BorderLayout.CENTER);
 		this.panel.add(panelButtons, BorderLayout.SOUTH);
+		
+		this.dialog.getRootPane().setDefaultButton(btnLogin);
 	}
 
 	@Override

@@ -11,6 +11,8 @@ import generators.GenServiceContent;
 import generators.GenWerkstattContent;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -18,6 +20,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import mySQLConnector.MySQLConnection;
 import objects.Nutzer;
 
 public class FrmMain {
@@ -59,6 +62,12 @@ public class FrmMain {
 		this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.addWindowListener(new WindowAdapter() { 
+			public void windowClosed(WindowEvent e) {
+				MySQLConnection.schliesseVerbindung();
+			}
+		}); 
+
 	}
 	
 	private void createMenubar(){
