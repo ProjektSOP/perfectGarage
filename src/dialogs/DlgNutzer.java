@@ -25,9 +25,10 @@ import objects.Nutzer;
 
 public class DlgNutzer implements DlgInterface {
 	
-	private JTable tableUsers;
 	private JDialog dialog = new JDialog();
 	private JPanel panel;
+	
+	private JTable tableUsers;
 	private ArrayList<Nutzer> users;
 	
 	public DlgNutzer(){

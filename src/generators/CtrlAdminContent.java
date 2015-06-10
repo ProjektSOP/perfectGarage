@@ -38,6 +38,7 @@ public class CtrlAdminContent implements ActionListener {
 		
 		DlgNutzer dlgNutzer = new DlgNutzer();
 		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
+		this.tableUsers.setModel( DAOJTable.fillTableUsers(users) );
 		
 		if (event.getActionCommand().equals("Neuer Benutzer")) {
 			dlgNutzer.newNutzer(tableUsers, new Nutzer());

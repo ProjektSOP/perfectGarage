@@ -20,6 +20,7 @@ public class DAONutzer {
 	final static String insertnewNutzerString = "INSERT INTO t_nutzer( benutzername, passwort, Name, Vorname, Nutzerrolle, Status) VALUES (?, MD5(?), ?, ?, ?,?)";
 	final static String getpasswordString = "SELECT * FROM t_nutzer where benutzername=? AND passwort=MD5(?) AND Status='Aktiviert' ";
 	final static String updateStatusString = "UPDATE t_nutzer SET Status=? WHERE benutzername=? ";
+	final static String updatePasswordString = "UPDATE t_nutzer SET passwort=? WHERE benutzername=? ";
 
 	public static ArrayList<Nutzer> returnAllNutzer() {
 
@@ -270,7 +271,7 @@ public class DAONutzer {
 		return ready;
 	}
 
-	public static boolean updateStatus(Nutzer oldNutzer, String status) {
+	public static boolean updateStatus(Nutzer user, String status) {
 
 		/**
 		 * @param Übernimmt
@@ -293,7 +294,7 @@ public class DAONutzer {
 
 				// Parameter durch übernommene Daten ersetzen
 				preparedStatement.setString(1, status);
-				preparedStatement.setString(2, oldNutzer.getUsername());
+				preparedStatement.setString(2, user.getUsername());
 
 				// SQL ausführen
 				preparedStatement.executeUpdate();
@@ -307,5 +308,5 @@ public class DAONutzer {
 		}
 		return ready;
 	}
-
+	
 }

@@ -28,12 +28,17 @@ import javax.swing.ListSelectionModel;
 
 import objects.Fahrzeug;
 import objects.Kunde;
+import DAO.DAOFahrzeug;
 import DAO.DAOJTable;
 import DAO.DAOKunde;
 
 public class GenServiceContent {
 
 	private JFrame frame;
+	private ArrayList<Kunde> customers;
+	private ArrayList<Fahrzeug> cars;
+	
+	private JTable tableSearchCar;
 	
 	public GenServiceContent(JFrame frame){
 		this.frame = frame;
@@ -92,10 +97,11 @@ public class GenServiceContent {
 	private JPanel createCustomerCarsPanel(){
 		
 		// DAO-Objekt und ArrayList<Kunde> wird erstellt
-		final ArrayList<Kunde> customers = DAOKunde.returnAllKunde();
+		//final ArrayList<Kunde> customers = DAOKunde.returnAllKunde();
+		customers = DAOKunde.returnAllKunde();
 		
 		// DAO-Objekt und ArrayList<Fahrzeug> wird erstellt
-		final ArrayList<Fahrzeug> cars;
+		//final ArrayList<Fahrzeug> cars;
 		
 		JPanel panel = new JPanel();
 		panel.setLayout (new BorderLayout());
@@ -279,55 +285,7 @@ public class GenServiceContent {
 		// JLabel und JTextField hinzufügen
 		panelCustomer.add(lblMail);
 		panelCustomer.add(txtMail);
-		
-		
-		
-		
-		
-		
-		
-		// JTable erzeugen
-		final JTable tableSearchCustomer = DAOJTable.createTableCustomers(customers);
-		
-        // Eigenschaften setzen
-        tableSearchCustomer.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		// JScrollPane erstellen
-		JScrollPane scrollTableCustomer = new JScrollPane(tableSearchCustomer);
-		scrollTableCustomer.setPreferredSize(new Dimension(
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 30,
-				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 424	));
-		scrollTableCustomer.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
-        // ActionListener für JTable erzeugen
-		tableSearchCustomer.addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(final MouseEvent e) {
-        		// Einfacher Klick auf einen Tabelleneintrag
-        		if (e.getClickCount() == 1) {
-        			if(customers.size() >= 1){
-        				// Kundeninformationen zum ausgewählten Kunden einlesen
-        				txtKundenNr.setText(""+customers.get(tableSearchCustomer.getSelectedRow()).getKundennr());
-        				txtKundenSeit.setText(""+customers.get(tableSearchCustomer.getSelectedRow()).getKundeseit());
-        				txtName.setText(customers.get(tableSearchCustomer.getSelectedRow()).getNachname());
-        				txtVorname.setText(customers.get(tableSearchCustomer.getSelectedRow()).getVorname());
-        				txtStrasse.setText(customers.get(tableSearchCustomer.getSelectedRow()).getStrasse());
-        				txtPostleitzahl.setText(""+customers.get(tableSearchCustomer.getSelectedRow()).getPlz());
-        				txtOrt.setText(customers.get(tableSearchCustomer.getSelectedRow()).getOrt());
-        				txtTelefon.setText(customers.get(tableSearchCustomer.getSelectedRow()).getTelefon());
-        				txtTelefax.setText(customers.get(tableSearchCustomer.getSelectedRow()).getTelefax());
-        				txtHandy.setText(customers.get(tableSearchCustomer.getSelectedRow()).getHandy());
-        				txtMail.setText(customers.get(tableSearchCustomer.getSelectedRow()).getEmail());
-        				//DAOJTable.createTableCars(customers.get(tableSearchCustomer.getSelectedRow()));	
-        			}
-        		}
-        	}
-        });
-		
-		
-		
-		
-		
-		
 		// Erstelle JPanel
 		JPanel panelCarDetails = new JPanel();
 		
@@ -387,10 +345,6 @@ public class GenServiceContent {
 		panelCarDetails.add(lblModell);
 		panelCarDetails.add(txtModell);
 		
-		
-		
-		
-		
 		// Erstelle JPanel
 		JPanel panelCar = new JPanel();
 		
@@ -403,25 +357,13 @@ public class GenServiceContent {
 		panelCarSelect.setBorder(BorderFactory.createTitledBorder("Vorhandene Fahrzeuge"));
 		panelCarSelect.setPreferredSize(new Dimension(100, 430));
 		
-		
-		
-		
-		
-		
-		
-		// Temporäre Fahrzeuge
-		cars = new ArrayList<Fahrzeug>();
-		
-//		cars.add(new Fahrzeug(1234,"audi","a3","schwarz"));
-//		cars.add(new Fahrzeug(5678,"audi","a4","blau"));
-		
-		
-		
-		
-		
-		
+		// Leere Liste erzeugen, wenn noch kein Fahrzeug ausgewählt wurde
+		if(cars == null){
+			cars = new ArrayList<Fahrzeug>();
+		}
+				
 		// Erstelle JTable mit JScrollPane
-		final JTable tableSearchCar = DAOJTable.createTableCars(cars);
+		tableSearchCar = DAOJTable.createTableCars(cars);
 		
 		JScrollPane scrollTableCar = new JScrollPane(tableSearchCar);
 		scrollTableCar.setPreferredSize(new Dimension(600, 70));
@@ -445,13 +387,52 @@ public class GenServiceContent {
 		
 		// JTable mit JScrollPane zum JPanel hinzufügen
 		panelCarSelect.add(scrollTableCar);
-		
-		
-		
-		
+
 		// Hinzufügen der JPanel's
 		panelCar.add(panelCarSelect);
 		panelCar.add(panelCarDetails);
+		
+		// JTable erzeugen
+		final JTable tableSearchCustomer = DAOJTable.createTableCustomers(customers);
+		
+        // Eigenschaften setzen
+        tableSearchCustomer.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		// JScrollPane erstellen
+		JScrollPane scrollTableCustomer = new JScrollPane(tableSearchCustomer);
+		scrollTableCustomer.setPreferredSize(new Dimension(
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 30,
+				(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 424	));
+		scrollTableCustomer.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+        // ActionListener für JTable erzeugen
+		tableSearchCustomer.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(final MouseEvent e) {
+        		// Einfacher Klick auf einen Tabelleneintrag
+        		if (e.getClickCount() == 1) {
+        			if(customers.size() >= 1){
+        				// Kundeninformationen zum ausgewählten Kunden einlesen
+        				txtKundenNr.setText(""+customers.get(tableSearchCustomer.getSelectedRow()).getKundennr());
+        				txtKundenSeit.setText(""+customers.get(tableSearchCustomer.getSelectedRow()).getKundeseit());
+        				txtName.setText(customers.get(tableSearchCustomer.getSelectedRow()).getNachname());
+        				txtVorname.setText(customers.get(tableSearchCustomer.getSelectedRow()).getVorname());
+        				txtStrasse.setText(customers.get(tableSearchCustomer.getSelectedRow()).getStrasse());
+        				txtPostleitzahl.setText(""+customers.get(tableSearchCustomer.getSelectedRow()).getPlz());
+        				txtOrt.setText(customers.get(tableSearchCustomer.getSelectedRow()).getOrt());
+        				txtTelefon.setText(customers.get(tableSearchCustomer.getSelectedRow()).getTelefon());
+        				txtTelefax.setText(customers.get(tableSearchCustomer.getSelectedRow()).getTelefax());
+        				txtHandy.setText(customers.get(tableSearchCustomer.getSelectedRow()).getHandy());
+        				txtMail.setText(customers.get(tableSearchCustomer.getSelectedRow()).getEmail());
+        				txtFIN.setText("");
+        				txtFarbe.setText("");
+        				txtHersteller.setText("");
+        				txtModell.setText("");
+        				cars = DAOFahrzeug.returnAllFahrzeugInfosbyKundenNr(customers.get(tableSearchCustomer.getSelectedRow()).getKundennr());
+        				tableSearchCar.setModel( DAOJTable.fillTableCars(cars) );
+        			}
+        		}
+        	}
+        });
 		
 		// Erstelle JPanel
 		JPanel panelBlank = new JPanel();
@@ -477,11 +458,11 @@ public class GenServiceContent {
 		panel.add(panelTop, BorderLayout.NORTH);
 		panel.add(panelCenter, BorderLayout.CENTER);
 		panel.add(panelBottom, BorderLayout.SOUTH);
-		
-		
-		
+
 		return panel;
 	}
+	
+	
 	
 	private JPanel createTaskPanel(){
 		JPanel panel = new JPanel();

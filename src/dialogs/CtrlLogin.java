@@ -73,19 +73,19 @@ public class CtrlLogin implements ActionListener {
 			// Gruppenzugehörigkeit auswerten
 			if(login==true && u!=-1){
 				if(users.get(u).getGruppe().equals("Admin")){
-					FrmMain frmMain = new FrmMain("Admin");
+					FrmMain frmMain = new FrmMain("Admin", users.get(u));
 					frmMain.showFrame(true);
 				}
 				else if(users.get(u).getGruppe().equals("Service")){
-					FrmMain frmMain = new FrmMain("Service");
+					FrmMain frmMain = new FrmMain("Service", users.get(u));
 					frmMain.showFrame(true);
 				}
 				else if(users.get(u).getGruppe().equals("Meister")){
-					FrmMain frmMain = new FrmMain("Meister");
+					FrmMain frmMain = new FrmMain("Meister", users.get(u));
 					frmMain.showFrame(true);
 				}
 				else if(users.get(u).getGruppe().equals("Werkstatt")){
-					FrmMain frmMain = new FrmMain("Werkstatt");
+					FrmMain frmMain = new FrmMain("Werkstatt", users.get(u));
 					frmMain.showFrame(true);
 				}
 			}else{

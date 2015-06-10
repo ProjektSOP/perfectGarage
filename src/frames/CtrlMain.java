@@ -16,14 +16,22 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import objects.Nutzer;
 import dialogs.DlgInfo;
+import dialogs.DlgPassword;
 
 public class CtrlMain implements ActionListener {
 	
 	private final JFrame frame;
+	private Nutzer user;
 
 	public CtrlMain(JFrame frame){
 		this.frame = frame;
+	}
+	
+	public CtrlMain(JFrame frame, Nutzer user){
+		this.frame = frame;
+		this.user = user;
 	}
 	
 	@Override
@@ -39,10 +47,16 @@ public class CtrlMain implements ActionListener {
 		if (event.getActionCommand().equals("Beenden")) {
 			System.exit(0);
 		}
-		else if (event.getActionCommand().equals("Schlieﬂen")) {
+		else if (event.getActionCommand().equals("Passwort ‰ndern")) {
+			/*
 			this.frame.getContentPane().removeAll();
 			this.frame.getContentPane().add(frameContent.closeContent());
 			this.frame.pack();
+			*/
+			
+			DlgPassword dlgPwd = new DlgPassword(user);
+			dlgPwd.showDialog(true);
+			
 		}
 		else if (event.getActionCommand().equals("Info")) {
 			DlgInfo dlgInfo = new DlgInfo();

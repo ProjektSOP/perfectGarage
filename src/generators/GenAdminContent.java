@@ -92,15 +92,6 @@ public class GenAdminContent {
 		btnDeactivateNutzer.setText("Benutzerstatus ändern");
 		btnDeactivateNutzer.setEnabled(false);
 		
-		// JButton "Passwort zurücksetzen"
-		final JButton btnSetPassword = new JButton();
-		btnSetPassword.setText("Passwort zurücksetzen");
-		btnSetPassword.setEnabled(false);
-		
-		// JButton "Passwort des Administrators ändern"
-		final JButton btnSetAdminPassword = new JButton();
-		btnSetAdminPassword.setText("Passwort des Administrators ändern");
-		
         // ActionListener für JTable erzeugen
         tableUsers.addMouseListener(new MouseAdapter() {
 
@@ -114,7 +105,6 @@ public class GenAdminContent {
         				btnDeleteNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
         				btnDeactivateNutzer.setEnabled(true);
         				btnDeactivateNutzer.addActionListener(new CtrlAdminContent(tableUsers, tableUsers.getSelectedRow()));
-        				btnSetPassword.setEnabled(true);
         			}
         		}
         		
@@ -135,8 +125,6 @@ public class GenAdminContent {
 		panelTop.add(btnEditNutzer);
 		panelTop.add(btnDeleteNutzer);
 		panelTop.add(btnDeactivateNutzer);
-		panelTop.add(btnSetPassword);
-		panelTop.add(btnSetAdminPassword);
 		
 		// Eigenschaften setzen
 		panelTop.setLayout (new FlowLayout (FlowLayout.LEFT, 5, 5));

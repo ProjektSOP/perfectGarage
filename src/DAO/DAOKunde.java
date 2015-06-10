@@ -20,6 +20,9 @@ public class DAOKunde {
 	final String returnKundebyPLZString = "SELECT * FROM t_kunde WHERE plz LIKE ? ";
 	final String returnKundebyKundenNrString = "SELECT * FROM t_kunde WHERE kundennr LIKE ? ";
 	final String returnKundebyNameString = "SELECT * FROM t_kunde WHERE name LIKE ? ";
+	
+	final String returnCarbyKundenNrString = "Select name, fin, hersteller, Modellcode, farbe from (t_kunde inner join t_kfz on fk_t_kunde_kundennr = kundennr) inner join t_kfztyp on fk_t_kfztyp_kfztypnr = kfztypnr where kundennr = ?";
+	
 	final static String returnAllKundeString = "SELECT * FROM t_kunde ";
 	final String insertnewKundeString = "INSERT INTO t_kunde( name, vorname, strasse, plz, ort, kundeseit, telefon, fax, handy, mail) VALUES (?, ?, ?, ?, ?, curDate(), ?, ?,?,?)";
 	final String updateoldKunde = "UPDATE t_kunde SET name=?, vorname=?, strasse=?, plz=?, ort=?, kundeseit=?, telefon=?, fax=?, handy=?, mail=? WHERE kundennr=? ";

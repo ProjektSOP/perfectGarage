@@ -79,7 +79,7 @@ public class DAOFahrzeug {
 		return fahrzeugliste;
 	}
 
-	public ArrayList<Fahrzeug> returnAllFahrzeugInfosbyKundenNr(int kundennummer) {
+	public static ArrayList<Fahrzeug> returnAllFahrzeugInfosbyKundenNr(int kundennummer) {
 
 		/**
 		 * @param Benötigt

@@ -18,17 +18,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import objects.Nutzer;
+
 public class FrmMain {
 	
 	private JFrame frame = new JFrame();
 	private JMenuBar menubar = new JMenuBar();
 	private JPanel panel = new JPanel();
 	private String modul = new String();
+	private Nutzer user = new Nutzer();
 	
 	
-	public FrmMain(String modul){
+	public FrmMain(String modul, Nutzer user){
 		
 		this.modul = modul;
+		this.user = user;
 		
 		if (this.modul.equals("Admin")){
 			this.frame.setTitle("perfectGarage - Administrator");
@@ -79,6 +83,14 @@ public class FrmMain {
 		mnuEdit.addSeparator();
 		JMenuItem mnuItemSelectAll = new JMenuItem("Alles markieren");
 		mnuEdit.add(mnuItemSelectAll);
+		
+		//Menü Extras
+		JMenu mnuExtras = new JMenu("Extras");
+		this.menubar.add(mnuExtras);
+		
+		JMenuItem mnuItemChangePwd = new JMenuItem("Passwort ändern");
+		mnuItemChangePwd.addActionListener(new CtrlMain(this.frame, user));
+		mnuExtras.add(mnuItemChangePwd);
 		
 		//Menü Hilfe
 		JMenu mnuHelp = new JMenu("Hilfe");
