@@ -36,10 +36,8 @@ public class CtrlAdminContent implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		
 		DlgNutzer dlgNutzer = new DlgNutzer();
-//		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
-//		this.tableUsers.setModel( DAOJTable.fillTableUsers(users) );
 		this.i = this.tableUsers.getSelectedRow();
-		System.out.println(this.i);
+		
 		if(this.i ==-1 ){
 			this.i = 0;
 		}
@@ -62,16 +60,20 @@ public class CtrlAdminContent implements ActionListener {
 			}
 		}
 		else if (event.getActionCommand().equals("Benutzerstatus ändern")) {
-			if(users.get(i).getStatus().equals("Aktiviert")){
-				users.get(i).setStatus("Deaktiviert");
-				DAONutzer.updateNutzer(users.get(i), users.get(i).getUsername());
-			}else{
-				users.get(i).setStatus("Aktiviert");
-				DAONutzer.updateNutzer(users.get(i), users.get(i).getUsername());
+			
+			if(!users.get(i).getStatus().equals("Geloescht am")){
+				if(users.get(i).getStatus().equals("Aktiviert")){
+					users.get(i).setStatus("Deaktiviert");
+					DAONutzer.updateNutzer(users.get(i), users.get(i).getUsername());
+				}else{
+					users.get(i).setStatus("Aktiviert");
+					DAONutzer.updateNutzer(users.get(i), users.get(i).getUsername());
+				}
 			}
 		}
 		else if (event.getActionCommand().equals("Benutzerpasswort zurücksetzen")) {
-			System.out.println(users.get(i).getUsername() + " zurücksetzen");
+			users.get(i).setPassword("p@ssw0rd");
+			DAONutzer.updateNutzer(users.get(i), users.get(i).getUsername());
 		}
 		
 		this.users = DAONutzer.returnAllNutzerWithoutAdmin();
