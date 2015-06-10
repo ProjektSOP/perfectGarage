@@ -72,7 +72,7 @@ public class CtrlAdminContent implements ActionListener {
 		}
 		else if (event.getActionCommand().equals("Benutzerpasswort zurücksetzen")) {
 			users.get(i).setPassword("p@ssw0rd");
-			DAONutzer.updateNutzer(users.get(i), users.get(i).getUsername());
+			DAONutzer.updateNutzerPw(users.get(i));
 			JOptionPane.showMessageDialog(null,
 				    "Das Passwort wurde auf   p@ssw0rd   zurückgesetzt!",
 				    "Meldung",

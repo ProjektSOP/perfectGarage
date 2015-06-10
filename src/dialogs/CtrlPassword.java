@@ -44,7 +44,7 @@ public class CtrlPassword implements ActionListener {
 			if(DAONutzer.pruefungPasswort(user.getUsername(), this.txtOldPassword.getText())){
 				if(txtNewPassword1.getText().equals(txtNewPassword2.getText())){
 					user.setPassword(this.txtNewPassword1.getText());
-					DAONutzer.updateNutzer(user, user.getUsername());
+					DAONutzer.updateNutzerPw(user);
 					this.dialog.show(false);
 				}else{
 					JOptionPane.showMessageDialog(null,
