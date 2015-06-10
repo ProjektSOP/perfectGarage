@@ -211,7 +211,7 @@ public class DAOArbeitsteilauftrag {
 		return newAuftragsmappe;
 	}
 
-	public boolean updateArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
+	public static boolean updateArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
 		/**
 		 * @param Übernimmt
 		 *            einen Arbeitsteilauftrag und updatet diesen in der
@@ -256,7 +256,7 @@ public class DAOArbeitsteilauftrag {
 		return done;
 	}
 
-	public boolean insertnewArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
+	public static boolean insertnewArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
 
 		/**
 		 * @param Übernimmt

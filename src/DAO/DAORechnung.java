@@ -114,7 +114,7 @@ public class DAORechnung {
 		return rechnungsliste;
 	}
 
-	public ArrayList<Rechnung> returnAllRechnungenbyStatus(String status) {
+	public static ArrayList<Rechnung> returnAllRechnungenbyStatus(String status) {
 
 		/**
 		 * @param Übernimmt
@@ -162,7 +162,7 @@ public class DAORechnung {
 		return rechnungsliste;
 	}
 
-	public boolean updateRechnung(Rechnung neuerechnung) {
+	public static boolean updateRechnung(Rechnung neuerechnung) {
 
 		/**
 		 * @param Übernimmt
@@ -203,7 +203,7 @@ public class DAORechnung {
 		return done;
 	}
 
-	public boolean insertnewRechnung(Rechnung neuerechnung) {
+	public static boolean insertnewRechnung(Rechnung neuerechnung) {
 
 		/**
 		 * @param Übernimmt
