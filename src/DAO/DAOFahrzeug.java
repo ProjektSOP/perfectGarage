@@ -137,7 +137,7 @@ public class DAOFahrzeug {
 		return fahrzeugliste;
 	}
 
-	public Fahrzeug returnAllFahrzeugInfosbyFIN(int tempfin) {
+	public static Fahrzeug returnAllFahrzeugInfosbyFIN(int tempfin) {
 
 		/**
 		 * @param Benötigt
@@ -193,7 +193,7 @@ public class DAOFahrzeug {
 		return tempfahrzeug;
 	}
 
-	public boolean updateFahrzeug(Fahrzeug neuesFahrzeug, String fin) {
+	public static boolean updateFahrzeug(Fahrzeug neuesFahrzeug, String fin) {
 
 		/**
 		 * @param Übernimmt
@@ -238,7 +238,7 @@ public class DAOFahrzeug {
 		return done;
 	}
 
-	public boolean insertnewFahrzeug(Fahrzeug neuesFahrzug) {
+	public static boolean insertnewFahrzeug(Fahrzeug neuesFahrzug) {
 
 		/**
 		 * @param Übernimmt

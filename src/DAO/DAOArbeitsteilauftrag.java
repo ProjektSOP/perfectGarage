@@ -24,7 +24,8 @@ public class DAOArbeitsteilauftrag {
 	final static String returnAllArbeitsteilauftragByAuftragsNrString = "SELECT fk_t_auftrag_AuftragsNr, arbeitsteilauftragnr, Arbeitsteilauftragsbezeichnung,KundenlesbareForm, Erstellungsdatum, ArbeitsteilauftragStatus, Abnahmedatum, Fremdvergabe, Kosten, ArbeitsteilauftragsPrioritaet FROM t_arbeitsteilauftrag Where fk_t_auftrag_AuftragsNr =? ";
 	final static String updateArbeitsteilauftragString = "UPDATE t_arbeitsteilauftrag SET Arbeitsteilauftragsbezeichnung=?,KundenlesbareForm=?, ArbeitsteilauftragStatus=?, Abnahmedatum=?, Fremdvergabe=?, Kosten=?, ArbeitsteilauftragsPrioritaet=?   WHERE arbeitsteilauftragnr=? ";
 	final static String insertnewArbeitsteilauftragString = "INSERT INTO t_arbeitsteilauftrag( Arbeitsteilauftragsbezeichnung,KundenlesbareForm, Erstellungsdatum, ArbeitsteilauftragStatus, Abnahmedatum, Fremdvergabe, Kosten, ArbeitsteilauftragsPrioritaet, fk_t_auftrag_AuftragsNr     ) VALUES (?, ?, curDate(), ?, ?, ?, ?, ?, ?)";
-
+	
+	
 	public static ArrayList<Arbeitsteilauftrag> returnAllArbeitsteilauftraege() {
 
 		/**
@@ -211,7 +212,7 @@ public class DAOArbeitsteilauftrag {
 		return newAuftragsmappe;
 	}
 
-	public boolean updateArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
+	public static boolean updateArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
 		/**
 		 * @param Übernimmt
 		 *            einen Arbeitsteilauftrag und updatet diesen in der
@@ -256,7 +257,7 @@ public class DAOArbeitsteilauftrag {
 		return done;
 	}
 
-	public boolean insertnewArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
+	public static boolean insertnewArbeitsteilauftrag(Arbeitsteilauftrag tempauftrag) {
 
 		/**
 		 * @param Übernimmt

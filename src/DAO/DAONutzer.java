@@ -19,6 +19,8 @@ public class DAONutzer {
 	final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
 	final static String insertnewNutzerString = "INSERT INTO t_nutzer( benutzername, passwort, Name, Vorname, Nutzerrolle, Status) VALUES (?, MD5(?), ?, ?, ?,?)";
 	final static String getpasswordString = "SELECT * FROM t_nutzer where benutzername=? AND passwort=MD5(?) AND Status='Aktiviert' ";
+	final static String anzahlKundenString = "select count(kundennr) as 'Anzahl Kunden' from t_kunde";
+	
 
 	public static ArrayList<Nutzer> returnAllNutzer() {
 
@@ -77,8 +79,7 @@ public class DAONutzer {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = returnAllNutzerWithoutAdminString;
-				ResultSet result = query.executeQuery(sql);
+				ResultSet result = query.executeQuery(returnAllNutzerWithoutAdminString);
 
 				while (result.next()) {
 
@@ -268,5 +269,32 @@ public class DAONutzer {
 		}
 		return ready;
 	}
-	
+
+	public static int returnanzahlKunden() {
+		
+		int anzahlkunden = 0;
+
+		Connection conn = MySQLConnection.getInstance();
+
+		if (conn != null) {
+
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				ResultSet result = query.executeQuery(anzahlKundenString);
+
+				while (result.next()) {
+
+					anzahlkunden = result.getInt("Anzahl Kunden");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return anzahlkunden;
+	}
+
 }
