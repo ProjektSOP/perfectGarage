@@ -259,7 +259,7 @@ public class DAOFahrzeug {
 
 		Connection conn = MySQLConnection.getInstance();
 		boolean done = false;
-		int kfztypnr = 0;
+		int kfztypnr = Integer.MIN_VALUE;
 		if (conn != null) {
 
 			try {
@@ -274,56 +274,20 @@ public class DAOFahrzeug {
 				ResultSet result = ps.executeQuery();
 
 				// Ergebnissätze durchfahren.
-				while (result.next()) {
+				while (result.next() ) {
 
-					if (!result.next()) {
-
-						// Wenn das ResultSet der Abfrage leer ist, ist für die
-						// Daten kein kfztypnr in der Tabelle vorhanden und
-						// daher müssen nun die Daten des Fahrzeugs neu in die
-						// Datenbank geschrieben werden
-
-						try {
-
-							PreparedStatement preparedStatement = conn
-									.prepareStatement(insertnewFahrzeugKFZTypString);
-
-							preparedStatement.setString(1,
-									neuesFahrzug.getHersteller());
-							preparedStatement.setString(2,
-									neuesFahrzug.getModell());
-
-							// SQL ausführen
-							preparedStatement.executeUpdate();
-
-							// Nach erfolgreichen Eintragen in die Tabelle muss
-							// nun noch die KfZTypNr ermittelt werden
-
-							try {
-								PreparedStatement ps2 = conn
-										.prepareStatement(getkfztypNrString);
-
-								ps2.setString(1, neuesFahrzug.getHersteller());
-								ps2.setString(2, neuesFahrzug.getModell());
-
-								ResultSet result2 = ps.executeQuery();
-
-								while (result2.next()) {
-									kfztypnr = result2.getInt("kfztypnr");
-								}
-							} catch (SQLException e) {
-								e.printStackTrace();
-							}
-
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-
-					} else {		// Wenn das ResultSet aus der ersten Abfrage nicht leer ist
-
-						kfztypnr = result.getInt("kfztypnr");
+				kfztypnr = result.getInt("kfztypnr");
+				}
+				
+				if( kfztypnr == Integer.MIN_VALUE ){
+					PreparedStatement pstm = conn.prepareStatement(insertnewFahrzeugKFZTypString, PreparedStatement.RETURN_GENERATED_KEYS );
+					pstm.executeUpdate();
+					ResultSet keys = pstm.getGeneratedKeys();
+					while (keys.next()) {
+						kfztypnr = keys.getInt(1);
 					}
 				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
