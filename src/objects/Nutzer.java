@@ -1,5 +1,10 @@
 package objects;
 
+/**
+ * 
+ * @author treichert
+ */
+
 public class Nutzer implements Comparable<Nutzer>{
 	
 	private String username;

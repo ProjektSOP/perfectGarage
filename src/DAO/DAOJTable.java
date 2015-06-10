@@ -10,8 +10,8 @@ import objects.Kunde;
 import objects.Nutzer;
 
 /**
+ * 
  * @author treichert
- *
  */
 
 public class DAOJTable {

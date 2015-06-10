@@ -1,5 +1,10 @@
 package objects;
 
+/**
+ * 
+ * @author treichert
+ */
+
 import java.sql.Date;
 
 

@@ -1,5 +1,10 @@
 package DAO;
 
+/**
+ * 
+ * @author mrothe
+ */
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

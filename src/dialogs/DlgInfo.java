@@ -40,7 +40,7 @@ public class DlgInfo implements DlgInterface {
 		
 		// Text
 		JTextArea txtInfo = new JTextArea();
-		txtInfo.setText("InfoText");
+		txtInfo.setText("Entwickelt von Tobias Reichert & Martin Rothe");
 		
 		JPanel panelInfo = new JPanel();
 		panelInfo.add(txtInfo);
