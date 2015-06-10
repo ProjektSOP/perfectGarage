@@ -55,7 +55,7 @@ public class CtrlNutzer implements ActionListener {
 		
 		else if (event.getActionCommand().equals("Speichern")) {
 			
-			String oldUsername = this.user.getUsername();
+			//String oldUsername = this.user.getUsername();
 			this.user.setUsername(this.username.getText());
 			this.user.setNachname(this.nachname.getText());
 			this.user.setVorname(this.vorname.getText());
@@ -68,7 +68,8 @@ public class CtrlNutzer implements ActionListener {
 				DAONutzer.insertNutzer(user);
 			}
 			else if(this.dialog.getTitle().equals("Nutzer bearbeiten")){
-				DAONutzer.updateNutzer(user, oldUsername);
+				//DAONutzer.updateNutzer(user, oldUsername);
+				DAONutzer.updateNutzerRolle(user);
 			}
 			
 			this.users = DAONutzer.returnAllNutzerWithoutAdmin();

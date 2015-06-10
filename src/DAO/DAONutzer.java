@@ -15,13 +15,12 @@ public class DAONutzer {
 
 	final static String returnAllNutzerString = "SELECT * FROM t_nutzer";
 	final static String returnAllNutzerWithoutAdminString = "SELECT * FROM t_nutzer WHERE benutzername != 'Administrator' ";
-	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
+	final static String updateoldNutzerString = "UPDATE t_nutzer SET benutzername=?, passwort=MD5(?), Name=?, Vorname=?, Nutzerrolle=?, Status=? WHERE benutzername=? ";
 	final static String deleteNutzerString = "UPDATE t_nutzer SET Status='Geloescht am', ZeitstempelLoeschung=curDate() WHERE benutzername=? ";
 	final static String insertnewNutzerString = "INSERT INTO t_nutzer( benutzername, passwort, Name, Vorname, Nutzerrolle, Status) VALUES (?, MD5(?), ?, ?, ?,?)";
 	final static String getpasswordString = "SELECT * FROM t_nutzer where benutzername=? AND passwort=MD5(?) AND Status='Aktiviert' ";
 	final static String anzahlKundenString = "select count(kundennr) as 'Anzahl Kunden' from t_kunde";
 	final static String updateNutzerRolleString = "UPDATE t_nutzer SET Nutzerrolle=? WHERE benutzername=? ";
-	final static String updateNutzerPwString = "UPDATE t_nutzer SET passwort=MD5(?) WHERE benutzername=? ";
 
 	public static ArrayList<Nutzer> returnAllNutzer() {
 
@@ -134,11 +133,12 @@ public class DAONutzer {
 
 				// Parameter durch übernommene Daten ersetzen
 				preparedStatement.setString(1, tempnutzer.getUsername());
-				preparedStatement.setString(2, tempnutzer.getNachname());
-				preparedStatement.setString(3, tempnutzer.getVorname());
-				preparedStatement.setString(4, tempnutzer.getGruppe());
-				preparedStatement.setString(5, tempnutzer.getStatus());
-				preparedStatement.setString(6, oldname);
+				preparedStatement.setString(2, tempnutzer.getPassword());
+				preparedStatement.setString(3, tempnutzer.getNachname());
+				preparedStatement.setString(4, tempnutzer.getVorname());
+				preparedStatement.setString(5, tempnutzer.getGruppe());
+				preparedStatement.setString(6, tempnutzer.getStatus());
+				preparedStatement.setString(7, oldname);
 
 				// SQL ausführen
 				preparedStatement.executeUpdate();
@@ -190,44 +190,6 @@ public class DAONutzer {
 			}
 		}
 		return done;
-	}
-		public static boolean updateNutzerPw(Nutzer tempnutzer) {
-
-			/**
-			 * @param Übernimmt
-			 *            einen Nutzer - Objekt und updatet das Passwort in der
-			 *            Datenbank
-			 * @param gibt
-			 *            ein boolean zurück, ob das Update erfolgreich war
-			 */
-
-			boolean done = false;
-
-			Connection conn = MySQLConnection.getInstance();
-
-			if (conn != null) {
-
-				try {
-					// Insert-Statement erzeugen (Fragezeichen werden später
-					// ersetzt).
-					PreparedStatement preparedStatement = conn
-							.prepareStatement(updateNutzerPwString);
-
-					// Parameter durch übernommene Daten ersetzen
-					preparedStatement.setString(1, tempnutzer.getPassword());
-					preparedStatement.setString(2, tempnutzer.getUsername());
-
-					// SQL ausführen
-					preparedStatement.executeUpdate();
-
-					done = true;
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-
-				}
-			}
-			return done;
 	}
 
 	public static boolean deleteNutzer(Nutzer oldNutzer) {
