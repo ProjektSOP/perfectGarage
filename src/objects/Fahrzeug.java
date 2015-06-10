@@ -29,11 +29,10 @@ public class Fahrzeug {
     
     public String[] getFahrzeugInfo(){
 		String[] cardata = new String[4];
-		cardata[0] = ""+this.kundennr;
-		cardata[1] = ""+this.fin;
-		cardata[2] = this.hersteller;
-		cardata[3] = this.modell;
-		cardata[4] = this.farbe;
+		cardata[0] = ""+this.fin;
+		cardata[1] = this.hersteller;
+		cardata[2] = this.modell;
+		cardata[3] = this.farbe;
 		
 		return cardata;
 	}
